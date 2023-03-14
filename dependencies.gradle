@@ -1,0 +1,18 @@
+ext.versions = [
+        support: [
+                core            : "1.8.0",
+                appCompat       : "1.5.1",
+                constraintLayout: "2.1.4",
+                recycler        : "1.2.1",
+                material        : "1.6.1"
+        ]
+]
+ext.libraries = [
+        support: [
+                core            : "androidx.core:core:$versions.support.core",
+                constraintLayout: "androidx.constraintlayout:constraintlayout:$versions.support.constraintLayout",
+                recycler        : "androidx.recyclerview:recyclerview:$versions.support.recycler",
+                appCompat       : "androidx.appcompat:appcompat:$versions.support.appCompat",
+                material        : "com.google.android.material:material:$versions.support.material",
+        ]
+]

@@ -1,0 +1,32 @@
+def versionProperties = readProperties("version.properties")
+def gradleProperties = readProperties("gradle.properties")
+
+ext.config = [
+        build: [
+                code: versionProperties["VERSION_CODE"].toInteger(),
+                name: versionProperties["VERSION_NAME"]
+        ],
+        sdk  : [
+                min    : 24,
+                target : 33,
+                compile: 33
+        ]
+]
+
+ext.signing = [
+        storeFile    : gradleProperties["KEY_STORE_FILE"],
+        storePassword: gradleProperties["KEY_STORE_PASSWORD"],
+        keyAlias     : gradleProperties["KEY_ALIAS"],
+        keyPassword  : gradleProperties["KEY_PASSWORD"]
+]
+
+def readProperties(name) {
+    if (file(name).canRead()) {
+        def properties = new Properties()
+        properties.load(new FileInputStream(file(name)))
+        return properties
+    } else {
+        throw RuntimeException("Can't find $name file in the project with VERSION_CODE and VERSION_NAME fields")
+    }
+}
+
