@@ -1,6 +1,5 @@
 <resources>
-    <string name="app_name">ModuloTech</string>
-    <string name="title_home">Home</string>
-    <string name="title_dashboard">Dashboard</string>
-    <string name="title_notifications">Notifications</string>
+    <string name="app_name">SmartHome</string>
+    <string name="devices_tab">Devices</string>
+    <string name="user_profile_tab">Profile</string>
 </resources>
