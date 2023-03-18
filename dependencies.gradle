@@ -1,37 +1,64 @@
 ext.versions = [
         support   : [
                 core            : "1.8.0",
-                appCompat       : "1.5.1",
-                constraintLayout: "2.1.4",
                 recycler        : "1.2.1",
-                material        : "1.6.1"
+                material        : "1.6.1",
+                appCompat       : "1.5.1",
+                constraintLayout: "2.1.4"
         ],
         compose   : [
+                ui             : "1.3.3",
                 material       : "1.3.1",
                 foundation     : "1.3.1",
-                ui             : "1.3.3",
                 activityCompose: "1.6.1"
         ],
+        di        : [
+                koinTest   : "3.3.3",
+                koinAndroid: "3.3.3",
+                koinCompose: "3.4.2"
+        ],
+        test      : [
+                junit         : "4.13.2",
+                rules         : "1.4.0",
+                runner        : "1.4.0",
+                junitx        : "1.1.3",
+                mockito       : "4.4.0",
+                kotlinRunner  : "3.4.2",
+                coroutinesTest: "1.6.4"
+        ],
+        coroutines: "1.6.4",
         navigation: "2.5.3"
 ]
 ext.libraries = [
-        support   : [
+        support     : [
                 core            : "androidx.core:core:$versions.support.core",
-                constraintLayout: "androidx.constraintlayout:constraintlayout:$versions.support.constraintLayout",
                 recycler        : "androidx.recyclerview:recyclerview:$versions.support.recycler",
-                appCompat       : "androidx.appcompat:appcompat:$versions.support.appCompat",
                 material        : "com.google.android.material:material:$versions.support.material",
+                appCompat       : "androidx.appcompat:appcompat:$versions.support.appCompat",
+                constraintLayout: "androidx.constraintlayout:constraintlayout:$versions.support.constraintLayout"
         ],
-        compose   : [
-                material       : "androidx.compose.material:material:$versions.compose.material",
-                foundation     : "androidx.compose.foundation:foundation:$versions.compose.foundation",
+        compose     : [
                 ui             : "androidx.compose.ui:ui:$versions.compose.ui",
                 tooling        : "androidx.compose.ui:ui-tooling:$versions.compose.ui",
+                material       : "androidx.compose.material:material:$versions.compose.material",
+                foundation     : "androidx.compose.foundation:foundation:$versions.compose.foundation",
                 toolingPreview : "androidx.compose.ui:ui-tooling-preview:$versions.compose.ui",
                 activityCompose: "androidx.activity:activity-compose:$versions.compose.activityCompose"
         ],
-        navigation: [
-                navComponent: "androidx.navigation:navigation-compose:$versions.navigation"
-
-        ]
+        di          : [
+                koinTest   : "io.insert-koin:koin-test-junit4:$versions.di.koinTest",
+                koinAndroid: "io.insert-koin:koin-android:$versions.di.koinAndroid",
+                koinCompose: "io.insert-koin:koin-androidx-compose:$versions.di.koinCompose"
+        ],
+        test        : [
+                junit         : "junit:junit:$versions.test.junit",
+                rules         : "androidx.test:rules:$versions.test.rules",
+                runner        : "androidx.test:runner:$versions.test.runner",
+                junitx        : "androidx.test.ext:junit:$versions.test.junitx",
+                mockito       : "org.mockito:mockito-core:$versions.test.mockito",
+                kotlinRunner  : "io.kotlintest:kotlintest-runner-junit4:$versions.test.kotlinRunner",
+                coroutinesTest: "org.jetbrains.kotlinx:kotlinx-coroutines-test:$versions.coroutines"
+        ],
+        navComponent: "androidx.navigation:navigation-compose:$versions.navigation",
+        coroutines  : "org.jetbrains.kotlinx:kotlinx-coroutines-android:$versions.coroutines"
 ]

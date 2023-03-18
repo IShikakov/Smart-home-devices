@@ -91,6 +91,13 @@ dependencies {
     implementation libraries.compose.activityCompose
     debugImplementation libraries.compose.tooling
 
-    implementation libraries.navigation.navComponent
+    implementation libraries.navComponent
 
+    implementation libraries.di.koinAndroid
+    implementation libraries.di.koinCompose
+
+    implementation libraries.coroutines
+
+    testImplementation libraries.test.mockito
+    testImplementation libraries.di.koinTest
 }

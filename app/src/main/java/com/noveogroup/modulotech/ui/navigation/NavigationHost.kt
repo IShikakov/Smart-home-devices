@@ -12,13 +12,17 @@ import com.noveogroup.modulotech.ui.profile.UserProfileScreen
 fun NavigationHost(
     navController: NavHostController,
     modifier: Modifier = Modifier,
-    startDestination: String = Routes.DEVICES_LIST
+    startDestination: String = Routes.DEVICES_LIST,
 ) {
     NavHost(
         navController = navController,
         startDestination = startDestination
     ) {
-        composable(Routes.DEVICES_LIST) { DevicesListScreen() }
+        composable(Routes.DEVICES_LIST) {
+            DevicesListScreen(modifier = modifier) {
+
+            }
+        }
         composable(Routes.USER_PROFILE) { UserProfileScreen() }
     }
 }

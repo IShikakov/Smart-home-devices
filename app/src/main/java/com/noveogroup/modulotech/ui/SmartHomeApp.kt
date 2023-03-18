@@ -40,13 +40,15 @@ fun SmartHomeApp() {
 }
 
 @Composable
-fun SmartHomeBottomBar(
-    navController: NavController
+private fun SmartHomeBottomBar(
+    navController: NavController,
 ) {
     val bottomNavigationTabs = SmartHomeTab.values()
     val navBackStackEntry by navController.currentBackStackEntryAsState()
     val currentRoute = navBackStackEntry?.destination?.route
-    BottomNavigation {
+    BottomNavigation(
+        backgroundColor = MaterialTheme.colors.surface
+    ) {
         bottomNavigationTabs.forEach { tab ->
             BottomNavigationTab(
                 tab = tab,
@@ -66,10 +68,10 @@ fun SmartHomeBottomBar(
 }
 
 @Composable
-fun RowScope.BottomNavigationTab(
+private fun RowScope.BottomNavigationTab(
     tab: SmartHomeTab,
     isSelected: Boolean,
-    onClick: () -> Unit
+    onClick: () -> Unit,
 ) {
     BottomNavigationItem(
         icon = { Icon(painterResource(tab.icon), contentDescription = null) },
@@ -85,7 +87,7 @@ fun RowScope.BottomNavigationTab(
 
 @Preview
 @Composable
-fun NavigationBottomBarPreview() {
+private fun NavigationBottomBarPreview() {
     val navController = rememberNavController()
     MaterialTheme {
         SmartHomeBottomBar(navController = navController)

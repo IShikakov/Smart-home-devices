@@ -9,5 +9,9 @@ java {
 }
 
 dependencies {
+    implementation libraries.coroutines
 
+    testImplementation libraries.test.mockito
+    testImplementation libraries.test.junit
+    testImplementation libraries.test.coroutinesTest
 }
