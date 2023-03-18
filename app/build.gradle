@@ -100,4 +100,6 @@ dependencies {
 
     testImplementation libraries.test.mockito
     testImplementation libraries.di.koinTest
+    testImplementation libraries.test.junit
+    testImplementation libraries.test.coroutinesTest
 }

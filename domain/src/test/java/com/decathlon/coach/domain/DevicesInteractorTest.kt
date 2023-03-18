@@ -1,4 +1,4 @@
-package com.decathlon.coach.domain.devices
+package com.decathlon.coach.domain
 
 import com.noveogroup.modulotech.domain.devices.DevicesInteractor
 import com.noveogroup.modulotech.domain.devices.model.DeviceType
@@ -8,7 +8,6 @@ import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.flow.take
 import kotlinx.coroutines.flow.toList
 import kotlinx.coroutines.launch
-import kotlinx.coroutines.test.StandardTestDispatcher
 import kotlinx.coroutines.test.TestScope
 import kotlinx.coroutines.test.UnconfinedTestDispatcher
 import kotlinx.coroutines.test.runTest
@@ -19,8 +18,7 @@ import org.junit.Test
 @OptIn(ExperimentalCoroutinesApi::class)
 class DevicesInteractorTest {
 
-    private val testDispatcher = StandardTestDispatcher()
-    private val testScope = TestScope(testDispatcher)
+    private val testScope = TestScope(UnconfinedTestDispatcher())
     private lateinit var interactor: DevicesInteractor
 
     @Before
@@ -94,7 +92,7 @@ class DevicesInteractorTest {
     @Test
     fun `Toggle one filter twice`() = testScope.runTest {
         val filterStates = mutableListOf<FiltersState>()
-        backgroundScope.launch(UnconfinedTestDispatcher(testScheduler)) {
+        backgroundScope.launch {
             interactor.observeFilters().take(3).toList(filterStates)
         }
         interactor.toggleDevicesFilter(DeviceType.LIGHT)
