@@ -1,6 +1,7 @@
 plugins {
     id 'com.android.library'
     id 'org.jetbrains.kotlin.android'
+    id 'com.google.devtools.ksp'
 }
 
 android {
@@ -11,7 +12,17 @@ android {
         minSdk config.sdk.min
         targetSdk config.sdk.target
 
-        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+        javaCompileOptions {
+            annotationProcessorOptions {
+                arguments = [
+                        "room.schemaLocation"  : "$projectDir/schemas".toString(),
+                        "room.incremental"     : "true",
+                        "room.expandProjection": "true"
+                ]
+            }
+        }
+
+        buildConfigField("String", "API_ROOT_URL", '"http://storage42.com/"')
     }
 
     compileOptions {
@@ -26,4 +37,19 @@ android {
 
 dependencies {
     implementation project(':domain')
+
+    implementation libraries.di.koinCore
+
+    implementation libraries.network.moshi
+    implementation libraries.network.retrofit2
+    implementation libraries.network.moshiRetrofit2
+    ksp libraries.network.moshiKotlin
+
+    implementation libraries.room.roomRuntime
+    implementation libraries.room.roomKtx
+    annotationProcessor libraries.room.roomCompiler
+    ksp libraries.room.roomCompiler
+    testImplementation libraries.room.roomTesting
+
+    implementation libraries.coroutines
 }

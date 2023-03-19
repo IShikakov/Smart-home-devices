@@ -3,7 +3,8 @@ package com.noveogroup.modulotech.ui.devices.list
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.noveogroup.modulotech.R
-import com.noveogroup.modulotech.domain.devices.DevicesInteractor
+import com.noveogroup.modulotech.domain.devices.DevicesListInteractor
+import com.noveogroup.modulotech.domain.synchronization.DataSyncInteractor
 import com.noveogroup.modulotech.ui.common.ResourcesManager
 import com.noveogroup.modulotech.ui.devices.list.common.DevicesListMapper
 import com.noveogroup.modulotech.ui.devices.list.model.DevicePreview
@@ -18,7 +19,8 @@ import kotlinx.coroutines.flow.onEach
 import kotlinx.coroutines.launch
 
 class DevicesListViewModel(
-    private val devicesInteractor: DevicesInteractor,
+    private val devicesInteractor: DevicesListInteractor,
+    private val dataSyncInteractor: DataSyncInteractor,
     private val devicesListMapper: DevicesListMapper,
     private val resourcesManager: ResourcesManager,
 ) : ViewModel() {
@@ -36,22 +38,31 @@ class DevicesListViewModel(
     val errorMessage: StateFlow<String?> = _errorMessage
 
     init {
-        observeDevices()
+        viewModelScope.launch {
+            syncDataIfRequired()
+            observeDevices()
+        }
         observeFilters()
     }
 
+    private suspend fun syncDataIfRequired() {
+        try {
+            if (dataSyncInteractor.isSyncRequired()) {
+                _loading.value = true
+                dataSyncInteractor.syncData()
+            }
+        } catch (error: Exception) {
+            handleError(error)
+        } finally {
+            _loading.value = false
+        }
+    }
+
     private fun observeDevices() {
-        _loading.value = true
         devicesInteractor.observeDevices()
             .map { devices -> devicesListMapper.mapDevice(devices) }
-            .onEach { previews ->
-                _loading.value = false
-                _devices.value = previews
-            }
-            .catch { error ->
-                _loading.value = false
-                handleError(error)
-            }
+            .onEach { previews -> _devices.value = previews }
+            .catch { error -> handleError(error) }
             .launchIn(viewModelScope)
     }
 
@@ -59,6 +70,7 @@ class DevicesListViewModel(
         devicesInteractor.observeFilters()
             .map { filtersState -> devicesListMapper.mapFilter(filtersState) }
             .onEach { filters -> _filters.value = filters }
+            .catch { error -> handleError(error) }
             .launchIn(viewModelScope)
     }
 
@@ -76,7 +88,7 @@ class DevicesListViewModel(
         viewModelScope.launch {
             try {
                 _loading.value = true
-                devicesInteractor.refreshDevices()
+                dataSyncInteractor.syncData()
             } catch (error: Exception) {
                 handleError(error)
             } finally {

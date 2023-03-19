@@ -4,18 +4,21 @@ ext.versions = [
                 recycler        : "1.2.1",
                 material        : "1.6.1",
                 appCompat       : "1.5.1",
-                constraintLayout: "2.1.4"
+                constraintLayout: "2.1.4",
         ],
         compose   : [
                 ui             : "1.3.3",
                 material       : "1.3.1",
                 foundation     : "1.3.1",
-                activityCompose: "1.6.1"
+                activityCompose: "1.6.1",
         ],
         di        : [
-                koinTest   : "3.3.3",
-                koinAndroid: "3.3.3",
-                koinCompose: "3.4.2"
+                koin       : "3.3.3",
+                koinCompose: "3.4.2",
+        ],
+        network   : [
+                moshi    : "1.14.0",
+                retrofit2: "2.9.0",
         ],
         test      : [
                 junit         : "4.13.2",
@@ -24,10 +27,11 @@ ext.versions = [
                 junitx        : "1.1.3",
                 mockito       : "4.4.0",
                 kotlinRunner  : "3.4.2",
-                coroutinesTest: "1.6.4"
+                coroutinesTest: "1.6.4",
         ],
+        room      : "2.5.0",
         coroutines: "1.6.4",
-        navigation: "2.5.3"
+        navigation: "2.5.3",
 ]
 ext.libraries = [
         support     : [
@@ -35,7 +39,7 @@ ext.libraries = [
                 recycler        : "androidx.recyclerview:recyclerview:$versions.support.recycler",
                 material        : "com.google.android.material:material:$versions.support.material",
                 appCompat       : "androidx.appcompat:appcompat:$versions.support.appCompat",
-                constraintLayout: "androidx.constraintlayout:constraintlayout:$versions.support.constraintLayout"
+                constraintLayout: "androidx.constraintlayout:constraintlayout:$versions.support.constraintLayout",
         ],
         compose     : [
                 ui             : "androidx.compose.ui:ui:$versions.compose.ui",
@@ -43,12 +47,25 @@ ext.libraries = [
                 material       : "androidx.compose.material:material:$versions.compose.material",
                 foundation     : "androidx.compose.foundation:foundation:$versions.compose.foundation",
                 toolingPreview : "androidx.compose.ui:ui-tooling-preview:$versions.compose.ui",
-                activityCompose: "androidx.activity:activity-compose:$versions.compose.activityCompose"
+                activityCompose: "androidx.activity:activity-compose:$versions.compose.activityCompose",
         ],
         di          : [
-                koinTest   : "io.insert-koin:koin-test-junit4:$versions.di.koinTest",
-                koinAndroid: "io.insert-koin:koin-android:$versions.di.koinAndroid",
-                koinCompose: "io.insert-koin:koin-androidx-compose:$versions.di.koinCompose"
+                koinCore   : "io.insert-koin:koin-core:$versions.di.koin",
+                koinTest   : "io.insert-koin:koin-test-junit4:$versions.di.koin",
+                koinAndroid: "io.insert-koin:koin-android:$versions.di.koin",
+                koinCompose: "io.insert-koin:koin-androidx-compose:$versions.di.koinCompose",
+        ],
+        network     : [
+                moshi         : "com.squareup.moshi:moshi:$versions.network.moshi",
+                retrofit2     : "com.squareup.retrofit2:retrofit:$versions.network.retrofit2",
+                moshiKotlin   : "com.squareup.moshi:moshi-kotlin-codegen:$versions.network.moshi",
+                moshiRetrofit2: "com.squareup.retrofit2:converter-moshi:$versions.network.retrofit2",
+        ],
+        room        : [
+                roomKtx     : "androidx.room:room-ktx:$versions.room",
+                roomRuntime : "androidx.room:room-runtime:$versions.room",
+                roomTesting : "androidx.room:room-testing:$versions.room",
+                roomCompiler: "androidx.room:room-compiler:$versions.room",
         ],
         test        : [
                 junit         : "junit:junit:$versions.test.junit",
@@ -57,8 +74,8 @@ ext.libraries = [
                 junitx        : "androidx.test.ext:junit:$versions.test.junitx",
                 mockito       : "org.mockito:mockito-core:$versions.test.mockito",
                 kotlinRunner  : "io.kotlintest:kotlintest-runner-junit4:$versions.test.kotlinRunner",
-                coroutinesTest: "org.jetbrains.kotlinx:kotlinx-coroutines-test:$versions.coroutines"
+                coroutinesTest: "org.jetbrains.kotlinx:kotlinx-coroutines-test:$versions.coroutines",
         ],
         navComponent: "androidx.navigation:navigation-compose:$versions.navigation",
-        coroutines  : "org.jetbrains.kotlinx:kotlinx-coroutines-android:$versions.coroutines"
+        coroutines  : "org.jetbrains.kotlinx:kotlinx-coroutines-android:$versions.coroutines",
 ]

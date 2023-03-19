@@ -73,7 +73,7 @@ import org.koin.androidx.compose.koinViewModel
 fun DevicesListScreen(
     modifier: Modifier = Modifier,
     viewModel: DevicesListViewModel = koinViewModel(),
-    openDeviceDetails: (Long) -> Unit,
+    openDeviceDetails: (String) -> Unit,
 ) {
     val devices by viewModel.devices.collectAsState()
     val filters by viewModel.filters.collectAsState()
@@ -294,19 +294,19 @@ private fun PreviewDevicesList() {
     DevicesList(
         devices = listOf(
             DevicePreview(
-                id = 0,
+                id = "0",
                 name = "Light",
                 icon = R.drawable.ic_light,
                 stateDescription = "14"
             ),
             DevicePreview(
-                id = 1,
+                id = "1",
                 name = "Roller shutter",
                 icon = R.drawable.ic_roller,
                 stateDescription = "50"
             ),
             DevicePreview(
-                id = 2,
+                id = "2",
                 name = "Heaters",
                 icon = R.drawable.ic_heater,
                 stateDescription = "23 °C"

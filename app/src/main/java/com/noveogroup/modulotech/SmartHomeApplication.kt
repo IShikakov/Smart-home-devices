@@ -1,6 +1,10 @@
 package com.noveogroup.modulotech
 
 import android.app.Application
+import com.noveogroup.modulotech.data.di.databaseModule
+import com.noveogroup.modulotech.data.di.devicesModule
+import com.noveogroup.modulotech.data.di.networkModule
+import com.noveogroup.modulotech.data.di.synchronizationModule
 import com.noveogroup.modulotech.di.devicesListModule
 import com.noveogroup.modulotech.di.resourcesModule
 import org.koin.android.ext.koin.androidContext
@@ -18,7 +22,11 @@ class SmartHomeApplication : Application() {
             androidContext(this@SmartHomeApplication)
             modules(
                 resourcesModule,
-                devicesListModule
+                networkModule,
+                databaseModule,
+                synchronizationModule,
+                devicesModule,
+                devicesListModule,
             )
         }
     }

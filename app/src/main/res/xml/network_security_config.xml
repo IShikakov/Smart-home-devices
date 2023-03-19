@@ -6,6 +6,10 @@
             <certificates src="system" />
         </trust-anchors>
     </base-config>
+    <!-- ensure only specific app endpoints to interact by http including subdomains -->
+    <domain-config cleartextTrafficPermitted="true">
+        <domain includeSubdomains="true">storage42.com</domain>
+    </domain-config>
     <!-- For debug builds: allow cleartext traffic to test api calls with Fiddler/Charles/other -->
     <debug-overrides cleartextTrafficPermitted="true">
         <trust-anchors>
