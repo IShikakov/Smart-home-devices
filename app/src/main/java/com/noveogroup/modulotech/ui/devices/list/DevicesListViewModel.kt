@@ -1,15 +1,14 @@
 package com.noveogroup.modulotech.ui.devices.list
 
-import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.noveogroup.modulotech.R
 import com.noveogroup.modulotech.domain.devices.DevicesListInteractor
 import com.noveogroup.modulotech.domain.synchronization.DataSyncInteractor
+import com.noveogroup.modulotech.ui.base.BaseViewModel
 import com.noveogroup.modulotech.ui.common.ResourcesManager
 import com.noveogroup.modulotech.ui.devices.list.common.DevicesListMapper
 import com.noveogroup.modulotech.ui.devices.list.model.DevicePreview
 import com.noveogroup.modulotech.ui.devices.list.model.DevicesFilter
-import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.catch
@@ -23,7 +22,7 @@ class DevicesListViewModel(
     private val dataSyncInteractor: DataSyncInteractor,
     private val devicesListMapper: DevicesListMapper,
     private val resourcesManager: ResourcesManager,
-) : ViewModel() {
+) : BaseViewModel() {
 
     private val _devices: MutableStateFlow<List<DevicePreview>> = MutableStateFlow(emptyList())
     val devices: StateFlow<List<DevicePreview>> = _devices
@@ -33,9 +32,6 @@ class DevicesListViewModel(
 
     private val _loading: MutableStateFlow<Boolean> = MutableStateFlow(false)
     val loading: StateFlow<Boolean> = _loading
-
-    private val _errorMessage: MutableStateFlow<String?> = MutableStateFlow(null)
-    val errorMessage: StateFlow<String?> = _errorMessage
 
     init {
         viewModelScope.launch {
@@ -52,7 +48,7 @@ class DevicesListViewModel(
                 dataSyncInteractor.syncData()
             }
         } catch (error: Exception) {
-            handleError(error)
+            showErrorMessage()
         } finally {
             _loading.value = false
         }
@@ -62,7 +58,7 @@ class DevicesListViewModel(
         devicesInteractor.observeDevices()
             .map { devices -> devicesListMapper.mapDevice(devices) }
             .onEach { previews -> _devices.value = previews }
-            .catch { error -> handleError(error) }
+            .catch { showErrorMessage() }
             .launchIn(viewModelScope)
     }
 
@@ -70,7 +66,7 @@ class DevicesListViewModel(
         devicesInteractor.observeFilters()
             .map { filtersState -> devicesListMapper.mapFilter(filtersState) }
             .onEach { filters -> _filters.value = filters }
-            .catch { error -> handleError(error) }
+            .catch { showErrorMessage() }
             .launchIn(viewModelScope)
     }
 
@@ -79,7 +75,7 @@ class DevicesListViewModel(
             try {
                 devicesInteractor.deleteDevice(device.id)
             } catch (error: Exception) {
-                handleError(error)
+                showErrorMessage()
             }
         }
     }
@@ -90,7 +86,7 @@ class DevicesListViewModel(
                 _loading.value = true
                 dataSyncInteractor.syncData()
             } catch (error: Exception) {
-                handleError(error)
+                showErrorMessage()
             } finally {
                 _loading.value = false
             }
@@ -103,20 +99,8 @@ class DevicesListViewModel(
         }
     }
 
-    /**
-     * The logic can be different. At the moment it shows a snackbar for 5 seconds and then hides it.
-     */
-    private fun handleError(error: Throwable) {
-        viewModelScope.launch {
-            val message =
-                resourcesManager.resolveString(R.string.error_message, error.javaClass.simpleName)
-            _errorMessage.value = message
-            delay(ERROR_MESSAGE_TIME)
-            _errorMessage.value = null
-        }
+    private fun showErrorMessage() {
+        showMessage(resourcesManager.resolveString(R.string.error_message))
     }
 
-    companion object {
-        private const val ERROR_MESSAGE_TIME = 2000L
-    }
 }

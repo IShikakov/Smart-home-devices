@@ -28,8 +28,6 @@ import androidx.compose.material.FractionalThreshold
 import androidx.compose.material.Icon
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Scaffold
-import androidx.compose.material.SnackbarDuration
-import androidx.compose.material.SnackbarHostState
 import androidx.compose.material.Surface
 import androidx.compose.material.SwipeToDismiss
 import androidx.compose.material.Text
@@ -42,7 +40,6 @@ import androidx.compose.material.pullrefresh.rememberPullRefreshState
 import androidx.compose.material.rememberDismissState
 import androidx.compose.material.rememberScaffoldState
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
@@ -56,6 +53,7 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import com.noveogroup.modulotech.R
 import com.noveogroup.modulotech.domain.devices.model.DeviceType
+import com.noveogroup.modulotech.ui.common.Snackbar
 import com.noveogroup.modulotech.ui.devices.list.model.DevicePreview
 import com.noveogroup.modulotech.ui.devices.list.model.DevicesFilter
 import com.noveogroup.modulotech.ui.theme.borderStroke
@@ -78,7 +76,7 @@ fun DevicesListScreen(
     val devices by viewModel.devices.collectAsState()
     val filters by viewModel.filters.collectAsState()
     val loading by viewModel.loading.collectAsState()
-    val errorMessage by viewModel.errorMessage.collectAsState()
+    val message by viewModel.message.collectAsState()
     val scaffoldState = rememberScaffoldState()
     Scaffold(
         scaffoldState = scaffoldState,
@@ -95,7 +93,7 @@ fun DevicesListScreen(
                 filterClicked = viewModel::filterClicked,
                 refresh = viewModel::refresh
             )
-            errorMessage?.let { DevicesListError(it, scaffoldState.snackbarHostState) }
+            message?.let { Snackbar(it, scaffoldState.snackbarHostState) }
         }
     )
 }
@@ -131,19 +129,6 @@ private fun DevicesListContent(
             DevicesList(devices, deviceClicked, deviceSwiped)
         }
         PullRefreshIndicator(loading, pullRefreshState, Modifier.align(Alignment.TopCenter))
-    }
-}
-
-@Composable
-private fun DevicesListError(
-    errorMessage: String,
-    snackbarHostState: SnackbarHostState,
-) {
-    LaunchedEffect(errorMessage, snackbarHostState) {
-        snackbarHostState.showSnackbar(
-            message = errorMessage,
-            duration = SnackbarDuration.Indefinite
-        )
     }
 }
 
