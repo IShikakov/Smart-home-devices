@@ -4,7 +4,7 @@
     <string name="devices_tab">Appareils</string>
     <string name="user_profile_tab">Profil</string>
     <string name="devices_screen_title">Mes appareils</string>
-    <string name="error_message">Une erreur s\'est produite %1$s</string>
+    <string name="error_message">Une erreur s\'est produite</string>
     <string name="device_icon_description">Appareil</string>
     <string name="delete_icon_description">Supprimer</string>
     <string name="lights_filter">Lumières</string>

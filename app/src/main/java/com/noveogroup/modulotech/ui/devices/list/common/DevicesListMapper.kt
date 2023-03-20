@@ -35,7 +35,12 @@ class DevicesListMapper(private val resourcesManager: ResourcesManager) {
     private val Device.stateDescription: String
         get() = when (this) {
             is Device.Light -> "${mode.description()}, $intensity"
-            is Device.Heater -> "${mode.description()}, ${this.temperature} $CELSIUS_METRIC"
+            is Device.Heater -> "${mode.description()}, ${
+                resourcesManager.resolveString(
+                    R.string.format_heater_temperature,
+                    temperature
+                )
+            }"
             is Device.RollerShutter -> "$position"
         }
 
@@ -62,7 +67,6 @@ class DevicesListMapper(private val resourcesManager: ResourcesManager) {
     }
 
     companion object {
-        private const val CELSIUS_METRIC = "°C"
         private const val MODE_ON = "ON"
         private const val MODE_OFF = "OFF"
     }

@@ -6,6 +6,6 @@ import androidx.annotation.StringRes
 class ResourcesManager(private val context: Context) {
 
     fun resolveString(@StringRes resId: Int, vararg args: Any): String {
-        return context.getString(resId, args)
+        return context.getString(resId, *args)
     }
 }

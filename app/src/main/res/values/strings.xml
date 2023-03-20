@@ -4,7 +4,7 @@
     <string name="devices_tab">Devices</string>
     <string name="user_profile_tab">Profile</string>
     <string name="devices_screen_title">My devices</string>
-    <string name="error_message">There was an error %1$s</string>
+    <string name="error_message">There was an error</string>
     <string name="device_icon_description">Device</string>
     <string name="delete_icon_description">Delete</string>
     <string name="lights_filter">Lights</string>
