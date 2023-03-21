@@ -23,6 +23,6 @@ fun NavigationHost(
 
             }
         }
-        composable(Routes.USER_PROFILE) { UserProfileScreen() }
+        composable(Routes.USER_PROFILE) { UserProfileScreen(modifier) }
     }
 }

@@ -59,6 +59,7 @@ import com.noveogroup.modulotech.ui.theme.borderStroke
 import com.noveogroup.modulotech.ui.theme.darkRed
 import com.noveogroup.modulotech.ui.theme.dismissIconEndScale
 import com.noveogroup.modulotech.ui.theme.dismissIconStartScale
+import com.noveogroup.modulotech.ui.theme.dismissThresholdFraction
 import com.noveogroup.modulotech.ui.theme.halfPadding
 import com.noveogroup.modulotech.ui.theme.iconSize
 import com.noveogroup.modulotech.ui.theme.lightGray
@@ -207,7 +208,7 @@ private fun DismissedContent(
     SwipeToDismiss(
         state = dismissState,
         directions = setOf(DismissDirection.EndToStart),
-        dismissThresholds = { FractionalThreshold(0.25f) },
+        dismissThresholds = { FractionalThreshold(dismissThresholdFraction) },
         background = {
             if (dismissState.dismissDirection != DismissDirection.EndToStart) return@SwipeToDismiss
             val color by animateColorAsState(

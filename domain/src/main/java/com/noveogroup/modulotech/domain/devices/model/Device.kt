@@ -18,7 +18,7 @@ sealed interface Device {
         override val id: String,
         override val name: String,
         val mode: DeviceMode,
-        val temperature: Int,
+        val temperature: Float,
     ) : Device {
         override val deviceType: DeviceType = DeviceType.HEATER
     }

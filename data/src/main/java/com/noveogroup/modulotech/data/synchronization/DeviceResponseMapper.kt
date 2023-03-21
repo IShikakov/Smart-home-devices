@@ -23,7 +23,7 @@ internal class DeviceResponseMapper {
             },
             intensity = intensity,
             mode = mode?.let {
-                when (it) {
+                when (mode) {
                     DeviceResponseMode.ON -> DeviceMode.ON
                     DeviceResponseMode.OFF -> DeviceMode.OFF
                 }

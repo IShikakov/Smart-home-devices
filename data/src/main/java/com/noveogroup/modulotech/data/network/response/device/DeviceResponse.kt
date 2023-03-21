@@ -11,5 +11,5 @@ internal data class DeviceResponse(
     @Json(name = "intensity") val intensity: Int?,
     @Json(name = "mode") val mode: DeviceResponseMode?,
     @Json(name = "position") val position: Int?,
-    @Json(name = "temperature") val temperature: Int?,
+    @Json(name = "temperature") val temperature: Float?,
 )

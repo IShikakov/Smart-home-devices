@@ -27,7 +27,7 @@ internal class DeviceEntityMapper {
         id = id,
         name = deviceName,
         mode = mode ?: DeviceMode.OFF,
-        temperature = temperature ?: 0
+        temperature = temperature ?: 0.0f
     )
 
     private fun DeviceEntity.toRollerShutter(): Device.RollerShutter = Device.RollerShutter(

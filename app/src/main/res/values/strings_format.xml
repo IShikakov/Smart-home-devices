@@ -1,4 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="format_heater_temperature" translatable="false">%1$s \u2103</string>
+    <string name="birthdate_format" translatable="false">dd/MM/yyyy</string>
 </resources>

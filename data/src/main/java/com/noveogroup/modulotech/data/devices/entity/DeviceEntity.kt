@@ -23,7 +23,7 @@ internal data class DeviceEntity(
     @ColumnInfo(name = COLUMN_POSITION)
     val position: Int?,
     @ColumnInfo(name = COLUMN_TEMPERATURE)
-    val temperature: Int?,
+    val temperature: Float?,
 ) {
 
     companion object {

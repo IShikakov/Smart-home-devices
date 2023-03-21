@@ -4,10 +4,26 @@
     <string name="devices_tab">Devices</string>
     <string name="user_profile_tab">Profile</string>
     <string name="devices_screen_title">My devices</string>
+    <string name="profile_screen_title">My profile</string>
     <string name="error_message">There was an error</string>
     <string name="device_icon_description">Device</string>
     <string name="delete_icon_description">Delete</string>
+    <string name="user_profile_photo_description">Profile photo</string>
     <string name="lights_filter">Lights</string>
     <string name="heaters_fiter">Heaters</string>
     <string name="roller_shutters_filter">Roller Shutters</string>
+    <string name="Profile.user_section">User information</string>
+    <string name="Profile.user_address_section">Address information</string>
+    <string name="Profile.first_name">First name</string>
+    <string name="Profile.last_name">Last name</string>
+    <string name="Profile.birthdate">Birthdate</string>
+    <string name="Profile.city">City</string>
+    <string name="Profile.postal_code">Postal code</string>
+    <string name="Profile.street">Street</string>
+    <string name="Profile.street_code">Street code</string>
+    <string name="Profile.country">Country</string>
+    <string name="Profile.save_button">Save</string>
+    <string name="Profile.error_empty_field">Field must not be empty</string>
+    <string name="Profile.error_date_format">Date must be in format %1$s</string>
+    <string name="Profile.saved_message">The profile has been saved</string>
 </resources>

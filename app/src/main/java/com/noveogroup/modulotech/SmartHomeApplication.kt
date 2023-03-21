@@ -5,8 +5,10 @@ import com.noveogroup.modulotech.data.di.databaseModule
 import com.noveogroup.modulotech.data.di.devicesModule
 import com.noveogroup.modulotech.data.di.networkModule
 import com.noveogroup.modulotech.data.di.synchronizationModule
+import com.noveogroup.modulotech.data.di.userModule
 import com.noveogroup.modulotech.di.devicesListModule
 import com.noveogroup.modulotech.di.resourcesModule
+import com.noveogroup.modulotech.di.userProfileModule
 import org.koin.android.ext.koin.androidContext
 import org.koin.core.context.startKoin
 
@@ -26,7 +28,9 @@ class SmartHomeApplication : Application() {
                 databaseModule,
                 synchronizationModule,
                 devicesModule,
+                userModule,
                 devicesListModule,
+                userProfileModule,
             )
         }
     }

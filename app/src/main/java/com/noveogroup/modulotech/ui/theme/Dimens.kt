@@ -19,6 +19,11 @@ val iconSize = 48.dp
 val borderStroke = 1.dp
 val roundedCornerSize = 16.dp
 
-/* Dismiss icon */
+/* Profile screen */
+val profilePhotoSize = 96.dp
+val saveProfileButtonHeight = 48.dp
+
+/* SwipeToDismiss  */
 const val dismissIconStartScale = 1.0f
 const val dismissIconEndScale = 1.2f
+const val dismissThresholdFraction = 0.25f
