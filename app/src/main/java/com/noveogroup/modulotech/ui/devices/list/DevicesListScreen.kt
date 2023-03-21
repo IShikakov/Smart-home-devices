@@ -154,7 +154,7 @@ private fun FilterChip(filter: DevicesFilter, filterClicked: (DevicesFilter) -> 
         border = if (filter.isSelected) {
             null
         } else {
-            BorderStroke(borderStroke, MaterialTheme.colors.onSurface)
+            BorderStroke(borderStroke, MaterialTheme.colors.secondary)
         },
     ) {
         Text(
