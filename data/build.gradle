@@ -25,6 +25,10 @@ android {
         buildConfigField("String", "API_ROOT_URL", '"http://storage42.com/"')
     }
 
+    sourceSets {
+        androidTest.assets.srcDirs += files("$projectDir/schemas".toString())
+    }
+
     compileOptions {
         sourceCompatibility JavaVersion.VERSION_11
         targetCompatibility JavaVersion.VERSION_11
@@ -49,7 +53,8 @@ dependencies {
     implementation libraries.room.roomKtx
     annotationProcessor libraries.room.roomCompiler
     ksp libraries.room.roomCompiler
-    testImplementation libraries.room.roomTesting
 
     implementation libraries.coroutines
+
+    androidTestImplementation libraries.room.roomTesting
 }
