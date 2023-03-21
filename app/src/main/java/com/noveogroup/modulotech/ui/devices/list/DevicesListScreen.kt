@@ -25,7 +25,6 @@ import androidx.compose.material.DismissValue
 import androidx.compose.material.Divider
 import androidx.compose.material.ExperimentalMaterialApi
 import androidx.compose.material.FractionalThreshold
-import androidx.compose.material.Icon
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Scaffold
 import androidx.compose.material.Surface
@@ -48,11 +47,11 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.scale
-import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import com.noveogroup.modulotech.R
 import com.noveogroup.modulotech.domain.devices.model.DeviceType
+import com.noveogroup.modulotech.ui.common.DrawableImage
 import com.noveogroup.modulotech.ui.common.Snackbar
 import com.noveogroup.modulotech.ui.devices.list.model.DevicePreview
 import com.noveogroup.modulotech.ui.devices.list.model.DevicesFilter
@@ -230,8 +229,8 @@ private fun DismissedContent(
                     .padding(regularPadding),
                 contentAlignment = Alignment.CenterEnd
             ) {
-                Icon(
-                    imageVector = Icons.Default.Delete,
+                Image(
+                    imageVector = Icons.Filled.Delete,
                     contentDescription = stringResource(R.string.delete_icon_description),
                     modifier = Modifier.scale(scale)
                 )
@@ -254,9 +253,9 @@ private fun DeviceCard(
             .background(MaterialTheme.colors.background)
             .padding(regularPadding),
     ) {
-        Image(
-            painter = painterResource(device.icon),
-            contentDescription = stringResource(R.string.device_icon_description),
+        DrawableImage(
+            image = device.icon,
+            contentDescription = R.string.device_icon_description,
             modifier = Modifier.size(iconSize)
         )
         Spacer(modifier = Modifier.width(halfPadding))
