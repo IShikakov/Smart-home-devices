@@ -61,7 +61,7 @@ class DeviceDetailsViewModel(
     }
 
     companion object {
-        private const val DEVICE_UPDATE_DEBOUNCE = 1000L
+        private const val DEVICE_UPDATE_DEBOUNCE = 250L
         private const val NUMBER_OF_INITIAL_VALUES = 1
     }
 
