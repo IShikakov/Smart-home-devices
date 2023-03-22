@@ -181,7 +181,7 @@ class DevicesListInteractorTest {
                 id = "1",
                 name = "Heater",
                 mode = DeviceMode.ON,
-                temperature = 20
+                temperature = 20.0f
             ),
             Device.RollerShutter(
                 id = "2",
