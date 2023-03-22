@@ -26,4 +26,8 @@
     <string name="Profile.error_empty_field">Le champ ne doit pas être vide</string>
     <string name="Profile.error_date_format">La date doit être au format %1$s</string>
     <string name="Profile.saved_message">Le profil a été sauvegardé</string>
+    <string name="DeviceDetails.mode">Mode(ON/OFF):</string>
+    <string name="DeviceDetails.light_intensity">Intensité: %1$s</string>
+    <string name="DeviceDetails.heater_temperature">Température: %1$s \u2103</string>
+    <string name="DeviceDetails.roller_shutter_position">Position: %1$s</string>
 </resources>

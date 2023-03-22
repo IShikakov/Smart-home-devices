@@ -6,6 +6,7 @@ import com.noveogroup.modulotech.data.di.devicesModule
 import com.noveogroup.modulotech.data.di.networkModule
 import com.noveogroup.modulotech.data.di.synchronizationModule
 import com.noveogroup.modulotech.data.di.userModule
+import com.noveogroup.modulotech.di.deviceDetailsModule
 import com.noveogroup.modulotech.di.devicesListModule
 import com.noveogroup.modulotech.di.resourcesModule
 import com.noveogroup.modulotech.di.userProfileModule
@@ -30,6 +31,7 @@ class SmartHomeApplication : Application() {
                 devicesModule,
                 userModule,
                 devicesListModule,
+                deviceDetailsModule,
                 userProfileModule,
             )
         }

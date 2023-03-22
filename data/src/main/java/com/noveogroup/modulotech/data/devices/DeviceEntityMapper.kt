@@ -10,7 +10,7 @@ internal class DeviceEntityMapper {
     fun mapToDomainModel(devices: List<DeviceEntity>): List<Device> =
         devices.map { device -> mapToDomainModel(device) }
 
-    private fun mapToDomainModel(device: DeviceEntity): Device = when (device.type) {
+    fun mapToDomainModel(device: DeviceEntity): Device = when (device.type) {
         DeviceType.LIGHT -> device.toLight()
         DeviceType.HEATER -> device.toHeater()
         DeviceType.ROLLER_SHUTTER -> device.toRollerShutter()
@@ -35,4 +35,20 @@ internal class DeviceEntityMapper {
         name = deviceName,
         position = position ?: 0
     )
+
+    fun mapToDatabaseEntity(device: Device): DeviceEntity = with(device) {
+        DeviceEntity(
+            id = id,
+            type = deviceType,
+            deviceName = name,
+            intensity = if (this is Device.Light) this.intensity else null,
+            mode = when (this) {
+                is Device.Light -> this.mode
+                is Device.Heater -> this.mode
+                else -> null
+            },
+            position = if (this is Device.RollerShutter) this.position else null,
+            temperature = if (this is Device.Heater) this.temperature else null,
+        )
+    }
 }

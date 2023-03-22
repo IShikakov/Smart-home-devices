@@ -5,5 +5,7 @@ import kotlinx.coroutines.flow.Flow
 
 interface DevicesRepositoryApi {
     fun observeDevices(): Flow<List<Device>>
+    suspend fun getDeviceById(id: String): Device
+    suspend fun updateDevice(device: Device)
     suspend fun deleteDevice(id: String)
 }

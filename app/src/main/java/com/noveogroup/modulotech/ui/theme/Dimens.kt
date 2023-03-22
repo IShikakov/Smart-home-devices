@@ -27,3 +27,6 @@ val saveProfileButtonHeight = 48.dp
 const val dismissIconStartScale = 1.0f
 const val dismissIconEndScale = 1.2f
 const val dismissThresholdFraction = 0.25f
+
+/* Device Details  */
+val deviceIcon = 128.dp

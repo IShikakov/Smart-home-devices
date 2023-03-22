@@ -6,6 +6,7 @@ import com.noveogroup.modulotech.data.di.devicesModule
 import com.noveogroup.modulotech.data.di.networkModule
 import com.noveogroup.modulotech.data.di.synchronizationModule
 import com.noveogroup.modulotech.data.di.userModule
+import com.noveogroup.modulotech.di.deviceDetailsModule
 import com.noveogroup.modulotech.di.devicesListModule
 import com.noveogroup.modulotech.di.resourcesModule
 import com.noveogroup.modulotech.di.userProfileModule
@@ -34,10 +35,11 @@ class KoinModulesTest : KoinTest {
             networkModule,
             databaseModule,
             synchronizationModule,
-            devicesModule,
             userModule,
+            devicesModule,
             devicesListModule,
-            userProfileModule,
+            deviceDetailsModule,
+            userProfileModule
         )
         checkKoinModules(modulesToCheck) {
             withInstance<Context>()

@@ -13,6 +13,9 @@ internal abstract class DevicesDao : BaseDao<DeviceEntity> {
     @Query("SELECT * FROM ${DeviceEntity.TABLE_NAME}")
     abstract fun observeDevices(): Flow<List<DeviceEntity>>
 
+    @Query("SELECT * FROM ${DeviceEntity.TABLE_NAME} WHERE id = :id")
+    abstract suspend fun getDeviceById(id: String): DeviceEntity
+
     @Query("DELETE FROM ${DeviceEntity.TABLE_NAME}")
     abstract suspend fun deleteDevices()
 
