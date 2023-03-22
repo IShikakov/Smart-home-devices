@@ -4,24 +4,39 @@ import androidx.annotation.DrawableRes
 import androidx.annotation.StringRes
 import com.noveogroup.modulotech.R
 
-object Routes {
-    const val DEVICES_LIST = "devices_list"
-    const val USER_PROFILE = "user_profile"
-}
-
 enum class SmartHomeTab(
     @StringRes val title: Int,
     @DrawableRes val icon: Int,
-    val route: String
+    val route: String,
 ) {
     DEVICES(
         R.string.devices_tab,
         R.drawable.ic_devices,
-        Routes.DEVICES_LIST
+        "Devices"
     ),
     USER_PROFILE(
         R.string.user_profile_tab,
         R.drawable.ic_user_profile,
-        Routes.USER_PROFILE
+        "Profile"
     )
+}
+
+sealed interface Screen {
+    val route: String
+
+    object DevicesListScreen : Screen {
+        override val route: String = "devices"
+    }
+
+    object DeviceDetailsScreen : Screen {
+        private const val ROUTE_PREFIX = "devices/device/"
+        const val DEVICE_ID_KEY = "deviceId"
+
+        override val route: String = "$ROUTE_PREFIX{$DEVICE_ID_KEY}"
+        fun createRoute(deviceId: String): String = "$ROUTE_PREFIX$deviceId"
+    }
+
+    object UserProfileScreen : Screen {
+        override val route: String = "user_profile"
+    }
 }

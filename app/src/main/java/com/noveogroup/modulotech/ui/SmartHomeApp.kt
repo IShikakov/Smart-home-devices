@@ -15,11 +15,15 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.navigation.NavController
+import androidx.navigation.NavHostController
+import androidx.navigation.compose.NavHost
+import androidx.navigation.compose.composable
 import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
 import com.noveogroup.modulotech.ui.common.DrawableImage
-import com.noveogroup.modulotech.ui.navigation.NavigationHost
+import com.noveogroup.modulotech.ui.devices.DevicesFlow
 import com.noveogroup.modulotech.ui.navigation.SmartHomeTab
+import com.noveogroup.modulotech.ui.profile.UserProfileFlow
 import com.noveogroup.modulotech.ui.theme.SmartHomeAppTheme
 
 @Preview
@@ -30,7 +34,7 @@ fun SmartHomeApp() {
         Scaffold(
             bottomBar = { SmartHomeBottomBar(navController) }
         ) { innerPaddingModifier ->
-            NavigationHost(
+            TabNavigationHost(
                 navController = navController,
                 modifier = Modifier.padding(innerPaddingModifier)
             )
@@ -42,13 +46,13 @@ fun SmartHomeApp() {
 private fun SmartHomeBottomBar(
     navController: NavController,
 ) {
-    val bottomNavigationTabs = SmartHomeTab.values()
+    val tabs = SmartHomeTab.values()
     val navBackStackEntry by navController.currentBackStackEntryAsState()
     val currentRoute = navBackStackEntry?.destination?.route
     BottomNavigation(
         backgroundColor = MaterialTheme.colors.surface
     ) {
-        bottomNavigationTabs.forEach { tab ->
+        tabs.forEach { tab ->
             BottomNavigationTab(
                 tab = tab,
                 isSelected = tab.route == currentRoute,
@@ -63,6 +67,21 @@ private fun SmartHomeBottomBar(
                 }
             )
         }
+    }
+}
+
+@Composable
+private fun TabNavigationHost(
+    navController: NavHostController,
+    modifier: Modifier = Modifier,
+    startTab: SmartHomeTab = SmartHomeTab.DEVICES,
+) {
+    NavHost(
+        navController = navController,
+        startDestination = startTab.route
+    ) {
+        composable(SmartHomeTab.DEVICES.route) { DevicesFlow(modifier) }
+        composable(SmartHomeTab.USER_PROFILE.route) { UserProfileFlow(modifier) }
     }
 }
 
