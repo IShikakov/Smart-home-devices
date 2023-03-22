@@ -39,7 +39,7 @@ class UserProfileViewModel(
     fun fieldValueChanged(field: UserProfileField, value: String) {
         _screenState.update { state ->
             val formattedValue = when (field) {
-                UserProfileField.BIRTHDATE -> dateMaskFormatter.format(value)
+                UserProfileField.BIRTHDATE -> dateMaskFormatter.extractDateDigits(value)
                 else -> value
             }
             state.copy(

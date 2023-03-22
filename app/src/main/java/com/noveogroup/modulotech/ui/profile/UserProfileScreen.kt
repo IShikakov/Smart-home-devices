@@ -26,13 +26,14 @@ import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
-import androidx.compose.ui.platform.LocalFocusManager
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.text.input.KeyboardType
+import androidx.compose.ui.text.input.VisualTransformation
 import androidx.compose.ui.tooling.preview.Preview
 import com.noveogroup.modulotech.R
+import com.noveogroup.modulotech.ui.common.DateTransformation
 import com.noveogroup.modulotech.ui.common.DrawableImage
 import com.noveogroup.modulotech.ui.common.Snackbar
 import com.noveogroup.modulotech.ui.profile.model.UserProfileField
@@ -131,7 +132,8 @@ private fun UserInformationSection(
             fieldState = field,
             onValueChange = fieldValueChanged,
             hint = field.hint(),
-            keyboardType = field.keyboardType()
+            keyboardType = field.keyboardType(),
+            visualTransformation = field.visualTransformation()
         )
         if (index != userSectionFields.lastIndex) Spacer(modifier = Modifier.height(halfPadding))
     }
@@ -151,7 +153,8 @@ private fun UserAddressSection(
             onValueChange = fieldValueChanged,
             hint = field.hint(),
             keyboardType = field.keyboardType(),
-            imeAction = if (index == userAddressSectionFields.lastIndex) ImeAction.Done else ImeAction.Next
+            imeAction = if (index == userAddressSectionFields.lastIndex) ImeAction.Done else ImeAction.Next,
+            visualTransformation = field.visualTransformation()
         )
         if (index != userAddressSectionFields.lastIndex) {
             Spacer(modifier = Modifier.height(halfPadding))
@@ -167,8 +170,8 @@ private fun UserProfileTextField(
     hint: String? = null,
     keyboardType: KeyboardType = KeyboardType.Text,
     imeAction: ImeAction = ImeAction.Next,
+    visualTransformation: VisualTransformation = VisualTransformation.None,
 ) {
-    val focus = LocalFocusManager.current
     OutlinedTextField(
         modifier = Modifier.fillMaxWidth(),
         label = { Text(text = label) },
@@ -181,6 +184,7 @@ private fun UserProfileTextField(
             imeAction = imeAction
         ),
         onValueChange = { onValueChange(fieldState.field, it) },
+        visualTransformation = visualTransformation
     )
     if (fieldState.error != null) {
         Text(
@@ -229,6 +233,12 @@ fun UserProfileFields.Field.keyboardType(): KeyboardType = when (field) {
 private fun UserProfileFields.Field.hint(): String? = when (field) {
     UserProfileField.BIRTHDATE -> stringResource(R.string.birthdate_format)
     else -> null
+}
+
+@Composable
+private fun UserProfileFields.Field.visualTransformation(): VisualTransformation = when (field) {
+    UserProfileField.BIRTHDATE -> DateTransformation(stringResource(R.string.birthdate_format))
+    else -> VisualTransformation.None
 }
 
 @Preview

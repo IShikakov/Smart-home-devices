@@ -1,6 +1,7 @@
 package com.noveogroup.modulotech.ui.profile.common
 
 import com.noveogroup.modulotech.R
+import com.noveogroup.modulotech.domain.common.DateMaskFormatter
 import com.noveogroup.modulotech.domain.user.model.UserAddress
 import com.noveogroup.modulotech.domain.user.model.UserProfile
 import com.noveogroup.modulotech.ui.common.ResourcesManager
@@ -13,13 +14,9 @@ import java.util.*
 class UserProfileMapper(
     resourcesManager: ResourcesManager,
 ) {
-
-    private val dateFormat by lazy {
-        SimpleDateFormat(
-            resourcesManager.resolveString(R.string.birthdate_format),
-            Locale.ENGLISH
-        )
-    }
+    private val birthdateFormat = resourcesManager.resolveString(R.string.birthdate_format)
+    private val dateFormat by lazy { SimpleDateFormat(birthdateFormat, Locale.ENGLISH) }
+    private val dateMaskFormatter by lazy { DateMaskFormatter(birthdateFormat) }
 
     fun mapToScreenState(userProfile: UserProfile): UserProfileScreenState = with(userProfile) {
         UserProfileScreenState(
@@ -34,7 +31,7 @@ class UserProfileMapper(
                 ),
                 birthdate = UserProfileFields.Field(
                     field = UserProfileField.BIRTHDATE,
-                    value = dateFormat.format(birthdate)
+                    value = dateMaskFormatter.extractDateDigits(dateFormat.format(birthdate))
                 ),
                 city = UserProfileFields.Field(
                     field = UserProfileField.CITY,
@@ -64,7 +61,7 @@ class UserProfileMapper(
         UserProfile(
             firstName = firstName.value,
             lastName = lastName.value,
-            birthdate = dateFormat.parse(birthdate.value) ?: Date(),
+            birthdate = dateFormat.parse(dateMaskFormatter.format(birthdate.value)) ?: Date(),
             address = UserAddress(
                 city = city.value,
                 postalCode = postalCode.value,

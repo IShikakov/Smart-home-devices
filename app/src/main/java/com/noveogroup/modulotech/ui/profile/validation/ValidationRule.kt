@@ -1,5 +1,6 @@
 package com.noveogroup.modulotech.ui.profile.validation
 
+import com.noveogroup.modulotech.domain.common.DateMaskFormatter
 import java.text.SimpleDateFormat
 import java.util.*
 
@@ -13,9 +14,11 @@ sealed interface ValidationRule {
 
     data class DateFormat(val format: String) : ValidationRule {
         private val dateFormat by lazy { SimpleDateFormat(format, Locale.ENGLISH) }
+        private val dateMaskFormatter by lazy { DateMaskFormatter(format) }
 
         override fun isValid(value: String): Boolean = try {
-            dateFormat.parse(value)?.let { dateFormat.format(it) == value } ?: false
+            val stringDate = dateMaskFormatter.format(value)
+            dateFormat.parse(stringDate)?.let { dateFormat.format(it) == stringDate } ?: false
         } catch (e: Exception) {
             false
         }

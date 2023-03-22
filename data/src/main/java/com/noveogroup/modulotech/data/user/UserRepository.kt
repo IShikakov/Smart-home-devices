@@ -17,7 +17,7 @@ internal class UserRepository(
 
     override suspend fun saveUserProfile(userProfile: UserProfile) =
         withContext(Dispatchers.Default) {
-            userDao.update(userEntityMapper.mapToUserEntity(userProfile))
+            userDao.refreshUser(userEntityMapper.mapToUserEntity(userProfile))
         }
 
 }
