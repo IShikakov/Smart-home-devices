@@ -14,7 +14,7 @@ import java.util.*
 class UserProfileMapper(
     resourcesManager: ResourcesManager,
 ) {
-    private val birthdateFormat = resourcesManager.resolveString(R.string.birthdate_format)
+    private val birthdateFormat by lazy { resourcesManager.resolveString(R.string.birthdate_format) }
     private val dateFormat by lazy { SimpleDateFormat(birthdateFormat, Locale.ENGLISH) }
     private val dateMaskFormatter by lazy { DateMaskFormatter(birthdateFormat) }
 
