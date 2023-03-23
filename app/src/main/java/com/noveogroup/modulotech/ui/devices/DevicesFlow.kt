@@ -28,7 +28,9 @@ fun DevicesFlow(modifier: Modifier = Modifier) {
             arguments = listOf(stringNavArg(Screen.DeviceDetailsScreen.DEVICE_ID_KEY))
         ) { backStackEntry ->
             val deviceId = backStackEntry.getStringArg(Screen.DeviceDetailsScreen.DEVICE_ID_KEY)
-            DeviceDetailsScreen(deviceId, modifier)
+            DeviceDetailsScreen(deviceId, modifier) {
+                navController.popBackStack()
+            }
         }
     }
 }
