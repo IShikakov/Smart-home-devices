@@ -12,25 +12,25 @@ import com.noveogroup.modulotech.ui.profile.UserProfileViewModel
 import com.noveogroup.modulotech.ui.profile.common.UserProfileMapper
 import com.noveogroup.modulotech.ui.profile.validation.UserProfileValidator
 import org.koin.androidx.viewmodel.dsl.viewModelOf
-import org.koin.core.module.dsl.singleOf
+import org.koin.core.module.dsl.factoryOf
 import org.koin.dsl.module
 
 val devicesListModule = module {
     viewModelOf(::DevicesListViewModel)
-    singleOf(::DataSyncInteractor)
-    singleOf(::DevicesListInteractor)
-    singleOf(::DevicesListMapper)
+    factoryOf(::DataSyncInteractor)
+    factoryOf(::DevicesListInteractor)
+    factoryOf(::DevicesListMapper)
 }
 
 val deviceDetailsModule = module {
     viewModelOf(::DeviceDetailsViewModel)
-    singleOf(::DeviceDetailsInteractor)
-    singleOf(::DeviceDetailsMapper)
+    factoryOf(::DeviceDetailsInteractor)
+    factoryOf(::DeviceDetailsMapper)
 }
 
 val userProfileModule = module {
     viewModelOf(::UserProfileViewModel)
-    singleOf(::UserProfileInteractor)
-    singleOf(::UserProfileValidator)
-    singleOf(::UserProfileMapper)
+    factoryOf(::UserProfileInteractor)
+    factoryOf(::UserProfileValidator)
+    factoryOf(::UserProfileMapper)
 }
