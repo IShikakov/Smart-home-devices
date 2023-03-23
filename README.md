@@ -3,6 +3,8 @@
 A small smart home application that can be used to control devices such as lights,
 roller shutters or heaters.
 
+[<img src="screenshots/app_overview.gif" width="200" height = "431" />](screenshots/app_overview.gif)
+
 ## General information
 
 All information about available devices comes from the server
