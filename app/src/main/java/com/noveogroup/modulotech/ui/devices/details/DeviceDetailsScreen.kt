@@ -1,5 +1,6 @@
 package com.noveogroup.modulotech.ui.devices.details
 
+import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material.Scaffold
 import androidx.compose.material.Text
@@ -24,7 +25,7 @@ fun DeviceDetailsScreen(
     val deviceDetails by viewModel.deviceDetails.collectAsState()
     deviceDetails?.let { details ->
         Scaffold(
-            modifier = modifier,
+            modifier = modifier.fillMaxSize(),
             topBar = { DeviceDetailsTopAppBar(details.name) },
             content = { paddingValues ->
                 when (details) {
