@@ -16,7 +16,7 @@ import com.noveogroup.modulotech.ui.devices.list.model.DevicesFilter
 
 class DevicesListMapper(private val resourcesManager: ResourcesManager) {
 
-    fun mapDevice(devices: List<Device>): List<DevicePreview> = devices.map { device ->
+    fun mapDevices(devices: List<Device>): List<DevicePreview> = devices.map { device ->
         with(device) {
             DevicePreview(
                 id = id,
@@ -26,6 +26,15 @@ class DevicesListMapper(private val resourcesManager: ResourcesManager) {
             )
         }
     }
+
+    fun mapFilters(filtersState: FiltersState): List<DevicesFilter> =
+        filtersState.availableFilters.map { type ->
+            DevicesFilter(
+                title = resourcesManager.resolveString(type.title),
+                type = type,
+                isSelected = filtersState.selectedFilters.contains(type)
+            )
+        }
 
     @get:DrawableRes
     private val Device.icon: Int
@@ -45,15 +54,6 @@ class DevicesListMapper(private val resourcesManager: ResourcesManager) {
                 )
             }"
             is RollerShutter -> "$position"
-        }
-
-    fun mapFilter(filtersState: FiltersState): List<DevicesFilter> =
-        filtersState.availableFilters.map { type ->
-            DevicesFilter(
-                title = resourcesManager.resolveString(type.title),
-                type = type,
-                isSelected = filtersState.selectedFilters.contains(type)
-            )
         }
 
     @get:StringRes

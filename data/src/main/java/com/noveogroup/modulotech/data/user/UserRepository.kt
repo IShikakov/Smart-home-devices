@@ -8,14 +8,13 @@ import kotlinx.coroutines.withContext
 
 internal class UserRepository(
     private val userDao: UserDao,
-    private val userEntityMapper: UserEntityMapper,
 ) : UserRepositoryApi {
 
     override suspend fun fetchUserProfile(): UserProfile = withContext(Dispatchers.IO) {
-        userEntityMapper.mapToUserProfile(userDao.selectUser())
+        UserEntityMapper.mapToUserProfile(userDao.selectUser())
     }
 
     override suspend fun saveUserProfile(userProfile: UserProfile) = withContext(Dispatchers.IO) {
-        userDao.refreshUser(userEntityMapper.mapToUserEntity(userProfile))
+        userDao.refreshUser(UserEntityMapper.mapToUserEntity(userProfile))
     }
 }

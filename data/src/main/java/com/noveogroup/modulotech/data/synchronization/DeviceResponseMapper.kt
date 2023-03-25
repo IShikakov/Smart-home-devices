@@ -7,7 +7,7 @@ import com.noveogroup.modulotech.data.network.response.device.DeviceResponseType
 import com.noveogroup.modulotech.domain.devices.model.DeviceMode
 import com.noveogroup.modulotech.domain.devices.model.DeviceType
 
-internal class DeviceResponseMapper {
+internal object DeviceResponseMapper {
 
     fun mapToDatabaseEntity(devices: List<DeviceResponse>): List<DeviceEntity> =
         devices.map { device -> mapToDatabaseEntity(device) }

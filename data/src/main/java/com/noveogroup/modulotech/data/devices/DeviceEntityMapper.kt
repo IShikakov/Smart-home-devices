@@ -8,15 +8,28 @@ import com.noveogroup.modulotech.domain.devices.model.device.Heater
 import com.noveogroup.modulotech.domain.devices.model.device.Light
 import com.noveogroup.modulotech.domain.devices.model.device.RollerShutter
 
-internal class DeviceEntityMapper {
-
-    fun mapToDomainModel(devices: List<DeviceEntity>): List<Device> =
-        devices.map { device -> mapToDomainModel(device) }
+internal object DeviceEntityMapper {
 
     fun mapToDomainModel(device: DeviceEntity): Device = when (device.type) {
         DeviceType.LIGHT -> device.toLight()
         DeviceType.HEATER -> device.toHeater()
         DeviceType.ROLLER_SHUTTER -> device.toRollerShutter()
+    }
+
+    fun mapToDatabaseEntity(device: Device): DeviceEntity = with(device) {
+        DeviceEntity(
+            id = id,
+            type = deviceType,
+            deviceName = name,
+            intensity = if (this is Light) this.intensity else null,
+            mode = when (this) {
+                is Light -> this.mode
+                is Heater -> this.mode
+                else -> null
+            },
+            position = if (this is RollerShutter) this.position else null,
+            temperature = if (this is Heater) this.temperature else null,
+        )
     }
 
     private fun DeviceEntity.toLight(): Light = Light(
@@ -38,20 +51,4 @@ internal class DeviceEntityMapper {
         name = deviceName,
         position = position ?: 0
     )
-
-    fun mapToDatabaseEntity(device: Device): DeviceEntity = with(device) {
-        DeviceEntity(
-            id = id,
-            type = deviceType,
-            deviceName = name,
-            intensity = if (this is Light) this.intensity else null,
-            mode = when (this) {
-                is Light -> this.mode
-                is Heater -> this.mode
-                else -> null
-            },
-            position = if (this is RollerShutter) this.position else null,
-            temperature = if (this is Heater) this.temperature else null,
-        )
-    }
 }

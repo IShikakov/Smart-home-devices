@@ -10,19 +10,20 @@ import kotlinx.coroutines.withContext
 
 internal class DevicesRepository(
     private val devicesDao: DevicesDao,
-    private val deviceMapper: DeviceEntityMapper,
 ) : DevicesRepositoryApi {
 
     override fun observeDevices(): Flow<List<Device>> = devicesDao.observeDevices()
-        .map { devices -> deviceMapper.mapToDomainModel(devices) }
+        .map { devices ->
+            devices.map { device -> DeviceEntityMapper.mapToDomainModel(device) }
+        }
 
     override suspend fun getDeviceById(id: String): Device = withContext(Dispatchers.IO) {
         val device = devicesDao.getDeviceById(id)
-        deviceMapper.mapToDomainModel(device)
+        DeviceEntityMapper.mapToDomainModel(device)
     }
 
     override suspend fun updateDevice(device: Device) = withContext(Dispatchers.IO) {
-        devicesDao.update(deviceMapper.mapToDatabaseEntity(device))
+        devicesDao.update(DeviceEntityMapper.mapToDatabaseEntity(device))
     }
 
     override suspend fun deleteDevice(id: String) {

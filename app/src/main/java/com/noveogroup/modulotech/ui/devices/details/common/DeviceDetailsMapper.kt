@@ -10,12 +10,30 @@ import com.noveogroup.modulotech.ui.devices.details.model.LightDetailsPreview
 import com.noveogroup.modulotech.ui.devices.details.model.RollerShutterDetailsPreview
 import kotlin.math.min
 
-class DeviceDetailsMapper {
+object DeviceDetailsMapper {
+
+    private const val MIN_INTENSITY = 0f
+    private const val MAX_INTENSITY = 100f
+    private const val INTENSITY_STEP = 1f
+
+    private const val MIN_TEMPERATURE = 7f
+    private const val MAX_TEMPERATURE = 28f
+    private const val TEMPERATURE_STEP = 0.5f
+
+    private const val MIN_ROLLER_POSITION = 0f
+    private const val MAX_ROLLER_POSITION = 100f
+    private const val ROLLER_POSITION_STEP = 1f
 
     fun mapToPreview(device: Device): DeviceDetailsPreview = when (device) {
         is Light -> device.preview
         is Heater -> device.preview
         is RollerShutter -> device.preview
+    }
+
+    fun mapToDevice(preview: DeviceDetailsPreview): Device = when (preview) {
+        is LightDetailsPreview -> preview.device
+        is HeaterDetailsPreview -> preview.device
+        is RollerShutterDetailsPreview -> preview.device
     }
 
     private val Light.preview: LightDetailsPreview
@@ -47,12 +65,6 @@ class DeviceDetailsMapper {
             valueStep = ROLLER_POSITION_STEP,
         )
 
-    fun mapToDevice(preview: DeviceDetailsPreview): Device = when (preview) {
-        is LightDetailsPreview -> preview.device
-        is HeaterDetailsPreview -> preview.device
-        is RollerShutterDetailsPreview -> preview.device
-    }
-
     private val LightDetailsPreview.device: Light
         get() = Light(
             id = id,
@@ -75,18 +87,4 @@ class DeviceDetailsMapper {
             name = name,
             position = value.toInt()
         )
-
-    companion object {
-        private const val MIN_INTENSITY = 0f
-        private const val MAX_INTENSITY = 100f
-        private const val INTENSITY_STEP = 1f
-
-        private const val MIN_TEMPERATURE = 7f
-        private const val MAX_TEMPERATURE = 28f
-        private const val TEMPERATURE_STEP = 0.5f
-
-        private const val MIN_ROLLER_POSITION = 0f
-        private const val MAX_ROLLER_POSITION = 100f
-        private const val ROLLER_POSITION_STEP = 1f
-    }
 }

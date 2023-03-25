@@ -56,7 +56,7 @@ class DevicesListViewModel(
 
     private fun observeDevices() {
         devicesInteractor.observeDevices()
-            .map { devices -> devicesListMapper.mapDevice(devices) }
+            .map { devices -> devicesListMapper.mapDevices(devices) }
             .onEach { previews -> _devices.value = previews }
             .catch { showErrorMessage() }
             .launchIn(viewModelScope)
@@ -64,7 +64,7 @@ class DevicesListViewModel(
 
     private fun observeFilters() {
         devicesInteractor.observeFilters()
-            .map { filtersState -> devicesListMapper.mapFilter(filtersState) }
+            .map { filtersState -> devicesListMapper.mapFilters(filtersState) }
             .onEach { filters -> _filters.value = filters }
             .catch { showErrorMessage() }
             .launchIn(viewModelScope)

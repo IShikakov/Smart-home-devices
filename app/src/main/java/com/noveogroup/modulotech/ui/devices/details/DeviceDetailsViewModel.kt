@@ -23,7 +23,6 @@ import kotlinx.coroutines.launch
 class DeviceDetailsViewModel(
     private val deviceId: String,
     private val deviceDetailsInteractor: DeviceDetailsInteractor,
-    private val mapper: DeviceDetailsMapper,
     private val resourcesManager: ResourcesManager,
 ) : BaseViewModel() {
 
@@ -34,7 +33,7 @@ class DeviceDetailsViewModel(
         observeDeviceUpdates()
         viewModelScope.launch {
             val device = deviceDetailsInteractor.getDeviceById(deviceId)
-            _deviceDetails.value = mapper.mapToPreview(device)
+            _deviceDetails.value = DeviceDetailsMapper.mapToPreview(device)
         }
     }
 
@@ -45,7 +44,7 @@ class DeviceDetailsViewModel(
             .distinctUntilChanged()
             .debounce(DEVICE_UPDATE_DEBOUNCE)
             .onEach { details ->
-                val device = mapper.mapToDevice(details)
+                val device = DeviceDetailsMapper.mapToDevice(details)
                 deviceDetailsInteractor.updateDevice(device)
             }
             .catch { showErrorMessage() }

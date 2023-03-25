@@ -5,7 +5,6 @@ import com.noveogroup.modulotech.domain.devices.details.DeviceDetailsInteractor
 import com.noveogroup.modulotech.domain.synchronization.DataSyncInteractor
 import com.noveogroup.modulotech.domain.user.UserProfileInteractor
 import com.noveogroup.modulotech.ui.devices.details.DeviceDetailsViewModel
-import com.noveogroup.modulotech.ui.devices.details.common.DeviceDetailsMapper
 import com.noveogroup.modulotech.ui.devices.list.DevicesListViewModel
 import com.noveogroup.modulotech.ui.devices.list.common.DevicesListMapper
 import com.noveogroup.modulotech.ui.profile.UserProfileViewModel
@@ -25,7 +24,6 @@ val devicesListModule = module {
 val deviceDetailsModule = module {
     viewModelOf(::DeviceDetailsViewModel)
     factoryOf(::DeviceDetailsInteractor)
-    factoryOf(::DeviceDetailsMapper)
 }
 
 val userProfileModule = module {

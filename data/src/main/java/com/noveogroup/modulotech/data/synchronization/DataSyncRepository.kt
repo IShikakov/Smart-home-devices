@@ -13,8 +13,6 @@ internal class DataSyncRepository(
     private val api: ModuloApi,
     private val userDao: UserDao,
     private val devicesDao: DevicesDao,
-    private val userMapper: UserResponseMapper,
-    private val deviceMapper: DeviceResponseMapper,
 ) : DataSyncRepositoryApi {
 
     override suspend fun isSyncRequired(): Boolean = !userDao.isUserCreated()
@@ -23,11 +21,11 @@ internal class DataSyncRepository(
         val response = api.fetchData()
         listOf(
             launch {
-                val user = userMapper.mapToDatabaseEntity(response.user)
+                val user = UserResponseMapper.mapToDatabaseEntity(response.user)
                 userDao.refreshUser(user)
             },
             launch {
-                val devices = deviceMapper.mapToDatabaseEntity(response.devices)
+                val devices = DeviceResponseMapper.mapToDatabaseEntity(response.devices)
                 devicesDao.refreshDevices(devices)
             }
         )

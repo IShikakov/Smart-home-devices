@@ -5,7 +5,7 @@ import com.noveogroup.modulotech.data.user.entity.UserEntity
 import com.noveogroup.modulotech.domain.user.model.UserAddress
 import com.noveogroup.modulotech.domain.user.model.UserProfile
 
-internal class UserEntityMapper {
+internal object UserEntityMapper {
 
     fun mapToUserProfile(user: UserEntity): UserProfile = with(user) {
         UserProfile(

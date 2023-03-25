@@ -5,7 +5,7 @@ import com.noveogroup.modulotech.data.user.entity.AddressEntity
 import com.noveogroup.modulotech.data.user.entity.UserEntity
 import java.util.*
 
-internal class UserResponseMapper {
+internal object UserResponseMapper {
 
     fun mapToDatabaseEntity(user: UserResponse): UserEntity = with(user) {
         UserEntity(
