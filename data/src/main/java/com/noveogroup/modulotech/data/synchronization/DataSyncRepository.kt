@@ -25,7 +25,9 @@ internal class DataSyncRepository(
                 userDao.refreshUser(user)
             },
             launch {
-                val devices = DeviceResponseMapper.mapToDatabaseEntity(response.devices)
+                val devices = response.devices.mapNotNull { deviceResponse ->
+                    DeviceResponseMapper.mapToDatabaseEntity(deviceResponse)
+                }
                 devicesDao.refreshDevices(devices)
             }
         )

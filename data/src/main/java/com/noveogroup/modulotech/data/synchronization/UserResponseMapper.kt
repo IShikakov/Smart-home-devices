@@ -9,18 +9,16 @@ internal object UserResponseMapper {
 
     fun mapToDatabaseEntity(user: UserResponse): UserEntity = with(user) {
         UserEntity(
-            firstName = firstName,
-            lastName = lastName,
-            birthdate = Date(birthdate),
-            address = with(address) {
-                AddressEntity(
-                    city = city,
-                    postalCode = postalCode,
-                    street = street,
-                    streetCode = streetCode,
-                    country = country
-                )
-            }
+            firstName = firstName ?: "",
+            lastName = lastName ?: "",
+            birthdate = Date(birthdate ?: 0),
+            address = AddressEntity(
+                city = address?.city ?: "",
+                postalCode = address?.postalCode ?: "",
+                street = address?.street ?: "",
+                streetCode = address?.streetCode ?: "",
+                country = address?.country ?: ""
+            )
         )
     }
 }

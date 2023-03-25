@@ -9,13 +9,11 @@ import com.noveogroup.modulotech.domain.devices.model.DeviceType
 
 internal object DeviceResponseMapper {
 
-    fun mapToDatabaseEntity(devices: List<DeviceResponse>): List<DeviceEntity> =
-        devices.map { device -> mapToDatabaseEntity(device) }
-
-    private fun mapToDatabaseEntity(device: DeviceResponse): DeviceEntity = with(device) {
+    fun mapToDatabaseEntity(device: DeviceResponse): DeviceEntity? = with(device) {
+        if (id == null || productType == null) return@with null
         DeviceEntity(
             id = id,
-            deviceName = deviceName,
+            deviceName = deviceName ?: "",
             type = when (productType) {
                 DeviceResponseType.Light -> DeviceType.LIGHT
                 DeviceResponseType.Heater -> DeviceType.HEATER

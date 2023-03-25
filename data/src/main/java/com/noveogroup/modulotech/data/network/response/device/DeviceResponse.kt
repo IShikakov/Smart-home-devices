@@ -5,9 +5,9 @@ import com.squareup.moshi.JsonClass
 
 @JsonClass(generateAdapter = true)
 internal data class DeviceResponse(
-    @Json(name = "id") val id: String,
-    @Json(name = "productType") val productType: DeviceResponseType,
-    @Json(name = "deviceName") val deviceName: String,
+    @Json(name = "id") val id: String?,
+    @Json(name = "productType") val productType: DeviceResponseType?,
+    @Json(name = "deviceName") val deviceName: String?,
     @Json(name = "intensity") val intensity: Int?,
     @Json(name = "mode") val mode: DeviceResponseMode?,
     @Json(name = "position") val position: Int?,
