@@ -14,6 +14,8 @@ import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.tooling.preview.Devices
+import androidx.compose.ui.tooling.preview.Preview
 import com.noveogroup.modulotech.R
 import com.noveogroup.modulotech.ui.devices.details.model.HeaterDetailsPreview
 import com.noveogroup.modulotech.ui.devices.details.model.LightDetailsPreview
@@ -74,5 +76,14 @@ private fun DeviceDetailsTopAppBar(
                 )
             }
         }
+    )
+}
+
+@Preview(showBackground = true, device = Devices.PIXEL_2, locale = "en")
+@Composable
+private fun PreviewDeviceDetailsTopAppBar() {
+    DeviceDetailsTopAppBar(
+        deviceName = "Light",
+        back = {}
     )
 }

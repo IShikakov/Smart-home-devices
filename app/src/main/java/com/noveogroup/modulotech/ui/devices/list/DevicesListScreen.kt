@@ -48,6 +48,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.scale
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.tooling.preview.Devices
 import androidx.compose.ui.tooling.preview.Preview
 import com.noveogroup.modulotech.R
 import com.noveogroup.modulotech.domain.devices.model.DeviceType
@@ -98,7 +99,6 @@ fun DevicesListScreen(
     )
 }
 
-@Preview
 @Composable
 private fun DevicesListTopAppBar() {
     TopAppBar(
@@ -273,36 +273,61 @@ private fun DeviceCard(
     }
 }
 
-@Preview
+@Preview(showBackground = true, device = Devices.PIXEL_2, locale = "en")
 @Composable
-private fun PreviewDevicesList() {
-    DevicesList(
-        devices = listOf(
-            DevicePreview(
-                id = "0",
-                name = "Light",
-                icon = R.drawable.ic_light,
-                stateDescription = "14"
-            ),
-            DevicePreview(
-                id = "1",
-                name = "Roller shutter",
-                icon = R.drawable.ic_roller,
-                stateDescription = "50"
-            ),
-            DevicePreview(
-                id = "2",
-                name = "Heaters",
-                icon = R.drawable.ic_heater,
-                stateDescription = "23 °C"
-            ),
+private fun PreviewDevicesListTopAppBar() {
+    DevicesListTopAppBar()
+}
+
+@Preview(showBackground = true, device = Devices.PIXEL_2, locale = "en")
+@Composable
+private fun PreviewDeviceCard() {
+    DeviceCard(
+        device = DevicePreview(
+            id = "0",
+            name = "Light",
+            icon = R.drawable.ic_light,
+            stateDescription = "ON, 50"
         ),
-        deviceClicked = {},
-        deviceSwiped = {}
+        deviceClicked = {}
     )
 }
 
-@Preview
+@Preview(showBackground = true, device = Devices.PIXEL_2, locale = "en")
+@Composable
+private fun PreviewDevicesList() {
+    var devices by remember {
+        mutableStateOf(
+            listOf(
+                DevicePreview(
+                    id = "0",
+                    name = "Light",
+                    icon = R.drawable.ic_light,
+                    stateDescription = "14"
+                ),
+                DevicePreview(
+                    id = "1",
+                    name = "Roller shutter",
+                    icon = R.drawable.ic_roller,
+                    stateDescription = "50"
+                ),
+                DevicePreview(
+                    id = "2",
+                    name = "Heater",
+                    icon = R.drawable.ic_heater,
+                    stateDescription = "23 °C"
+                ),
+            )
+        )
+    }
+    DevicesList(
+        devices = devices,
+        deviceSwiped = { device -> devices = devices.filter { it.id != device.id } },
+        deviceClicked = {},
+    )
+}
+
+@Preview(showBackground = true, device = Devices.PIXEL_2, locale = "en")
 @Composable
 private fun PreviewFilterChips() {
     var filters by remember {

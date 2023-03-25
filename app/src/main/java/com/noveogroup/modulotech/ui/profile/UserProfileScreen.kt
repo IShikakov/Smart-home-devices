@@ -2,6 +2,7 @@ package com.noveogroup.modulotech.ui.profile
 
 import androidx.annotation.DrawableRes
 import androidx.compose.foundation.Image
+import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
@@ -23,6 +24,9 @@ import androidx.compose.material.rememberScaffoldState
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
@@ -31,6 +35,7 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.text.input.VisualTransformation
+import androidx.compose.ui.tooling.preview.Devices
 import androidx.compose.ui.tooling.preview.Preview
 import com.noveogroup.modulotech.R
 import com.noveogroup.modulotech.ui.common.DateTransformation
@@ -69,7 +74,6 @@ fun UserProfileScreen(
     )
 }
 
-@Preview
 @Composable
 private fun ProfileTopAppBar(
 ) {
@@ -172,26 +176,28 @@ private fun UserProfileTextField(
     imeAction: ImeAction = ImeAction.Next,
     visualTransformation: VisualTransformation = VisualTransformation.None,
 ) {
-    OutlinedTextField(
-        modifier = Modifier.fillMaxWidth(),
-        label = { Text(text = label) },
-        placeholder = hint?.let { { Text(text = hint) } },
-        value = fieldState.value,
-        isError = fieldState.error != null,
-        trailingIcon = fieldState.error?.let { { DrawableImage(image = R.drawable.ic_error) } },
-        keyboardOptions = KeyboardOptions(
-            keyboardType = keyboardType,
-            imeAction = imeAction
-        ),
-        onValueChange = { onValueChange(fieldState.field, it) },
-        visualTransformation = visualTransformation
-    )
-    if (fieldState.error != null) {
-        Text(
-            text = fieldState.error.errorText,
-            color = MaterialTheme.colors.error,
-            style = MaterialTheme.typography.caption,
+    Column(verticalArrangement = Arrangement.Center) {
+        OutlinedTextField(
+            modifier = Modifier.fillMaxWidth(),
+            label = { Text(text = label) },
+            placeholder = hint?.let { { Text(text = hint) } },
+            value = fieldState.value,
+            isError = fieldState.error != null,
+            trailingIcon = fieldState.error?.let { { DrawableImage(image = R.drawable.ic_error) } },
+            keyboardOptions = KeyboardOptions(
+                keyboardType = keyboardType,
+                imeAction = imeAction
+            ),
+            onValueChange = { onValueChange(fieldState.field, it) },
+            visualTransformation = visualTransformation
         )
+        if (fieldState.error != null) {
+            Text(
+                text = fieldState.error.errorText,
+                color = MaterialTheme.colors.error,
+                style = MaterialTheme.typography.caption,
+            )
+        }
     }
 }
 
@@ -241,12 +247,57 @@ private fun UserProfileFields.Field.visualTransformation(): VisualTransformation
     else -> VisualTransformation.None
 }
 
-@Preview
+@Preview(showBackground = true, device = Devices.PIXEL_2, locale = "en")
 @Composable
-fun PreviewProfileScreenContent() {
+private fun PreviewProfileTopAppBar() {
+    ProfileTopAppBar()
+}
+
+@Preview(showBackground = true, device = Devices.PIXEL_2, locale = "en")
+@Composable
+private fun PreviewUserPhoto() {
+    UserPhoto(userPhoto = R.drawable.ic_user_photo)
+}
+
+@Preview(showBackground = true, device = Devices.PIXEL_2, locale = "en")
+@Composable
+private fun PreviewUserProfileTextField() {
+    var fieldState by remember {
+        mutableStateOf(
+            UserProfileFields.Field(
+                field = UserProfileField.FIRST_NAME,
+                value = "Name"
+            )
+        )
+    }
+    UserProfileTextField(
+        label = "First name",
+        fieldState = fieldState,
+        onValueChange = { _, value ->
+            fieldState = fieldState.copy(
+                value = value,
+                error = if (value == "Error") {
+                    UserProfileFields.FieldError("Oops, it is an error")
+                } else {
+                    null
+                }
+            )
+        }
+    )
+}
+
+@Preview(showBackground = true, device = Devices.PIXEL_2, locale = "en")
+@Composable
+private fun PreviewProfileScreenContent() {
+    var screenState by remember { mutableStateOf(UserProfileScreenState()) }
     ProfileScreenContent(
-        screenState = UserProfileScreenState(),
-        fieldValueChanged = { _, _ -> },
+        screenState = screenState,
+        fieldValueChanged = { field, value ->
+            screenState = screenState.copy(
+                userProfileFields = screenState.userProfileFields
+                    .copyWithNewFieldValue(field, value)
+            )
+        },
         saveButtonClicked = {}
     )
 }

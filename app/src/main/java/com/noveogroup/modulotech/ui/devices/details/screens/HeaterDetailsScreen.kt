@@ -10,7 +10,6 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
-import androidx.compose.material.IconButton
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Slider
 import androidx.compose.material.SliderDefaults
@@ -26,11 +25,13 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.toArgb
 import androidx.compose.ui.platform.LocalConfiguration
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.tooling.preview.Devices
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.core.graphics.ColorUtils
 import com.noveogroup.modulotech.R
 import com.noveogroup.modulotech.domain.devices.model.DeviceMode
 import com.noveogroup.modulotech.ui.common.DrawableImage
+import com.noveogroup.modulotech.ui.devices.details.common.DeviceModeRow
 import com.noveogroup.modulotech.ui.devices.details.model.HeaterDetailsPreview
 import com.noveogroup.modulotech.ui.theme.deviceIcon
 import com.noveogroup.modulotech.ui.theme.halfPadding
@@ -42,29 +43,17 @@ fun HeaterDetailsScreen(
     heaterDetailsChanged: (HeaterDetailsPreview) -> Unit,
     modifier: Modifier = Modifier,
 ) {
-    val color = when (heater.mode) {
-        DeviceMode.OFF -> Color.Blue
-        DeviceMode.ON -> Color(
-            ColorUtils.blendARGB(
-                Color.Blue.toArgb(),
-                Color.Red.toArgb(),
-                heater.rawValue / heater.valueRange.endInclusive
-            )
-        )
-    }
     val orientation = LocalConfiguration.current.orientation
     if (orientation == Configuration.ORIENTATION_PORTRAIT) {
         PortraitDetailsScreen(
             heater = heater,
             heaterDetailsChanged = heaterDetailsChanged,
-            color = color,
             modifier = modifier
         )
     } else {
         LandscapeDetailsScreen(
             heater = heater,
             heaterDetailsChanged = heaterDetailsChanged,
-            color = color,
             modifier = modifier
         )
     }
@@ -74,9 +63,9 @@ fun HeaterDetailsScreen(
 private fun PortraitDetailsScreen(
     heater: HeaterDetailsPreview,
     heaterDetailsChanged: (HeaterDetailsPreview) -> Unit,
-    color: Color,
     modifier: Modifier = Modifier,
 ) {
+    val color = heater.color
     Column(
         modifier = modifier
             .fillMaxSize()
@@ -84,7 +73,7 @@ private fun PortraitDetailsScreen(
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
         HeaterIcon(color)
-        ModeRow(
+        DeviceModeRow(
             mode = heater.mode,
             toggleMode = { heaterDetailsChanged(heater.copy(mode = heater.mode.opposite())) }
         )
@@ -103,9 +92,9 @@ private fun PortraitDetailsScreen(
 private fun LandscapeDetailsScreen(
     heater: HeaterDetailsPreview,
     heaterDetailsChanged: (HeaterDetailsPreview) -> Unit,
-    color: Color,
     modifier: Modifier = Modifier,
 ) {
+    val color = heater.color
     Row(
         modifier = modifier
             .fillMaxSize()
@@ -115,7 +104,7 @@ private fun LandscapeDetailsScreen(
         HeaterIcon(color)
         Spacer(modifier = Modifier.width(halfPadding))
         Column(horizontalAlignment = Alignment.CenterHorizontally) {
-            ModeRow(
+            DeviceModeRow(
                 mode = heater.mode,
                 toggleMode = { heaterDetailsChanged(heater.copy(mode = heater.mode.opposite())) }
             )
@@ -139,34 +128,6 @@ private fun HeaterIcon(
         modifier = Modifier.size(deviceIcon),
         tint = tint
     )
-}
-
-@Composable
-private fun ModeRow(
-    mode: DeviceMode,
-    toggleMode: () -> Unit,
-) {
-    Row(
-        modifier = Modifier.fillMaxWidth(),
-        verticalAlignment = Alignment.CenterVertically
-    ) {
-        Text(
-            text = stringResource(R.string.DeviceDetails_mode),
-            style = MaterialTheme.typography.subtitle1,
-            modifier = Modifier.weight(1f),
-        )
-        IconButton(
-            onClick = toggleMode
-        ) {
-            DrawableImage(
-                image = R.drawable.ic_power,
-                tint = when (mode) {
-                    DeviceMode.ON -> Color.Green
-                    DeviceMode.OFF -> Color.Red
-                }
-            )
-        }
-    }
 }
 
 @Composable
@@ -199,23 +160,67 @@ private fun TemperatureSlider(
     )
 }
 
-@Preview
-@Composable
-private fun PreviewHeaterDetailsScreen() {
-    var heater by remember {
-        mutableStateOf(
-            HeaterDetailsPreview(
-                id = "0",
-                name = "Heater",
-                rawValue = 7.0f,
-                valueRange = 7f..28f,
-                valueStep = 0.5f,
-                mode = DeviceMode.ON
+private val HeaterDetailsPreview.color: Color
+    get() = when (mode) {
+        DeviceMode.OFF -> Color.Blue
+        DeviceMode.ON -> Color(
+            ColorUtils.blendARGB(
+                Color.Blue.toArgb(),
+                Color.Red.toArgb(),
+                rawValue / valueRange.endInclusive
             )
         )
     }
-    HeaterDetailsScreen(
-        heater = heater,
-        heaterDetailsChanged = { heater = it }
+
+private val detailsPreview = HeaterDetailsPreview(
+    id = "0",
+    name = "Heater",
+    rawValue = 7.0f,
+    valueRange = 7f..28f,
+    valueStep = 0.5f,
+    mode = DeviceMode.ON
+)
+
+@Preview(showBackground = true, device = Devices.PIXEL_2, locale = "en")
+@Composable
+private fun PreviewHeaterIcon() {
+    HeaterIcon(tint = Color.Red)
+}
+
+@Preview(showBackground = true, device = Devices.PIXEL_2, locale = "en")
+@Composable
+private fun PreviewTemperatureText() {
+    TemperatureText(value = detailsPreview.value)
+}
+
+@Preview(showBackground = true, device = Devices.PIXEL_2, locale = "en")
+@Composable
+private fun PreviewTemperatureSlider() {
+    var detailsPreview by remember { mutableStateOf(detailsPreview) }
+    TemperatureSlider(
+        value = detailsPreview.rawValue,
+        range = detailsPreview.valueRange,
+        color = Color.Gray,
+        changeTemperature = { detailsPreview = detailsPreview.copy(rawValue = it) }
+    )
+}
+
+@Preview(showBackground = true, device = Devices.PIXEL_2, locale = "en")
+@Composable
+private fun PreviewPortraitHeaterDetailsScreen() {
+    var detailsPreview by remember { mutableStateOf(detailsPreview) }
+    PortraitDetailsScreen(
+        heater = detailsPreview,
+        heaterDetailsChanged = { detailsPreview = it },
+    )
+}
+
+@Preview(showBackground = true, device = Devices.PIXEL_2, locale = "en")
+@Composable
+private fun PreviewLandscapeHeaterDetailsScreen() {
+    var detailsPreview by remember { mutableStateOf(detailsPreview) }
+    LandscapeDetailsScreen(
+        heater = detailsPreview,
+        heaterDetailsChanged = { detailsPreview = it },
     )
 }

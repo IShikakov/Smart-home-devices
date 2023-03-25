@@ -26,6 +26,7 @@ import androidx.compose.ui.graphics.graphicsLayer
 import androidx.compose.ui.layout.layout
 import androidx.compose.ui.platform.LocalConfiguration
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.tooling.preview.Devices
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.Constraints
 import com.noveogroup.modulotech.R
@@ -160,22 +161,53 @@ fun Modifier.verticalPosition() = this
         }
     }
 
-@Preview
+private val detailsPreview = RollerShutterDetailsPreview(
+    id = "0",
+    name = "Roller Shutter",
+    rawValue = 45f,
+    valueRange = 0f..100f,
+    valueStep = 1f
+)
+
+@Preview(showBackground = true, device = Devices.PIXEL_2, locale = "en")
 @Composable
-private fun PreviewRollerShutterDetailsScreen() {
-    var roller by remember {
-        mutableStateOf(
-            RollerShutterDetailsPreview(
-                id = "0",
-                name = "Roller Shutter",
-                rawValue = 45f,
-                valueRange = 0f..100f,
-                valueStep = 1f
-            )
-        )
-    }
-    RollerShutterDetailsScreen(
-        roller = roller,
-        rollerDetailsChanged = { roller = it }
+private fun PreviewRollerIcon() {
+    RollerIcon()
+}
+
+@Preview(showBackground = true, device = Devices.PIXEL_2, locale = "en")
+@Composable
+private fun PreviewPositionText() {
+    PositionText(value = detailsPreview.value.toInt())
+}
+
+@Preview(showBackground = true, device = Devices.PIXEL_2, locale = "en")
+@Composable
+private fun PreviewPositionSlider() {
+    var detailsPreview by remember { mutableStateOf(detailsPreview) }
+    PositionSlider(
+        value = detailsPreview.rawValue,
+        range = detailsPreview.valueRange,
+        changePosition = { detailsPreview = detailsPreview.copy(rawValue = it) }
+    )
+}
+
+@Preview(showBackground = true, device = Devices.PIXEL_2, locale = "en")
+@Composable
+private fun PreviewPortraitRollerDetailsScreen() {
+    var detailsPreview by remember { mutableStateOf(detailsPreview) }
+    PortraitDetailsScreen(
+        roller = detailsPreview,
+        rollerDetailsChanged = { detailsPreview = it }
+    )
+}
+
+@Preview(showBackground = true, device = Devices.PIXEL_2, locale = "en")
+@Composable
+private fun PreviewLandscapeRollerDetailsScreen() {
+    var detailsPreview by remember { mutableStateOf(detailsPreview) }
+    LandscapeDetailsScreen(
+        roller = detailsPreview,
+        rollerDetailsChanged = { detailsPreview = it }
     )
 }

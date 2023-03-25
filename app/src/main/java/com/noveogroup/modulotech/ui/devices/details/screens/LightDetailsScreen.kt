@@ -10,7 +10,6 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
-import androidx.compose.material.IconButton
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Slider
 import androidx.compose.material.SliderDefaults
@@ -26,11 +25,13 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.toArgb
 import androidx.compose.ui.platform.LocalConfiguration
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.tooling.preview.Devices
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.core.graphics.ColorUtils
 import com.noveogroup.modulotech.R
 import com.noveogroup.modulotech.domain.devices.model.DeviceMode
 import com.noveogroup.modulotech.ui.common.DrawableImage
+import com.noveogroup.modulotech.ui.devices.details.common.DeviceModeRow
 import com.noveogroup.modulotech.ui.devices.details.model.LightDetailsPreview
 import com.noveogroup.modulotech.ui.theme.deviceIcon
 import com.noveogroup.modulotech.ui.theme.halfPadding
@@ -42,29 +43,17 @@ fun LightDetailsScreen(
     lightDetailsChanged: (LightDetailsPreview) -> Unit,
     modifier: Modifier = Modifier,
 ) {
-    val color = when (light.mode) {
-        DeviceMode.OFF -> Color.Gray
-        DeviceMode.ON -> Color(
-            ColorUtils.blendARGB(
-                Color.Gray.toArgb(),
-                Color.Yellow.toArgb(),
-                light.rawValue / light.valueRange.endInclusive
-            )
-        )
-    }
     val orientation = LocalConfiguration.current.orientation
     if (orientation == Configuration.ORIENTATION_PORTRAIT) {
         PortraitDetailsScreen(
             light = light,
             lightDetailsChanged = lightDetailsChanged,
-            color = color,
             modifier = modifier
         )
     } else {
         LandscapeDetailsScreen(
             light = light,
             lightDetailsChanged = lightDetailsChanged,
-            color = color,
             modifier = modifier
         )
     }
@@ -74,9 +63,9 @@ fun LightDetailsScreen(
 private fun PortraitDetailsScreen(
     light: LightDetailsPreview,
     lightDetailsChanged: (LightDetailsPreview) -> Unit,
-    color: Color,
     modifier: Modifier = Modifier,
 ) {
+    val color = light.color
     Column(
         modifier = modifier
             .fillMaxSize()
@@ -84,7 +73,7 @@ private fun PortraitDetailsScreen(
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
         LightIcon(tint = color)
-        ModeRow(
+        DeviceModeRow(
             mode = light.mode,
             toggleMode = { lightDetailsChanged(light.copy(mode = light.mode.opposite())) }
         )
@@ -103,19 +92,23 @@ private fun PortraitDetailsScreen(
 private fun LandscapeDetailsScreen(
     light: LightDetailsPreview,
     lightDetailsChanged: (LightDetailsPreview) -> Unit,
-    color: Color,
     modifier: Modifier = Modifier,
 ) {
+    val color = light.color
     Row(
         modifier = modifier
             .fillMaxSize()
             .padding(regularPadding),
         verticalAlignment = Alignment.CenterVertically
     ) {
-        LightIcon(tint = color)
+        DrawableImage(
+            image = R.drawable.ic_light,
+            modifier = Modifier.size(deviceIcon),
+            tint = color
+        )
         Spacer(modifier = Modifier.width(halfPadding))
         Column(horizontalAlignment = Alignment.CenterHorizontally) {
-            ModeRow(
+            DeviceModeRow(
                 mode = light.mode,
                 toggleMode = { lightDetailsChanged(light.copy(mode = light.mode.opposite())) }
             )
@@ -140,34 +133,6 @@ private fun LightIcon(
         modifier = Modifier.size(deviceIcon),
         tint = tint
     )
-}
-
-@Composable
-private fun ModeRow(
-    mode: DeviceMode,
-    toggleMode: () -> Unit,
-) {
-    Row(
-        modifier = Modifier.fillMaxWidth(),
-        verticalAlignment = Alignment.CenterVertically
-    ) {
-        Text(
-            text = stringResource(R.string.DeviceDetails_mode),
-            style = MaterialTheme.typography.subtitle1,
-            modifier = Modifier.weight(1f),
-        )
-        IconButton(
-            onClick = toggleMode
-        ) {
-            DrawableImage(
-                image = R.drawable.ic_power,
-                tint = when (mode) {
-                    DeviceMode.ON -> Color.Green
-                    DeviceMode.OFF -> Color.Red
-                }
-            )
-        }
-    }
 }
 
 @Composable
@@ -200,23 +165,67 @@ private fun IntensitySlider(
     )
 }
 
-@Preview
-@Composable
-private fun PreviewLightDetailsScreen() {
-    var light by remember {
-        mutableStateOf(
-            LightDetailsPreview(
-                id = "0",
-                name = "Light",
-                rawValue = 10f,
-                valueRange = 0f..100f,
-                valueStep = 1f,
-                mode = DeviceMode.ON
+private val LightDetailsPreview.color: Color
+    get() = when (mode) {
+        DeviceMode.OFF -> Color.Gray
+        DeviceMode.ON -> Color(
+            ColorUtils.blendARGB(
+                Color.Gray.toArgb(),
+                Color.Yellow.toArgb(),
+                rawValue / valueRange.endInclusive
             )
         )
     }
-    LightDetailsScreen(
-        light = light,
-        lightDetailsChanged = { light = it }
+
+private val detailsPreview = LightDetailsPreview(
+    id = "0",
+    name = "Light",
+    rawValue = 10f,
+    valueRange = 0f..100f,
+    valueStep = 1f,
+    mode = DeviceMode.ON
+)
+
+@Preview(showBackground = true, device = Devices.PIXEL_2, locale = "en")
+@Composable
+private fun PreviewLightIcon() {
+    LightIcon(tint = Color.Gray)
+}
+
+@Preview(showBackground = true, device = Devices.PIXEL_2, locale = "en")
+@Composable
+private fun PreviewIntensityText() {
+    IntensityText(value = detailsPreview.value.toInt())
+}
+
+@Preview(showBackground = true, device = Devices.PIXEL_2, locale = "en")
+@Composable
+private fun PreviewIntensitySlider() {
+    var detailsPreview by remember { mutableStateOf(detailsPreview) }
+    IntensitySlider(
+        value = detailsPreview.rawValue,
+        range = detailsPreview.valueRange,
+        color = Color.Gray,
+        changeIntensity = { detailsPreview = detailsPreview.copy(rawValue = it) }
+    )
+}
+
+@Preview(showBackground = true, device = Devices.PIXEL_2, locale = "en")
+@Composable
+private fun PreviewPortraitLightDetailsScreen() {
+    var detailsPreview by remember { mutableStateOf(detailsPreview) }
+    PortraitDetailsScreen(
+        light = detailsPreview,
+        lightDetailsChanged = { detailsPreview = it },
+    )
+}
+
+@Preview(showBackground = true, device = Devices.PIXEL_2, locale = "en")
+@Composable
+private fun PreviewLandscapeLightDetailsScreen() {
+    var detailsPreview by remember { mutableStateOf(detailsPreview) }
+    LandscapeDetailsScreen(
+        light = detailsPreview,
+        lightDetailsChanged = { detailsPreview = it },
     )
 }
