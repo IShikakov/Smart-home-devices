@@ -3,7 +3,8 @@ package com.noveogroup.modulotech.domain.common
 class DateMaskFormatter(private val pattern: String) {
 
     private val separator = pattern.first { !it.isLetterOrDigit() }
-    private val maxNumberDigits = pattern.filter { it != separator }.length
+    val maxNumberDigits = pattern.count { it != separator }
+    val maskLength = pattern.length
 
     fun format(input: String): String {
         val dateDigits = extractDateDigits(input)
@@ -22,7 +23,6 @@ class DateMaskFormatter(private val pattern: String) {
         }
     }
 
-    fun extractDateDigits(input: String): String {
-        return input.filter { it.isDigit() }.take(maxNumberDigits)
-    }
+    fun extractDateDigits(input: String): String =
+        input.filter { it.isDigit() }.take(maxNumberDigits)
 }

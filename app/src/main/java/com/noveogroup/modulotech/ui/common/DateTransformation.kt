@@ -4,57 +4,33 @@ import androidx.compose.ui.text.AnnotatedString
 import androidx.compose.ui.text.input.OffsetMapping
 import androidx.compose.ui.text.input.TransformedText
 import androidx.compose.ui.text.input.VisualTransformation
+import com.noveogroup.modulotech.domain.common.DateMaskFormatter
 
 /**
  * Changes visual output of the input field by adding a separator between parts of the date.
  * Currently only dd/MM/yyyy format patterns are supported, with any single character separator.
  */
-class DateTransformation(private val pattern: String) : VisualTransformation {
+class DateTransformation(pattern: String) : VisualTransformation {
 
-    private val separator = pattern.first { !it.isLetterOrDigit() }
-    private val numberSeparators = pattern.count { it == separator }
-    private val maxNumberDigits = pattern.length - numberSeparators
-
+    private val dateMaskFormatter = DateMaskFormatter(pattern)
     private val numberOffsetTranslator = object : OffsetMapping {
         override fun originalToTransformed(offset: Int): Int {
             if (offset <= 1) return offset
             if (offset <= 3) return offset + 1
             if (offset <= 8) return offset + 2
-            return pattern.length
+            return dateMaskFormatter.maskLength
         }
 
         override fun transformedToOriginal(offset: Int): Int {
             if (offset <= 2) return offset
             if (offset <= 5) return offset - 1
             if (offset <= 10) return offset - 2
-            return maxNumberDigits
+            return dateMaskFormatter.maxNumberDigits
         }
     }
 
     override fun filter(text: AnnotatedString): TransformedText {
-        return text.transform()
-    }
-
-    private fun AnnotatedString.transform(): TransformedText {
-        val trimmedText = if (text.length >= maxNumberDigits) {
-            text.substring(0 until maxNumberDigits)
-        } else {
-            text
-        }
-        val output = buildString {
-            var maskIndex = 0
-            for (char in pattern) {
-                when {
-                    char == separator -> append(separator)
-                    maskIndex >= trimmedText.length -> break
-                    else -> {
-                        append(trimmedText[maskIndex])
-                        maskIndex++
-                    }
-                }
-            }
-        }
-
+        val output = dateMaskFormatter.format(text.text)
         return TransformedText(AnnotatedString(output), numberOffsetTranslator)
     }
 }
