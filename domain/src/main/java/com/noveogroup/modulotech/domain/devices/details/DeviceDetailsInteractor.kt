@@ -1,7 +1,7 @@
 package com.noveogroup.modulotech.domain.devices.details
 
 import com.noveogroup.modulotech.domain.devices.DevicesRepositoryApi
-import com.noveogroup.modulotech.domain.devices.model.Device
+import com.noveogroup.modulotech.domain.devices.model.device.Device
 
 class DeviceDetailsInteractor(
     private val devicesRepository: DevicesRepositoryApi,

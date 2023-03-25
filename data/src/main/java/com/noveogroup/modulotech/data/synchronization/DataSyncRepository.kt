@@ -19,20 +19,18 @@ internal class DataSyncRepository(
 
     override suspend fun isSyncRequired(): Boolean = !userDao.isUserCreated()
 
-    override suspend fun syncData() {
-        withContext(Dispatchers.Default) {
-            val response = api.fetchData()
-            listOf(
-                launch {
-                    val user = userMapper.mapToDatabaseEntity(response.user)
-                    userDao.refreshUser(user)
-                },
-                launch {
-                    val devices = deviceMapper.mapToDatabaseEntity(response.devices)
-                    devicesDao.refreshDevices(devices)
-                }
-            )
-                .joinAll()
-        }
+    override suspend fun syncData() = withContext(Dispatchers.IO) {
+        val response = api.fetchData()
+        listOf(
+            launch {
+                val user = userMapper.mapToDatabaseEntity(response.user)
+                userDao.refreshUser(user)
+            },
+            launch {
+                val devices = deviceMapper.mapToDatabaseEntity(response.devices)
+                devicesDao.refreshDevices(devices)
+            }
+        )
+            .joinAll()
     }
 }

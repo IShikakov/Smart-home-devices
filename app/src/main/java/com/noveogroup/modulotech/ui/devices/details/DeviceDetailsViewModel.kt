@@ -64,5 +64,4 @@ class DeviceDetailsViewModel(
         private const val DEVICE_UPDATE_DEBOUNCE = 250L
         private const val NUMBER_OF_INITIAL_VALUES = 1
     }
-
 }

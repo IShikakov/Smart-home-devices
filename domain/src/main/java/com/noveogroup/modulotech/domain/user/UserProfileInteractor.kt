@@ -10,5 +10,4 @@ class UserProfileInteractor(
 
     suspend fun saveUserProfile(userProfile: UserProfile): Unit =
         userRepository.saveUserProfile(userProfile)
-
 }

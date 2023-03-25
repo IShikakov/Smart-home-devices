@@ -21,21 +21,24 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.TransformOrigin
+import androidx.compose.ui.graphics.graphicsLayer
+import androidx.compose.ui.layout.layout
 import androidx.compose.ui.platform.LocalConfiguration
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.unit.Constraints
 import com.noveogroup.modulotech.R
 import com.noveogroup.modulotech.ui.common.DrawableImage
-import com.noveogroup.modulotech.ui.common.verticalPosition
-import com.noveogroup.modulotech.ui.devices.details.model.DeviceDetailsPreview
+import com.noveogroup.modulotech.ui.devices.details.model.RollerShutterDetailsPreview
 import com.noveogroup.modulotech.ui.theme.deviceIcon
 import com.noveogroup.modulotech.ui.theme.halfPadding
 import com.noveogroup.modulotech.ui.theme.regularPadding
 
 @Composable
 fun RollerShutterDetailsScreen(
-    roller: DeviceDetailsPreview.RollerShutter,
-    rollerDetailsChanged: (DeviceDetailsPreview.RollerShutter) -> Unit,
+    roller: RollerShutterDetailsPreview,
+    rollerDetailsChanged: (RollerShutterDetailsPreview) -> Unit,
     modifier: Modifier = Modifier,
 ) {
     val orientation = LocalConfiguration.current.orientation
@@ -56,8 +59,8 @@ fun RollerShutterDetailsScreen(
 
 @Composable
 private fun PortraitDetailsScreen(
-    roller: DeviceDetailsPreview.RollerShutter,
-    rollerDetailsChanged: (DeviceDetailsPreview.RollerShutter) -> Unit,
+    roller: RollerShutterDetailsPreview,
+    rollerDetailsChanged: (RollerShutterDetailsPreview) -> Unit,
     modifier: Modifier = Modifier,
 ) {
     Column(
@@ -79,8 +82,8 @@ private fun PortraitDetailsScreen(
 
 @Composable
 private fun LandscapeDetailsScreen(
-    roller: DeviceDetailsPreview.RollerShutter,
-    rollerDetailsChanged: (DeviceDetailsPreview.RollerShutter) -> Unit,
+    roller: RollerShutterDetailsPreview,
+    rollerDetailsChanged: (RollerShutterDetailsPreview) -> Unit,
     modifier: Modifier = Modifier,
 ) {
     Row(
@@ -138,12 +141,31 @@ private fun PositionSlider(
     )
 }
 
+fun Modifier.verticalPosition() = this
+    .graphicsLayer {
+        rotationZ = 270f
+        transformOrigin = TransformOrigin(0f, 0f)
+    }
+    .layout { measurable, constraints ->
+        val placeable = measurable.measure(
+            Constraints(
+                minWidth = constraints.minHeight,
+                maxWidth = constraints.maxHeight,
+                minHeight = constraints.minWidth,
+                maxHeight = constraints.maxHeight,
+            )
+        )
+        layout(placeable.height, placeable.width) {
+            placeable.place(-placeable.width, 0)
+        }
+    }
+
 @Preview
 @Composable
 private fun PreviewRollerShutterDetailsScreen() {
     var roller by remember {
         mutableStateOf(
-            DeviceDetailsPreview.RollerShutter(
+            RollerShutterDetailsPreview(
                 id = "0",
                 name = "Roller Shutter",
                 rawValue = 45f,

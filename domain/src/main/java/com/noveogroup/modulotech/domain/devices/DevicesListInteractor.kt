@@ -1,8 +1,8 @@
 package com.noveogroup.modulotech.domain.devices
 
-import com.noveogroup.modulotech.domain.devices.model.Device
 import com.noveogroup.modulotech.domain.devices.model.DeviceType
 import com.noveogroup.modulotech.domain.devices.model.FiltersState
+import com.noveogroup.modulotech.domain.devices.model.device.Device
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.combine
@@ -35,7 +35,6 @@ class DevicesListInteractor(
                 selectedFilters = selectedFilters
             )
         }
-
 
     fun toggleDevicesFilter(deviceType: DeviceType) {
         selectedFilters.update { filters ->

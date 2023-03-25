@@ -27,5 +27,4 @@ internal abstract class DevicesDao : BaseDao<DeviceEntity> {
         deleteDevices()
         insert(devices)
     }
-
 }

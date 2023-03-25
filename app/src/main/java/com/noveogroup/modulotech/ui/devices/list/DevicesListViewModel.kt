@@ -102,5 +102,4 @@ class DevicesListViewModel(
     private fun showErrorMessage() {
         showMessage(resourcesManager.resolveString(R.string.error_message))
     }
-
 }

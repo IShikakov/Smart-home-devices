@@ -11,12 +11,12 @@ import com.noveogroup.modulotech.di.devicesListModule
 import com.noveogroup.modulotech.di.resourcesModule
 import com.noveogroup.modulotech.di.userProfileModule
 import com.noveogroup.modulotech.rule.MainDispatcherRule
+import io.mockk.mockkClass
 import org.junit.Rule
 import org.junit.Test
 import org.koin.test.KoinTest
 import org.koin.test.check.checkKoinModules
 import org.koin.test.mock.MockProviderRule
-import org.mockito.Mockito
 
 class KoinModulesTest : KoinTest {
 
@@ -25,11 +25,11 @@ class KoinModulesTest : KoinTest {
 
     @get:Rule
     val mockProvider = MockProviderRule.create { clazz ->
-        Mockito.mock(clazz.java)
+        mockkClass(clazz)
     }
 
     @Test
-    fun checkAllModules() {
+    fun `Koin must provide all required dependencies`() {
         val modulesToCheck = listOf(
             resourcesModule,
             networkModule,

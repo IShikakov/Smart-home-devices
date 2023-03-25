@@ -11,13 +11,11 @@ internal class UserRepository(
     private val userEntityMapper: UserEntityMapper,
 ) : UserRepositoryApi {
 
-    override suspend fun fetchUserProfile(): UserProfile = withContext(Dispatchers.Default) {
+    override suspend fun fetchUserProfile(): UserProfile = withContext(Dispatchers.IO) {
         userEntityMapper.mapToUserProfile(userDao.selectUser())
     }
 
-    override suspend fun saveUserProfile(userProfile: UserProfile) =
-        withContext(Dispatchers.Default) {
-            userDao.refreshUser(userEntityMapper.mapToUserEntity(userProfile))
-        }
-
+    override suspend fun saveUserProfile(userProfile: UserProfile) = withContext(Dispatchers.IO) {
+        userDao.refreshUser(userEntityMapper.mapToUserEntity(userProfile))
+    }
 }

@@ -6,6 +6,8 @@
     <string name="devices_screen_title">Mes appareils</string>
     <string name="profile_screen_title">Mon profil</string>
     <string name="error_message">Une erreur s\'est produite</string>
+    <string name="device_on">ON</string>
+    <string name="device_off">OFF</string>
     <string name="device_icon_description">Appareil</string>
     <string name="delete_icon_description">Supprimer</string>
     <string name="back_icon_description">Retour</string>

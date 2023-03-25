@@ -14,5 +14,4 @@ internal interface BaseDao<Entity> {
 
     @Update(onConflict = OnConflictStrategy.REPLACE)
     suspend fun update(entity: Entity)
-
 }

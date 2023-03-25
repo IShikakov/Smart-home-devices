@@ -7,5 +7,4 @@ internal interface ModuloApi {
 
     @GET("modulotest/data.json")
     suspend fun fetchData(): ModuloResponse
-
 }

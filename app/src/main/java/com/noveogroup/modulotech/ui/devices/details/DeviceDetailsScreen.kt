@@ -15,7 +15,9 @@ import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import com.noveogroup.modulotech.R
-import com.noveogroup.modulotech.ui.devices.details.model.DeviceDetailsPreview
+import com.noveogroup.modulotech.ui.devices.details.model.HeaterDetailsPreview
+import com.noveogroup.modulotech.ui.devices.details.model.LightDetailsPreview
+import com.noveogroup.modulotech.ui.devices.details.model.RollerShutterDetailsPreview
 import com.noveogroup.modulotech.ui.devices.details.screens.HeaterDetailsScreen
 import com.noveogroup.modulotech.ui.devices.details.screens.LightDetailsScreen
 import com.noveogroup.modulotech.ui.devices.details.screens.RollerShutterDetailsScreen
@@ -36,17 +38,17 @@ fun DeviceDetailsScreen(
             topBar = { DeviceDetailsTopAppBar(details.name, back) },
             content = { paddingValues ->
                 when (details) {
-                    is DeviceDetailsPreview.Light -> LightDetailsScreen(
+                    is LightDetailsPreview -> LightDetailsScreen(
                         light = details,
                         modifier = modifier.padding(paddingValues),
                         lightDetailsChanged = viewModel::updateDeviceDetails
                     )
-                    is DeviceDetailsPreview.Heater -> HeaterDetailsScreen(
+                    is HeaterDetailsPreview -> HeaterDetailsScreen(
                         heater = details,
                         modifier = modifier.padding(paddingValues),
                         heaterDetailsChanged = viewModel::updateDeviceDetails
                     )
-                    is DeviceDetailsPreview.RollerShutter -> RollerShutterDetailsScreen(
+                    is RollerShutterDetailsPreview -> RollerShutterDetailsScreen(
                         roller = details,
                         modifier = modifier.padding(paddingValues),
                         rollerDetailsChanged = viewModel::updateDeviceDetails

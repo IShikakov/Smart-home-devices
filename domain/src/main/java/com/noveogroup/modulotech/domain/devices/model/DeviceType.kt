@@ -4,4 +4,5 @@ enum class DeviceType {
     LIGHT,
     HEATER,
     ROLLER_SHUTTER,
+    ;
 }

@@ -31,15 +31,15 @@ import androidx.core.graphics.ColorUtils
 import com.noveogroup.modulotech.R
 import com.noveogroup.modulotech.domain.devices.model.DeviceMode
 import com.noveogroup.modulotech.ui.common.DrawableImage
-import com.noveogroup.modulotech.ui.devices.details.model.DeviceDetailsPreview
+import com.noveogroup.modulotech.ui.devices.details.model.LightDetailsPreview
 import com.noveogroup.modulotech.ui.theme.deviceIcon
 import com.noveogroup.modulotech.ui.theme.halfPadding
 import com.noveogroup.modulotech.ui.theme.regularPadding
 
 @Composable
 fun LightDetailsScreen(
-    light: DeviceDetailsPreview.Light,
-    lightDetailsChanged: (DeviceDetailsPreview.Light) -> Unit,
+    light: LightDetailsPreview,
+    lightDetailsChanged: (LightDetailsPreview) -> Unit,
     modifier: Modifier = Modifier,
 ) {
     val color = when (light.mode) {
@@ -72,8 +72,8 @@ fun LightDetailsScreen(
 
 @Composable
 private fun PortraitDetailsScreen(
-    light: DeviceDetailsPreview.Light,
-    lightDetailsChanged: (DeviceDetailsPreview.Light) -> Unit,
+    light: LightDetailsPreview,
+    lightDetailsChanged: (LightDetailsPreview) -> Unit,
     color: Color,
     modifier: Modifier = Modifier,
 ) {
@@ -101,8 +101,8 @@ private fun PortraitDetailsScreen(
 
 @Composable
 private fun LandscapeDetailsScreen(
-    light: DeviceDetailsPreview.Light,
-    lightDetailsChanged: (DeviceDetailsPreview.Light) -> Unit,
+    light: LightDetailsPreview,
+    lightDetailsChanged: (LightDetailsPreview) -> Unit,
     color: Color,
     modifier: Modifier = Modifier,
 ) {
@@ -205,7 +205,7 @@ private fun IntensitySlider(
 private fun PreviewLightDetailsScreen() {
     var light by remember {
         mutableStateOf(
-            DeviceDetailsPreview.Light(
+            LightDetailsPreview(
                 id = "0",
                 name = "Light",
                 rawValue = 10f,

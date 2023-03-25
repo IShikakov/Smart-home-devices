@@ -6,6 +6,8 @@
     <string name="devices_screen_title">My devices</string>
     <string name="profile_screen_title">My profile</string>
     <string name="error_message">There was an error</string>
+    <string name="device_on">ON</string>
+    <string name="device_off">OFF</string>
     <string name="device_icon_description">Device</string>
     <string name="delete_icon_description">Delete</string>
     <string name="back_icon_description">Back</string>

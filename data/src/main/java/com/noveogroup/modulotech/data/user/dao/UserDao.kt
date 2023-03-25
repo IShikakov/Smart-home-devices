@@ -23,5 +23,4 @@ internal abstract class UserDao : BaseDao<UserEntity> {
         deleteUser()
         insert(user)
     }
-
 }

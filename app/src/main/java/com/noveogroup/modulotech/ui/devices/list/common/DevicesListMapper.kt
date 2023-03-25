@@ -3,10 +3,13 @@ package com.noveogroup.modulotech.ui.devices.list.common
 import androidx.annotation.DrawableRes
 import androidx.annotation.StringRes
 import com.noveogroup.modulotech.R
-import com.noveogroup.modulotech.domain.devices.model.Device
 import com.noveogroup.modulotech.domain.devices.model.DeviceMode
 import com.noveogroup.modulotech.domain.devices.model.DeviceType
 import com.noveogroup.modulotech.domain.devices.model.FiltersState
+import com.noveogroup.modulotech.domain.devices.model.device.Device
+import com.noveogroup.modulotech.domain.devices.model.device.Heater
+import com.noveogroup.modulotech.domain.devices.model.device.Light
+import com.noveogroup.modulotech.domain.devices.model.device.RollerShutter
 import com.noveogroup.modulotech.ui.common.ResourcesManager
 import com.noveogroup.modulotech.ui.devices.list.model.DevicePreview
 import com.noveogroup.modulotech.ui.devices.list.model.DevicesFilter
@@ -27,21 +30,21 @@ class DevicesListMapper(private val resourcesManager: ResourcesManager) {
     @get:DrawableRes
     private val Device.icon: Int
         get() = when (this) {
-            is Device.Light -> R.drawable.ic_light
-            is Device.Heater -> R.drawable.ic_heater
-            is Device.RollerShutter -> R.drawable.ic_roller
+            is Light -> R.drawable.ic_light
+            is Heater -> R.drawable.ic_heater
+            is RollerShutter -> R.drawable.ic_roller
         }
 
     private val Device.stateDescription: String
         get() = when (this) {
-            is Device.Light -> "${mode.description()}, $intensity"
-            is Device.Heater -> "${mode.description()}, ${
+            is Light -> "${mode.description()}, $intensity"
+            is Heater -> "${mode.description()}, ${
                 resourcesManager.resolveString(
                     R.string.format_heater_temperature,
                     temperature
                 )
             }"
-            is Device.RollerShutter -> "$position"
+            is RollerShutter -> "$position"
         }
 
     fun mapFilter(filtersState: FiltersState): List<DevicesFilter> =
@@ -62,12 +65,7 @@ class DevicesListMapper(private val resourcesManager: ResourcesManager) {
         }
 
     private fun DeviceMode.description(): String = when (this) {
-        DeviceMode.ON -> MODE_ON
-        DeviceMode.OFF -> MODE_OFF
-    }
-
-    companion object {
-        private const val MODE_ON = "ON"
-        private const val MODE_OFF = "OFF"
+        DeviceMode.ON -> resourcesManager.resolveString(R.string.device_on)
+        DeviceMode.OFF -> resourcesManager.resolveString(R.string.device_off)
     }
 }

@@ -1,6 +1,6 @@
 package com.noveogroup.modulotech.domain.devices
 
-import com.noveogroup.modulotech.domain.devices.model.Device
+import com.noveogroup.modulotech.domain.devices.model.device.Device
 import kotlinx.coroutines.flow.Flow
 
 interface DevicesRepositoryApi {

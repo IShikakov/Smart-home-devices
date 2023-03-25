@@ -32,5 +32,4 @@ internal class DeviceResponseMapper {
             temperature = temperature
         )
     }
-
 }

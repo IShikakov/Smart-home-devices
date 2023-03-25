@@ -98,8 +98,7 @@ dependencies {
 
     implementation libraries.coroutines
 
-    testImplementation libraries.test.mockito
+    testImplementation libraries.test.mockk
     testImplementation libraries.di.koinTest
-    testImplementation libraries.test.junit
     testImplementation libraries.test.coroutinesTest
 }

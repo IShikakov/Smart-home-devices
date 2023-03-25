@@ -31,15 +31,15 @@ import androidx.core.graphics.ColorUtils
 import com.noveogroup.modulotech.R
 import com.noveogroup.modulotech.domain.devices.model.DeviceMode
 import com.noveogroup.modulotech.ui.common.DrawableImage
-import com.noveogroup.modulotech.ui.devices.details.model.DeviceDetailsPreview
+import com.noveogroup.modulotech.ui.devices.details.model.HeaterDetailsPreview
 import com.noveogroup.modulotech.ui.theme.deviceIcon
 import com.noveogroup.modulotech.ui.theme.halfPadding
 import com.noveogroup.modulotech.ui.theme.regularPadding
 
 @Composable
 fun HeaterDetailsScreen(
-    heater: DeviceDetailsPreview.Heater,
-    heaterDetailsChanged: (DeviceDetailsPreview.Heater) -> Unit,
+    heater: HeaterDetailsPreview,
+    heaterDetailsChanged: (HeaterDetailsPreview) -> Unit,
     modifier: Modifier = Modifier,
 ) {
     val color = when (heater.mode) {
@@ -72,8 +72,8 @@ fun HeaterDetailsScreen(
 
 @Composable
 private fun PortraitDetailsScreen(
-    heater: DeviceDetailsPreview.Heater,
-    heaterDetailsChanged: (DeviceDetailsPreview.Heater) -> Unit,
+    heater: HeaterDetailsPreview,
+    heaterDetailsChanged: (HeaterDetailsPreview) -> Unit,
     color: Color,
     modifier: Modifier = Modifier,
 ) {
@@ -101,8 +101,8 @@ private fun PortraitDetailsScreen(
 
 @Composable
 private fun LandscapeDetailsScreen(
-    heater: DeviceDetailsPreview.Heater,
-    heaterDetailsChanged: (DeviceDetailsPreview.Heater) -> Unit,
+    heater: HeaterDetailsPreview,
+    heaterDetailsChanged: (HeaterDetailsPreview) -> Unit,
     color: Color,
     modifier: Modifier = Modifier,
 ) {
@@ -204,7 +204,7 @@ private fun TemperatureSlider(
 private fun PreviewHeaterDetailsScreen() {
     var heater by remember {
         mutableStateOf(
-            DeviceDetailsPreview.Heater(
+            HeaterDetailsPreview(
                 id = "0",
                 name = "Heater",
                 rawValue = 7.0f,

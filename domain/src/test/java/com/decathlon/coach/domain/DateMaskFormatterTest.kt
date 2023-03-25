@@ -7,7 +7,7 @@ import org.junit.Test
 class DateMaskFormatterTest {
 
     @Test
-    fun `Format a valid date string`() {
+    fun `DateMaskFormatter must return the same date string if it is already valid`() {
         val formatter = DateMaskFormatter("dd/MM/yyyy")
 
         val output = formatter.format("10/12/2020")
@@ -16,7 +16,7 @@ class DateMaskFormatterTest {
     }
 
     @Test
-    fun `Format a date string with invalid characters`() {
+    fun `DateMaskFormatter must remove all invalid characters if there are any in a date string`() {
         val formatter = DateMaskFormatter("dd/MM/yyyy")
 
         val output1 = formatter.format("1a/12d/2020")
@@ -27,7 +27,7 @@ class DateMaskFormatterTest {
     }
 
     @Test
-    fun `Format digits string`() {
+    fun `DateMaskFormatter must add a separator based on a pattern when a date string contains only digits`() {
         val formatter = DateMaskFormatter("dd/MM/yyyy")
 
         val output = formatter.format("10122020")
@@ -37,7 +37,7 @@ class DateMaskFormatterTest {
     }
 
     @Test
-    fun `Format an unfilled date string`() {
+    fun `DateMaskFormatter must add a separator based on a pattern, even if a year part is not finished in a date string`() {
         val formatter = DateMaskFormatter("dd/MM/yyyy")
 
         val output = formatter.format("10/12/20")
@@ -47,7 +47,7 @@ class DateMaskFormatterTest {
     }
 
     @Test
-    fun `Format a date string without year`() {
+    fun `DateMaskFormatter must add a separator based on a pattern, even if a year part is empty in a date string`() {
         val formatter = DateMaskFormatter("dd/MM/yyyy")
 
         val output1 = formatter.format("10/12/")
@@ -58,7 +58,7 @@ class DateMaskFormatterTest {
     }
 
     @Test
-    fun `Format a date string that contains only a day`() {
+    fun `DateMaskFormatter must add a separator based on a pattern, even if a date string contains only a day part`() {
         val formatter = DateMaskFormatter("dd/MM/yyyy")
 
         val output1 = formatter.format("10/")
@@ -69,7 +69,7 @@ class DateMaskFormatterTest {
     }
 
     @Test
-    fun `Format a date string that contains more characters than expected`() {
+    fun `DateMaskFormatter must remove extra characters if a date string contains more characters than a pattern has`() {
         val formatter = DateMaskFormatter("dd/MM/yyyy")
 
         val output1 = formatter.format("10/12/20202")
