@@ -15,6 +15,7 @@
     <string name="lights_filter">Lights</string>
     <string name="heaters_fiter">Heaters</string>
     <string name="roller_shutters_filter">Roller Shutters</string>
+    <string name="birthdate_format">MM.dd.yyyy</string>
     <string name="Profile.user_section">User information</string>
     <string name="Profile.user_address_section">Address information</string>
     <string name="Profile.first_name">First name</string>

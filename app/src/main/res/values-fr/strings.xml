@@ -15,6 +15,7 @@
     <string name="lights_filter">Lumières</string>
     <string name="heaters_fiter">Chauffages</string>
     <string name="roller_shutters_filter">Volets roulants</string>
+    <string name="birthdate_format">dd/MM/yyyy</string>
     <string name="Profile.user_section">Informations sur l\'utilisateur</string>
     <string name="Profile.user_address_section">Informations sur l\'adresse</string>
     <string name="Profile.first_name">Prénom</string>
