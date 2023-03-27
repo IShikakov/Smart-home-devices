@@ -25,8 +25,8 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Devices
 import androidx.compose.ui.tooling.preview.Preview
 import com.noveogroup.modulotech.R
-import com.noveogroup.modulotech.ui.common.DrawableImage
-import com.noveogroup.modulotech.ui.common.VerticalSlider
+import com.noveogroup.modulotech.ui.common.views.DrawableIcon
+import com.noveogroup.modulotech.ui.common.views.VerticalSlider
 import com.noveogroup.modulotech.ui.devices.details.model.RollerShutterDetailsPreview
 import com.noveogroup.modulotech.ui.theme.deviceIcon
 import com.noveogroup.modulotech.ui.theme.halfPadding
@@ -73,6 +73,7 @@ private fun PortraitDetailsScreen(
             value = roller.rawValue,
             range = roller.valueRange,
             changePosition = { rollerDetailsChanged(roller.copy(rawValue = it)) },
+            modifier = Modifier.fillMaxHeight()
         )
     }
 }
@@ -95,6 +96,7 @@ private fun LandscapeDetailsScreen(
             value = roller.rawValue,
             range = roller.valueRange,
             changePosition = { rollerDetailsChanged(roller.copy(rawValue = it)) },
+            modifier = modifier.height(deviceIcon)
         )
         Spacer(modifier = Modifier.width(halfPadding))
         PositionText(value = roller.value.toInt())
@@ -105,7 +107,7 @@ private fun LandscapeDetailsScreen(
 private fun RollerIcon(
     tint: Color = Color.Gray,
 ) {
-    DrawableImage(
+    DrawableIcon(
         image = R.drawable.ic_roller,
         modifier = Modifier.size(deviceIcon),
         tint = tint
@@ -127,43 +129,13 @@ private fun PositionSlider(
     value: Float,
     range: ClosedFloatingPointRange<Float>,
     changePosition: (Float) -> Unit,
+    modifier: Modifier,
 ) {
     VerticalSlider(
         value = value,
         valueRange = range,
         onValueChange = changePosition,
-        modifier = Modifier.fillMaxHeight()
-    )
-}
-
-private val detailsPreview = RollerShutterDetailsPreview(
-    id = "0",
-    name = "Roller Shutter",
-    rawValue = 45f,
-    valueRange = 0f..100f,
-    valueStep = 1f
-)
-
-@Preview(showBackground = true, device = Devices.PIXEL_2, locale = "en")
-@Composable
-private fun PreviewRollerIcon() {
-    RollerIcon()
-}
-
-@Preview(showBackground = true, device = Devices.PIXEL_2, locale = "en")
-@Composable
-private fun PreviewPositionText() {
-    PositionText(value = detailsPreview.value.toInt())
-}
-
-@Preview(showBackground = true, device = Devices.PIXEL_2, locale = "en")
-@Composable
-private fun PreviewPositionSlider() {
-    var detailsPreview by remember { mutableStateOf(detailsPreview) }
-    PositionSlider(
-        value = detailsPreview.rawValue,
-        range = detailsPreview.valueRange,
-        changePosition = { detailsPreview = detailsPreview.copy(rawValue = it) },
+        modifier = modifier
     )
 }
 
@@ -177,7 +149,7 @@ private fun PreviewPortraitRollerDetailsScreen() {
     )
 }
 
-@Preview(showBackground = true, device = Devices.PIXEL_2, locale = "en")
+@Preview(showBackground = true, device = Devices.AUTOMOTIVE_1024p, locale = "en")
 @Composable
 private fun PreviewLandscapeRollerDetailsScreen() {
     var detailsPreview by remember { mutableStateOf(detailsPreview) }
@@ -186,3 +158,11 @@ private fun PreviewLandscapeRollerDetailsScreen() {
         rollerDetailsChanged = { detailsPreview = it }
     )
 }
+
+private val detailsPreview = RollerShutterDetailsPreview(
+    id = "0",
+    name = "Roller Shutter",
+    rawValue = 45f,
+    valueRange = 0f..100f,
+    valueStep = 1f
+)

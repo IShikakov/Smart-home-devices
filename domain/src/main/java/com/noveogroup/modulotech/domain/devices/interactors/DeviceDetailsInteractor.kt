@@ -1,4 +1,4 @@
-package com.noveogroup.modulotech.domain.devices.details
+package com.noveogroup.modulotech.domain.devices.interactors
 
 import com.noveogroup.modulotech.domain.devices.api.DevicesRepositoryApi
 import com.noveogroup.modulotech.domain.devices.model.device.Device

@@ -18,7 +18,7 @@ import androidx.compose.ui.tooling.preview.Devices
 import androidx.compose.ui.tooling.preview.Preview
 import com.noveogroup.modulotech.R
 import com.noveogroup.modulotech.domain.devices.model.DeviceMode
-import com.noveogroup.modulotech.ui.common.DrawableImage
+import com.noveogroup.modulotech.ui.common.views.DrawableIcon
 
 @Composable
 fun DeviceModeRow(
@@ -37,7 +37,7 @@ fun DeviceModeRow(
         IconButton(
             onClick = toggleMode
         ) {
-            DrawableImage(
+            DrawableIcon(
                 image = R.drawable.ic_power,
                 tint = when (mode) {
                     DeviceMode.ON -> Color.Green

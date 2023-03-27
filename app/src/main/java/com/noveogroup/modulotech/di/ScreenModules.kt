@@ -1,6 +1,6 @@
 package com.noveogroup.modulotech.di
 
-import com.noveogroup.modulotech.domain.devices.details.DeviceDetailsInteractor
+import com.noveogroup.modulotech.domain.devices.interactors.DeviceDetailsInteractor
 import com.noveogroup.modulotech.domain.devices.interactors.DevicesListInteractor
 import com.noveogroup.modulotech.domain.synchronization.interactors.DataSyncInteractor
 import com.noveogroup.modulotech.domain.user.interactors.UserProfileInteractor

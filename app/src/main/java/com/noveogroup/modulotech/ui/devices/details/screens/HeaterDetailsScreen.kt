@@ -30,7 +30,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.core.graphics.ColorUtils
 import com.noveogroup.modulotech.R
 import com.noveogroup.modulotech.domain.devices.model.DeviceMode
-import com.noveogroup.modulotech.ui.common.DrawableImage
+import com.noveogroup.modulotech.ui.common.views.DrawableIcon
 import com.noveogroup.modulotech.ui.devices.details.common.DeviceModeRow
 import com.noveogroup.modulotech.ui.devices.details.model.HeaterDetailsPreview
 import com.noveogroup.modulotech.ui.theme.deviceIcon
@@ -123,7 +123,7 @@ private fun LandscapeDetailsScreen(
 private fun HeaterIcon(
     tint: Color,
 ) {
-    DrawableImage(
+    DrawableIcon(
         image = R.drawable.ic_heater,
         modifier = Modifier.size(deviceIcon),
         tint = tint
@@ -172,39 +172,6 @@ private val HeaterDetailsPreview.color: Color
         )
     }
 
-private val detailsPreview = HeaterDetailsPreview(
-    id = "0",
-    name = "Heater",
-    rawValue = 7.0f,
-    valueRange = 7f..28f,
-    valueStep = 0.5f,
-    mode = DeviceMode.ON
-)
-
-@Preview(showBackground = true, device = Devices.PIXEL_2, locale = "en")
-@Composable
-private fun PreviewHeaterIcon() {
-    HeaterIcon(tint = Color.Red)
-}
-
-@Preview(showBackground = true, device = Devices.PIXEL_2, locale = "en")
-@Composable
-private fun PreviewTemperatureText() {
-    TemperatureText(value = detailsPreview.value)
-}
-
-@Preview(showBackground = true, device = Devices.PIXEL_2, locale = "en")
-@Composable
-private fun PreviewTemperatureSlider() {
-    var detailsPreview by remember { mutableStateOf(detailsPreview) }
-    TemperatureSlider(
-        value = detailsPreview.rawValue,
-        range = detailsPreview.valueRange,
-        color = Color.Gray,
-        changeTemperature = { detailsPreview = detailsPreview.copy(rawValue = it) }
-    )
-}
-
 @Preview(showBackground = true, device = Devices.PIXEL_2, locale = "en")
 @Composable
 private fun PreviewPortraitHeaterDetailsScreen() {
@@ -215,7 +182,7 @@ private fun PreviewPortraitHeaterDetailsScreen() {
     )
 }
 
-@Preview(showBackground = true, device = Devices.PIXEL_2, locale = "en")
+@Preview(showBackground = true, device = Devices.AUTOMOTIVE_1024p, locale = "en")
 @Composable
 private fun PreviewLandscapeHeaterDetailsScreen() {
     var detailsPreview by remember { mutableStateOf(detailsPreview) }
@@ -224,3 +191,12 @@ private fun PreviewLandscapeHeaterDetailsScreen() {
         heaterDetailsChanged = { detailsPreview = it },
     )
 }
+
+private val detailsPreview = HeaterDetailsPreview(
+    id = "0",
+    name = "Heater",
+    rawValue = 7.0f,
+    valueRange = 7f..28f,
+    valueStep = 0.5f,
+    mode = DeviceMode.ON
+)

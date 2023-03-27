@@ -1,4 +1,4 @@
-package com.noveogroup.modulotech.ui.common
+package com.noveogroup.modulotech.ui.common.views
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.focusable

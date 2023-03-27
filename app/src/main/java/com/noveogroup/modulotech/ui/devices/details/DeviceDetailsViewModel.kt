@@ -2,7 +2,7 @@ package com.noveogroup.modulotech.ui.devices.details
 
 import androidx.lifecycle.viewModelScope
 import com.noveogroup.modulotech.R
-import com.noveogroup.modulotech.domain.devices.details.DeviceDetailsInteractor
+import com.noveogroup.modulotech.domain.devices.interactors.DeviceDetailsInteractor
 import com.noveogroup.modulotech.ui.base.BaseViewModel
 import com.noveogroup.modulotech.ui.common.resources.ResourcesManager
 import com.noveogroup.modulotech.ui.devices.details.common.DeviceDetailsMapper

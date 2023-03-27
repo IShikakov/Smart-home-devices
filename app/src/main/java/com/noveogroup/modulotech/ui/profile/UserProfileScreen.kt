@@ -43,9 +43,9 @@ import androidx.compose.ui.text.input.VisualTransformation
 import androidx.compose.ui.tooling.preview.Devices
 import androidx.compose.ui.tooling.preview.Preview
 import com.noveogroup.modulotech.R
-import com.noveogroup.modulotech.ui.common.DrawableImage
-import com.noveogroup.modulotech.ui.common.Snackbar
 import com.noveogroup.modulotech.ui.common.formatters.DateTransformation
+import com.noveogroup.modulotech.ui.common.views.DrawableIcon
+import com.noveogroup.modulotech.ui.common.views.Snackbar
 import com.noveogroup.modulotech.ui.profile.model.UserProfileField
 import com.noveogroup.modulotech.ui.profile.model.UserProfileFields
 import com.noveogroup.modulotech.ui.profile.model.UserProfileScreenState
@@ -214,7 +214,7 @@ private fun UserProfileTextField(
             placeholder = hint?.let { { Text(text = hint) } },
             value = fieldState.value,
             isError = fieldState.error != null,
-            trailingIcon = fieldState.error?.let { { DrawableImage(image = R.drawable.ic_error) } },
+            trailingIcon = fieldState.error?.let { { DrawableIcon(image = R.drawable.ic_error) } },
             keyboardOptions = KeyboardOptions(
                 keyboardType = keyboardType,
                 imeAction = imeAction
@@ -288,50 +288,33 @@ private fun PreviewProfileTopAppBar() {
     )
 }
 
-@Preview(showBackground = true, device = Devices.PIXEL_2, locale = "en")
-@Composable
-private fun PreviewUserPhoto() {
-    UserPhoto(userPhoto = R.drawable.ic_user_photo)
-}
-
-@Preview(showBackground = true, device = Devices.PIXEL_2, locale = "en")
-@Composable
-private fun PreviewUserProfileTextField() {
-    var fieldState by remember {
-        mutableStateOf(
-            UserProfileFields.Field(
-                field = UserProfileField.FIRST_NAME,
-                value = "Name"
-            )
-        )
-    }
-    UserProfileTextField(
-        label = "First name",
-        fieldState = fieldState,
-        onValueChange = { _, value ->
-            fieldState = fieldState.copy(
-                value = value,
-                error = if (value == "Error") {
-                    UserProfileFields.FieldError("Oops, it is an error")
-                } else {
-                    null
-                }
-            )
-        }
-    )
-}
-
-@Preview(showBackground = true, device = Devices.PIXEL_2, locale = "en")
+@Preview(name = "Portrait", showBackground = true, device = Devices.PIXEL_2, locale = "en")
+@Preview(
+    name = "Landscape",
+    showBackground = true,
+    device = Devices.AUTOMOTIVE_1024p,
+    locale = "en"
+)
 @Composable
 private fun PreviewProfileScreenContent() {
     var screenState by remember { mutableStateOf(UserProfileScreenState()) }
     ProfileScreenContent(
         screenState = screenState,
         fieldValueChanged = { field, value ->
-            screenState = screenState.copy(
-                userProfileFields = screenState.userProfileFields
-                    .copyWithNewFieldValue(field, value)
-            )
+            val userProfileFields = screenState.userProfileFields
+                .copyWithNewFieldValue(field, value)
+                .run {
+                    if (value == "Error") {
+                        this.copyWithErrors(
+                            mapOf(
+                                field to UserProfileFields.FieldError("Oops, it is an error")
+                            )
+                        )
+                    } else {
+                        this
+                    }
+                }
+            screenState = screenState.copy(userProfileFields = userProfileFields)
         },
         saveButtonClicked = {}
     )

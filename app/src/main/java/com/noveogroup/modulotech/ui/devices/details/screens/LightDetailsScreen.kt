@@ -30,7 +30,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.core.graphics.ColorUtils
 import com.noveogroup.modulotech.R
 import com.noveogroup.modulotech.domain.devices.model.DeviceMode
-import com.noveogroup.modulotech.ui.common.DrawableImage
+import com.noveogroup.modulotech.ui.common.views.DrawableIcon
 import com.noveogroup.modulotech.ui.devices.details.common.DeviceModeRow
 import com.noveogroup.modulotech.ui.devices.details.model.LightDetailsPreview
 import com.noveogroup.modulotech.ui.theme.deviceIcon
@@ -101,7 +101,7 @@ private fun LandscapeDetailsScreen(
             .padding(regularPadding),
         verticalAlignment = Alignment.CenterVertically
     ) {
-        DrawableImage(
+        DrawableIcon(
             image = R.drawable.ic_light,
             modifier = Modifier.size(deviceIcon),
             tint = color
@@ -128,7 +128,7 @@ private fun LandscapeDetailsScreen(
 private fun LightIcon(
     tint: Color,
 ) {
-    DrawableImage(
+    DrawableIcon(
         image = R.drawable.ic_light,
         modifier = Modifier.size(deviceIcon),
         tint = tint
@@ -177,39 +177,6 @@ private val LightDetailsPreview.color: Color
         )
     }
 
-private val detailsPreview = LightDetailsPreview(
-    id = "0",
-    name = "Light",
-    rawValue = 10f,
-    valueRange = 0f..100f,
-    valueStep = 1f,
-    mode = DeviceMode.ON
-)
-
-@Preview(showBackground = true, device = Devices.PIXEL_2, locale = "en")
-@Composable
-private fun PreviewLightIcon() {
-    LightIcon(tint = Color.Gray)
-}
-
-@Preview(showBackground = true, device = Devices.PIXEL_2, locale = "en")
-@Composable
-private fun PreviewIntensityText() {
-    IntensityText(value = detailsPreview.value.toInt())
-}
-
-@Preview(showBackground = true, device = Devices.PIXEL_2, locale = "en")
-@Composable
-private fun PreviewIntensitySlider() {
-    var detailsPreview by remember { mutableStateOf(detailsPreview) }
-    IntensitySlider(
-        value = detailsPreview.rawValue,
-        range = detailsPreview.valueRange,
-        color = Color.Gray,
-        changeIntensity = { detailsPreview = detailsPreview.copy(rawValue = it) }
-    )
-}
-
 @Preview(showBackground = true, device = Devices.PIXEL_2, locale = "en")
 @Composable
 private fun PreviewPortraitLightDetailsScreen() {
@@ -220,7 +187,7 @@ private fun PreviewPortraitLightDetailsScreen() {
     )
 }
 
-@Preview(showBackground = true, device = Devices.PIXEL_2, locale = "en")
+@Preview(showBackground = true, device = Devices.AUTOMOTIVE_1024p, locale = "en")
 @Composable
 private fun PreviewLandscapeLightDetailsScreen() {
     var detailsPreview by remember { mutableStateOf(detailsPreview) }
@@ -229,3 +196,13 @@ private fun PreviewLandscapeLightDetailsScreen() {
         lightDetailsChanged = { detailsPreview = it },
     )
 }
+
+
+private val detailsPreview = LightDetailsPreview(
+    id = "0",
+    name = "Light",
+    rawValue = 10f,
+    valueRange = 0f..100f,
+    valueStep = 1f,
+    mode = DeviceMode.ON
+)

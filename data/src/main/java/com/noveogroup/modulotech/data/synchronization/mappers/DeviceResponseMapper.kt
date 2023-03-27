@@ -13,7 +13,7 @@ internal object DeviceResponseMapper {
         if (id == null || productType == null) return@with null
         DeviceEntity(
             id = id,
-            deviceName = deviceName ?: "",
+            deviceName = deviceName.orEmpty(),
             type = when (productType) {
                 DeviceResponseType.Light -> DeviceType.LIGHT
                 DeviceResponseType.Heater -> DeviceType.HEATER

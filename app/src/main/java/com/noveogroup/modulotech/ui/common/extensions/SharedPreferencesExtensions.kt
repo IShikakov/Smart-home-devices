@@ -1,4 +1,4 @@
-package com.noveogroup.modulotech.ui.common
+package com.noveogroup.modulotech.ui.common.extensions
 
 import android.content.SharedPreferences
 

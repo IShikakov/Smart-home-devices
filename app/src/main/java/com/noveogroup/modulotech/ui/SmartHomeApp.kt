@@ -22,7 +22,7 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
-import com.noveogroup.modulotech.ui.common.DrawableImage
+import com.noveogroup.modulotech.ui.common.views.DrawableIcon
 import com.noveogroup.modulotech.ui.devices.DevicesFlow
 import com.noveogroup.modulotech.ui.navigation.SmartHomeTab
 import com.noveogroup.modulotech.ui.profile.UserProfileFlow
@@ -103,7 +103,7 @@ private fun RowScope.BottomNavigationTab(
     onClick: () -> Unit,
 ) {
     BottomNavigationItem(
-        icon = { DrawableImage(tab.icon) },
+        icon = { DrawableIcon(tab.icon) },
         label = { Text(stringResource(tab.title)) },
         selected = isSelected,
         onClick = onClick,
@@ -112,15 +112,6 @@ private fun RowScope.BottomNavigationTab(
         unselectedContentColor = LocalContentColor.current,
         modifier = Modifier.navigationBarsPadding()
     )
-}
-
-@Preview(showBackground = true, device = Devices.PIXEL_2, locale = "en")
-@Composable
-private fun NavigationBottomBarPreview() {
-    val navController = rememberNavController()
-    MaterialTheme {
-        SmartHomeBottomBar(navController = navController)
-    }
 }
 
 @Preview(showBackground = true, device = Devices.PIXEL_2, locale = "en")

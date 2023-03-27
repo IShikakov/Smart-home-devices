@@ -2,7 +2,7 @@ package com.noveogroup.modulotech.ui.theme.dark_theme
 
 import android.content.Context
 import android.content.res.Configuration
-import com.noveogroup.modulotech.ui.common.edit
+import com.noveogroup.modulotech.ui.common.extensions.edit
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 

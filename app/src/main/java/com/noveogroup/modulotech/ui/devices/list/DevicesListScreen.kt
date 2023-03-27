@@ -52,8 +52,8 @@ import androidx.compose.ui.tooling.preview.Devices
 import androidx.compose.ui.tooling.preview.Preview
 import com.noveogroup.modulotech.R
 import com.noveogroup.modulotech.domain.devices.model.DeviceType
-import com.noveogroup.modulotech.ui.common.DrawableImage
-import com.noveogroup.modulotech.ui.common.Snackbar
+import com.noveogroup.modulotech.ui.common.views.DrawableIcon
+import com.noveogroup.modulotech.ui.common.views.Snackbar
 import com.noveogroup.modulotech.ui.devices.list.model.DevicePreview
 import com.noveogroup.modulotech.ui.devices.list.model.DevicesFilter
 import com.noveogroup.modulotech.ui.theme.borderStroke
@@ -84,7 +84,7 @@ fun DevicesListScreen(
         modifier = modifier,
         topBar = { DevicesListTopAppBar() },
         content = { paddingValues ->
-            DevicesListContent(
+            DevicesListScreenContent(
                 modifier = Modifier.padding(paddingValues),
                 devices = devices,
                 filters = filters,
@@ -108,7 +108,7 @@ private fun DevicesListTopAppBar() {
 
 @OptIn(ExperimentalMaterialApi::class)
 @Composable
-private fun DevicesListContent(
+private fun DevicesListScreenContent(
     modifier: Modifier,
     devices: List<DevicePreview>,
     filters: List<DevicesFilter>,
@@ -254,7 +254,7 @@ private fun DeviceCard(
             .background(MaterialTheme.colors.background)
             .padding(regularPadding),
     ) {
-        DrawableImage(
+        DrawableIcon(
             image = device.icon,
             contentDescription = R.string.device_icon_description,
             modifier = Modifier.size(iconSize)
@@ -273,86 +273,24 @@ private fun DeviceCard(
     }
 }
 
-@Preview(showBackground = true, device = Devices.PIXEL_2, locale = "en")
+@Preview(name = "Portrait", showBackground = true, device = Devices.PIXEL_2, locale = "en")
+@Preview(
+    name = "Landscape",
+    showBackground = true,
+    device = Devices.AUTOMOTIVE_1024p,
+    locale = "en"
+)
 @Composable
-private fun PreviewDevicesListTopAppBar() {
-    DevicesListTopAppBar()
-}
-
-@Preview(showBackground = true, device = Devices.PIXEL_2, locale = "en")
-@Composable
-private fun PreviewDeviceCard() {
-    DeviceCard(
-        device = DevicePreview(
-            id = "0",
-            name = "Light",
-            icon = R.drawable.ic_light,
-            stateDescription = "ON, 50"
-        ),
-        deviceClicked = {}
-    )
-}
-
-@Preview(showBackground = true, device = Devices.PIXEL_2, locale = "en")
-@Composable
-private fun PreviewDevicesList() {
-    var devices by remember {
-        mutableStateOf(
-            listOf(
-                DevicePreview(
-                    id = "0",
-                    name = "Light",
-                    icon = R.drawable.ic_light,
-                    stateDescription = "14"
-                ),
-                DevicePreview(
-                    id = "1",
-                    name = "Roller shutter",
-                    icon = R.drawable.ic_roller,
-                    stateDescription = "50"
-                ),
-                DevicePreview(
-                    id = "2",
-                    name = "Heater",
-                    icon = R.drawable.ic_heater,
-                    stateDescription = "23 °C"
-                ),
-            )
-        )
-    }
-    DevicesList(
+private fun PreviewDevicesListScreenContent() {
+    var devices by remember { mutableStateOf(devicesPreview) }
+    var filters by remember { mutableStateOf(filtersPreview) }
+    DevicesListScreenContent(
+        modifier = Modifier.padding(regularPadding),
         devices = devices,
-        deviceSwiped = { device -> devices = devices.filter { it.id != device.id } },
-        deviceClicked = {},
-    )
-}
-
-@Preview(showBackground = true, device = Devices.PIXEL_2, locale = "en")
-@Composable
-private fun PreviewFilterChips() {
-    var filters by remember {
-        mutableStateOf(
-            listOf(
-                DevicesFilter(
-                    title = "Light",
-                    type = DeviceType.LIGHT,
-                    isSelected = true
-                ),
-                DevicesFilter(
-                    title = "Heater",
-                    type = DeviceType.HEATER,
-                    isSelected = false
-                ),
-                DevicesFilter(
-                    title = "Roller shutter",
-                    type = DeviceType.ROLLER_SHUTTER,
-                    isSelected = true
-                )
-            )
-        )
-    }
-    FilterChips(
         filters = filters,
+        loading = false,
+        deviceClicked = {},
+        deviceSwiped = { device -> devices = devices.filter { it.id != device.id } },
         filterClicked = { clickedFilter ->
             filters = filters.map { filter ->
                 if (filter.type == clickedFilter.type) {
@@ -361,6 +299,46 @@ private fun PreviewFilterChips() {
                     filter
                 }
             }
-        }
+        },
+        refresh = { devices = devicesPreview }
     )
 }
+
+private val devicesPreview = listOf(
+    DevicePreview(
+        id = "0",
+        name = "Light",
+        icon = R.drawable.ic_light,
+        stateDescription = "14"
+    ),
+    DevicePreview(
+        id = "1",
+        name = "Roller shutter",
+        icon = R.drawable.ic_roller,
+        stateDescription = "50"
+    ),
+    DevicePreview(
+        id = "2",
+        name = "Heater",
+        icon = R.drawable.ic_heater,
+        stateDescription = "23 °C"
+    ),
+)
+
+private val filtersPreview = listOf(
+    DevicesFilter(
+        title = "Light",
+        type = DeviceType.LIGHT,
+        isSelected = true
+    ),
+    DevicesFilter(
+        title = "Heater",
+        type = DeviceType.HEATER,
+        isSelected = true
+    ),
+    DevicesFilter(
+        title = "Roller shutter",
+        type = DeviceType.ROLLER_SHUTTER,
+        isSelected = true
+    )
+)
