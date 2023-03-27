@@ -11,6 +11,7 @@
     <string name="device_icon_description">Appareil</string>
     <string name="delete_icon_description">Supprimer</string>
     <string name="back_icon_description">Retour</string>
+    <string name="dark_theme_icon_description">Thème sombre</string>
     <string name="user_profile_photo_description">Photo de profil</string>
     <string name="lights_filter">Lumières</string>
     <string name="heaters_fiter">Chauffages</string>

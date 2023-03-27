@@ -10,9 +10,11 @@ import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Scaffold
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.tooling.preview.Devices
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.navigation.NavController
 import androidx.navigation.NavHostController
@@ -25,20 +27,29 @@ import com.noveogroup.modulotech.ui.devices.DevicesFlow
 import com.noveogroup.modulotech.ui.navigation.SmartHomeTab
 import com.noveogroup.modulotech.ui.profile.UserProfileFlow
 import com.noveogroup.modulotech.ui.theme.SmartHomeAppTheme
+import com.noveogroup.modulotech.ui.theme.dark_theme.DarkThemeDelegate
+import org.koin.androidx.compose.get
 
-@Preview
 @Composable
-fun SmartHomeApp() {
-    SmartHomeAppTheme {
-        val navController = rememberNavController()
-        Scaffold(
-            bottomBar = { SmartHomeBottomBar(navController) }
-        ) { innerPaddingModifier ->
-            TabNavigationHost(
-                navController = navController,
-                modifier = Modifier.padding(innerPaddingModifier)
-            )
-        }
+fun SmartHomeApp(
+    darkThemeDelegate: DarkThemeDelegate = get(),
+) {
+    val darkThemeEnabled by darkThemeDelegate.observeDarkThemeState().collectAsState()
+    SmartHomeAppTheme(darkThemeEnabled = darkThemeEnabled) {
+        SmartHomeAppContent()
+    }
+}
+
+@Composable
+private fun SmartHomeAppContent() {
+    val navController = rememberNavController()
+    Scaffold(
+        bottomBar = { SmartHomeBottomBar(navController) }
+    ) { innerPaddingModifier ->
+        TabNavigationHost(
+            navController = navController,
+            modifier = Modifier.padding(innerPaddingModifier)
+        )
     }
 }
 
@@ -103,11 +114,17 @@ private fun RowScope.BottomNavigationTab(
     )
 }
 
-@Preview
+@Preview(showBackground = true, device = Devices.PIXEL_2, locale = "en")
 @Composable
 private fun NavigationBottomBarPreview() {
     val navController = rememberNavController()
     MaterialTheme {
         SmartHomeBottomBar(navController = navController)
     }
+}
+
+@Preview(showBackground = true, device = Devices.PIXEL_2, locale = "en")
+@Composable
+private fun SmartHomeAppContentPreview() {
+    SmartHomeAppContent()
 }

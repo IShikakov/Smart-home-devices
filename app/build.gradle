@@ -13,6 +13,8 @@ android {
         targetSdk config.sdk.target
         versionCode config.build.code
         versionName config.build.name
+
+        testInstrumentationRunner 'androidx.test.runner.AndroidJUnitRunner'
     }
 
     buildTypes {
@@ -50,8 +52,13 @@ android {
     buildFeatures {
         compose true
     }
+
     composeOptions {
         kotlinCompilerExtensionVersion '1.4.3'
+    }
+
+    packagingOptions {
+        exclude("META-INF/*")
     }
 
     lintOptions {
@@ -98,7 +105,10 @@ dependencies {
 
     implementation libraries.coroutines
 
-    testImplementation libraries.test.mockk
-    testImplementation libraries.di.koinTest
-    testImplementation libraries.test.coroutinesTest
+    androidTestImplementation libraries.test.mockk
+    androidTestImplementation libraries.di.koinTest
+    androidTestImplementation libraries.test.coroutinesTest
+    androidTestImplementation libraries.test.junitKtx
+    androidTestImplementation libraries.test.kotlinRunner
+    androidTestImplementation libraries.test.rules
 }

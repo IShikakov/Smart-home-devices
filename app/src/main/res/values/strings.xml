@@ -11,6 +11,7 @@
     <string name="device_icon_description">Device</string>
     <string name="delete_icon_description">Delete</string>
     <string name="back_icon_description">Back</string>
+    <string name="dark_theme_icon_description">Dark theme</string>
     <string name="user_profile_photo_description">Profile photo</string>
     <string name="lights_filter">Lights</string>
     <string name="heaters_fiter">Heaters</string>

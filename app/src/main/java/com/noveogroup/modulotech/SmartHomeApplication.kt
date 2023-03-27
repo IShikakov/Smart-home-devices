@@ -6,6 +6,7 @@ import com.noveogroup.modulotech.data.di.devicesModule
 import com.noveogroup.modulotech.data.di.networkModule
 import com.noveogroup.modulotech.data.di.synchronizationModule
 import com.noveogroup.modulotech.data.di.userModule
+import com.noveogroup.modulotech.di.darkThemeModule
 import com.noveogroup.modulotech.di.deviceDetailsModule
 import com.noveogroup.modulotech.di.devicesListModule
 import com.noveogroup.modulotech.di.resourcesModule
@@ -25,6 +26,7 @@ class SmartHomeApplication : Application() {
             androidContext(this@SmartHomeApplication)
             modules(
                 resourcesModule,
+                darkThemeModule,
                 networkModule,
                 databaseModule,
                 synchronizationModule,

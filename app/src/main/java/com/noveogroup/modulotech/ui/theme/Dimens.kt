@@ -22,6 +22,9 @@ val roundedCornerSize = 16.dp
 /* Profile screen */
 val profilePhotoSize = 96.dp
 val saveProfileButtonHeight = 48.dp
+const val darkThemeIconAnimationStart = 0f
+const val darkThemeIconAnimationEnd = 360f
+const val darkThemeIconAnimationDuration = 500
 
 /* SwipeToDismiss  */
 const val dismissIconStartScale = 1.0f

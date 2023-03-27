@@ -1,6 +1,8 @@
 package com.noveogroup.modulotech.ui.profile
 
 import androidx.annotation.DrawableRes
+import androidx.compose.animation.core.animateFloatAsState
+import androidx.compose.animation.core.tween
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
@@ -15,6 +17,8 @@ import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.Button
+import androidx.compose.material.Icon
+import androidx.compose.material.IconButton
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.OutlinedTextField
 import androidx.compose.material.Scaffold
@@ -30,6 +34,7 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
+import androidx.compose.ui.draw.rotate
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.input.ImeAction
@@ -44,6 +49,9 @@ import com.noveogroup.modulotech.ui.common.Snackbar
 import com.noveogroup.modulotech.ui.profile.model.UserProfileField
 import com.noveogroup.modulotech.ui.profile.model.UserProfileFields
 import com.noveogroup.modulotech.ui.profile.model.UserProfileScreenState
+import com.noveogroup.modulotech.ui.theme.darkThemeIconAnimationDuration
+import com.noveogroup.modulotech.ui.theme.darkThemeIconAnimationEnd
+import com.noveogroup.modulotech.ui.theme.darkThemeIconAnimationStart
 import com.noveogroup.modulotech.ui.theme.halfPadding
 import com.noveogroup.modulotech.ui.theme.profilePhotoSize
 import com.noveogroup.modulotech.ui.theme.regularPadding
@@ -56,12 +64,18 @@ fun UserProfileScreen(
     viewModel: UserProfileViewModel = koinViewModel(),
 ) {
     val screenState by viewModel.screenState.collectAsState()
+    val darkModeEnabled by viewModel.darkModeState.collectAsState()
     val message by viewModel.message.collectAsState()
     val scaffoldState = rememberScaffoldState()
     Scaffold(
         scaffoldState = scaffoldState,
         modifier = modifier,
-        topBar = { ProfileTopAppBar() },
+        topBar = {
+            ProfileTopAppBar(
+                darkThemeEnabled = darkModeEnabled,
+                toggleDarkTheme = viewModel::toggleDarkTheme
+            )
+        },
         content = { paddingValues ->
             ProfileScreenContent(
                 modifier = Modifier.padding(paddingValues),
@@ -76,8 +90,25 @@ fun UserProfileScreen(
 
 @Composable
 private fun ProfileTopAppBar(
+    darkThemeEnabled: Boolean,
+    toggleDarkTheme: () -> Unit,
 ) {
-    TopAppBar(title = { Text(text = stringResource(R.string.profile_screen_title)) })
+    TopAppBar(
+        title = { Text(text = stringResource(R.string.profile_screen_title)) },
+        actions = {
+            val iconRotation: Float by animateFloatAsState(
+                targetValue = if (!darkThemeEnabled) darkThemeIconAnimationStart else darkThemeIconAnimationEnd,
+                animationSpec = tween(durationMillis = darkThemeIconAnimationDuration)
+            )
+            IconButton(onClick = toggleDarkTheme) {
+                Icon(
+                    painter = painterResource(if (darkThemeEnabled) R.drawable.ic_sun else R.drawable.ic_moon),
+                    contentDescription = stringResource(R.string.dark_theme_icon_description),
+                    modifier = Modifier.rotate(iconRotation)
+                )
+            }
+        }
+    )
 }
 
 @Composable
@@ -250,7 +281,11 @@ private fun UserProfileFields.Field.visualTransformation(): VisualTransformation
 @Preview(showBackground = true, device = Devices.PIXEL_2, locale = "en")
 @Composable
 private fun PreviewProfileTopAppBar() {
-    ProfileTopAppBar()
+    var darkThemeEnabled by remember { mutableStateOf(true) }
+    ProfileTopAppBar(
+        darkThemeEnabled = darkThemeEnabled,
+        toggleDarkTheme = { darkThemeEnabled = !darkThemeEnabled }
+    )
 }
 
 @Preview(showBackground = true, device = Devices.PIXEL_2, locale = "en")

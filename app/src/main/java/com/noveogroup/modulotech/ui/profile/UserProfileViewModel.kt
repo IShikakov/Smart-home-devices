@@ -10,6 +10,7 @@ import com.noveogroup.modulotech.ui.profile.common.UserProfileMapper
 import com.noveogroup.modulotech.ui.profile.model.UserProfileField
 import com.noveogroup.modulotech.ui.profile.model.UserProfileScreenState
 import com.noveogroup.modulotech.ui.profile.validation.UserProfileValidator
+import com.noveogroup.modulotech.ui.theme.dark_theme.DarkThemeDelegate
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.update
@@ -20,6 +21,7 @@ class UserProfileViewModel(
     private val mapper: UserProfileMapper,
     private val validator: UserProfileValidator,
     private val resourcesManager: ResourcesManager,
+    private val darkThemeDelegate: DarkThemeDelegate,
 ) : BaseViewModel() {
 
     private val dateMaskFormatter by lazy {
@@ -28,6 +30,7 @@ class UserProfileViewModel(
 
     private val _screenState = MutableStateFlow(UserProfileScreenState())
     val screenState: StateFlow<UserProfileScreenState> = _screenState
+    val darkModeState: StateFlow<Boolean> = darkThemeDelegate.observeDarkThemeState()
 
     init {
         viewModelScope.launch {
@@ -70,6 +73,10 @@ class UserProfileViewModel(
                 handleError(error)
             }
         }
+    }
+
+    fun toggleDarkTheme() {
+        darkThemeDelegate.toggleDarkTheme()
     }
 
     private fun handleError(error: Throwable) {
