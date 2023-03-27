@@ -3,7 +3,7 @@
 A small smart home application that can be used to control devices such as lights,
 roller shutters or heaters.
 
-[<img src="screenshots/app_overview.gif" width="200" height = "431" />](screenshots/app_overview.gif)
+[<img src="screenshots/app_overview.mp4" width="200" height = "431" />](screenshots/app_overview.mp4)
 
 ## General information
 
@@ -13,7 +13,8 @@ by http://storage42.com/modulotest/data.json.
 The main screen consists from two tabs:
 
 * A list of currently available devices, which can be filtered by product type;
-* A user profile page where the user can update all information about themselves.
+* A user profile page where the user can update all information about themselves and switch the dark
+  theme.
 
 Currently, the device list can contain three types of products,
 for each of which the user can open the control screen:
