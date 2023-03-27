@@ -1,6 +1,6 @@
 package com.decathlon.coach.domain
 
-import com.noveogroup.modulotech.domain.common.DateMaskFormatter
+import com.noveogroup.modulotech.domain.common.formatters.DateMaskFormatter
 import org.junit.Assert
 import org.junit.Test
 

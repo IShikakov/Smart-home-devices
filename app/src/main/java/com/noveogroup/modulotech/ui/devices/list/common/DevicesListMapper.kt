@@ -10,7 +10,7 @@ import com.noveogroup.modulotech.domain.devices.model.device.Device
 import com.noveogroup.modulotech.domain.devices.model.device.Heater
 import com.noveogroup.modulotech.domain.devices.model.device.Light
 import com.noveogroup.modulotech.domain.devices.model.device.RollerShutter
-import com.noveogroup.modulotech.ui.common.ResourcesManager
+import com.noveogroup.modulotech.ui.common.resources.ResourcesManager
 import com.noveogroup.modulotech.ui.devices.list.model.DevicePreview
 import com.noveogroup.modulotech.ui.devices.list.model.DevicesFilter
 

@@ -1,10 +1,10 @@
-package com.noveogroup.modulotech.ui.common
+package com.noveogroup.modulotech.ui.common.formatters
 
 import androidx.compose.ui.text.AnnotatedString
 import androidx.compose.ui.text.input.OffsetMapping
 import androidx.compose.ui.text.input.TransformedText
 import androidx.compose.ui.text.input.VisualTransformation
-import com.noveogroup.modulotech.domain.common.DateMaskFormatter
+import com.noveogroup.modulotech.domain.common.formatters.DateMaskFormatter
 
 /**
  * Changes visual output of the input field by adding a separator between parts of the date.

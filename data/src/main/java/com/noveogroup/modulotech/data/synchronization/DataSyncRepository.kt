@@ -2,8 +2,10 @@ package com.noveogroup.modulotech.data.synchronization
 
 import com.noveogroup.modulotech.data.devices.dao.DevicesDao
 import com.noveogroup.modulotech.data.network.api.ModuloApi
+import com.noveogroup.modulotech.data.synchronization.mappers.DeviceResponseMapper
+import com.noveogroup.modulotech.data.synchronization.mappers.UserResponseMapper
 import com.noveogroup.modulotech.data.user.dao.UserDao
-import com.noveogroup.modulotech.domain.synchronization.DataSyncRepositoryApi
+import com.noveogroup.modulotech.domain.synchronization.api.DataSyncRepositoryApi
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.joinAll
 import kotlinx.coroutines.launch

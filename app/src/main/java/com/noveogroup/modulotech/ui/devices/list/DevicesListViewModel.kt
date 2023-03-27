@@ -2,10 +2,10 @@ package com.noveogroup.modulotech.ui.devices.list
 
 import androidx.lifecycle.viewModelScope
 import com.noveogroup.modulotech.R
-import com.noveogroup.modulotech.domain.devices.DevicesListInteractor
-import com.noveogroup.modulotech.domain.synchronization.DataSyncInteractor
+import com.noveogroup.modulotech.domain.devices.interactors.DevicesListInteractor
+import com.noveogroup.modulotech.domain.synchronization.interactors.DataSyncInteractor
 import com.noveogroup.modulotech.ui.base.BaseViewModel
-import com.noveogroup.modulotech.ui.common.ResourcesManager
+import com.noveogroup.modulotech.ui.common.resources.ResourcesManager
 import com.noveogroup.modulotech.ui.devices.list.common.DevicesListMapper
 import com.noveogroup.modulotech.ui.devices.list.model.DevicePreview
 import com.noveogroup.modulotech.ui.devices.list.model.DevicesFilter

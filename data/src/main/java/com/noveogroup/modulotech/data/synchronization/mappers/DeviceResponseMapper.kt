@@ -1,4 +1,4 @@
-package com.noveogroup.modulotech.data.synchronization
+package com.noveogroup.modulotech.data.synchronization.mappers
 
 import com.noveogroup.modulotech.data.devices.entity.DeviceEntity
 import com.noveogroup.modulotech.data.network.response.device.DeviceResponse

@@ -1,7 +1,8 @@
 package com.noveogroup.modulotech.data.devices
 
 import com.noveogroup.modulotech.data.devices.dao.DevicesDao
-import com.noveogroup.modulotech.domain.devices.DevicesRepositoryApi
+import com.noveogroup.modulotech.data.devices.mappers.DeviceEntityMapper
+import com.noveogroup.modulotech.domain.devices.api.DevicesRepositoryApi
 import com.noveogroup.modulotech.domain.devices.model.device.Device
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.Flow

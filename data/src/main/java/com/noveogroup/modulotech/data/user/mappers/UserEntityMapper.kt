@@ -1,4 +1,4 @@
-package com.noveogroup.modulotech.data.user
+package com.noveogroup.modulotech.data.user.mappers
 
 import com.noveogroup.modulotech.data.user.entity.AddressEntity
 import com.noveogroup.modulotech.data.user.entity.UserEntity

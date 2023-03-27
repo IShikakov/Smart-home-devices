@@ -1,6 +1,6 @@
 package com.noveogroup.modulotech.domain.devices.details
 
-import com.noveogroup.modulotech.domain.devices.DevicesRepositoryApi
+import com.noveogroup.modulotech.domain.devices.api.DevicesRepositoryApi
 import com.noveogroup.modulotech.domain.devices.model.device.Device
 
 class DeviceDetailsInteractor(

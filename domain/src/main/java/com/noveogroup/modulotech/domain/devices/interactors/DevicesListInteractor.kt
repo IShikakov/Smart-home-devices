@@ -1,5 +1,6 @@
-package com.noveogroup.modulotech.domain.devices
+package com.noveogroup.modulotech.domain.devices.interactors
 
+import com.noveogroup.modulotech.domain.devices.api.DevicesRepositoryApi
 import com.noveogroup.modulotech.domain.devices.model.DeviceType
 import com.noveogroup.modulotech.domain.devices.model.FiltersState
 import com.noveogroup.modulotech.domain.devices.model.device.Device

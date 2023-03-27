@@ -1,4 +1,4 @@
-package com.noveogroup.modulotech.domain.common
+package com.noveogroup.modulotech.domain.common.formatters
 
 class DateMaskFormatter(private val pattern: String) {
 

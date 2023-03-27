@@ -1,4 +1,4 @@
-package com.noveogroup.modulotech.domain.devices
+package com.noveogroup.modulotech.domain.devices.api
 
 import com.noveogroup.modulotech.domain.devices.model.device.Device
 import kotlinx.coroutines.flow.Flow

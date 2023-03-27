@@ -1,4 +1,4 @@
-package com.noveogroup.modulotech.domain.synchronization
+package com.noveogroup.modulotech.domain.synchronization.api
 
 interface DataSyncRepositoryApi {
     suspend fun isSyncRequired(): Boolean

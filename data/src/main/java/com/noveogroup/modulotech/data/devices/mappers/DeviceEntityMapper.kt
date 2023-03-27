@@ -1,4 +1,4 @@
-package com.noveogroup.modulotech.data.devices
+package com.noveogroup.modulotech.data.devices.mappers
 
 import com.noveogroup.modulotech.data.devices.entity.DeviceEntity
 import com.noveogroup.modulotech.domain.devices.model.DeviceMode

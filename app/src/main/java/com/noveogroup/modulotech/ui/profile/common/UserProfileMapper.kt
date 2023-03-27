@@ -1,10 +1,10 @@
 package com.noveogroup.modulotech.ui.profile.common
 
 import com.noveogroup.modulotech.R
-import com.noveogroup.modulotech.domain.common.DateMaskFormatter
+import com.noveogroup.modulotech.domain.common.formatters.DateMaskFormatter
 import com.noveogroup.modulotech.domain.user.model.UserAddress
 import com.noveogroup.modulotech.domain.user.model.UserProfile
-import com.noveogroup.modulotech.ui.common.ResourcesManager
+import com.noveogroup.modulotech.ui.common.resources.ResourcesManager
 import com.noveogroup.modulotech.ui.profile.model.UserProfileField
 import com.noveogroup.modulotech.ui.profile.model.UserProfileFields
 import com.noveogroup.modulotech.ui.profile.model.UserProfileScreenState

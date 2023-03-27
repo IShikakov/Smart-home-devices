@@ -55,6 +55,4 @@ dependencies {
     ksp libraries.room.roomCompiler
 
     implementation libraries.coroutines
-
-    androidTestImplementation libraries.room.roomTesting
 }

@@ -1,7 +1,7 @@
 package com.decathlon.coach.domain
 
-import com.noveogroup.modulotech.domain.devices.DevicesListInteractor
-import com.noveogroup.modulotech.domain.devices.DevicesRepositoryApi
+import com.noveogroup.modulotech.domain.devices.api.DevicesRepositoryApi
+import com.noveogroup.modulotech.domain.devices.interactors.DevicesListInteractor
 import com.noveogroup.modulotech.domain.devices.model.DeviceMode
 import com.noveogroup.modulotech.domain.devices.model.DeviceType
 import com.noveogroup.modulotech.domain.devices.model.FiltersState

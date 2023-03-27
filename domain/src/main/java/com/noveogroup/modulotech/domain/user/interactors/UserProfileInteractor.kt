@@ -1,5 +1,6 @@
-package com.noveogroup.modulotech.domain.user
+package com.noveogroup.modulotech.domain.user.interactors
 
+import com.noveogroup.modulotech.domain.user.api.UserRepositoryApi
 import com.noveogroup.modulotech.domain.user.model.UserProfile
 
 class UserProfileInteractor(

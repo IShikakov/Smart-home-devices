@@ -3,9 +3,9 @@ package com.noveogroup.modulotech.data.di
 import com.noveogroup.modulotech.data.devices.DevicesRepository
 import com.noveogroup.modulotech.data.synchronization.DataSyncRepository
 import com.noveogroup.modulotech.data.user.UserRepository
-import com.noveogroup.modulotech.domain.devices.DevicesRepositoryApi
-import com.noveogroup.modulotech.domain.synchronization.DataSyncRepositoryApi
-import com.noveogroup.modulotech.domain.user.UserRepositoryApi
+import com.noveogroup.modulotech.domain.devices.api.DevicesRepositoryApi
+import com.noveogroup.modulotech.domain.synchronization.api.DataSyncRepositoryApi
+import com.noveogroup.modulotech.domain.user.api.UserRepositoryApi
 import org.koin.core.module.dsl.singleOf
 import org.koin.dsl.bind
 import org.koin.dsl.module

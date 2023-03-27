@@ -1,9 +1,9 @@
 package com.noveogroup.modulotech.di
 
-import com.noveogroup.modulotech.domain.devices.DevicesListInteractor
 import com.noveogroup.modulotech.domain.devices.details.DeviceDetailsInteractor
-import com.noveogroup.modulotech.domain.synchronization.DataSyncInteractor
-import com.noveogroup.modulotech.domain.user.UserProfileInteractor
+import com.noveogroup.modulotech.domain.devices.interactors.DevicesListInteractor
+import com.noveogroup.modulotech.domain.synchronization.interactors.DataSyncInteractor
+import com.noveogroup.modulotech.domain.user.interactors.UserProfileInteractor
 import com.noveogroup.modulotech.ui.devices.details.DeviceDetailsViewModel
 import com.noveogroup.modulotech.ui.devices.list.DevicesListViewModel
 import com.noveogroup.modulotech.ui.devices.list.common.DevicesListMapper

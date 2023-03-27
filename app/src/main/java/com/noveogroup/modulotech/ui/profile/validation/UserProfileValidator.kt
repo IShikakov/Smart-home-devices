@@ -1,7 +1,7 @@
 package com.noveogroup.modulotech.ui.profile.validation
 
 import com.noveogroup.modulotech.R
-import com.noveogroup.modulotech.ui.common.ResourcesManager
+import com.noveogroup.modulotech.ui.common.resources.ResourcesManager
 import com.noveogroup.modulotech.ui.profile.model.UserProfileField
 import com.noveogroup.modulotech.ui.profile.model.UserProfileFields
 

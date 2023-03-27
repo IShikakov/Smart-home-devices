@@ -1,4 +1,4 @@
-package com.noveogroup.modulotech.ui.common
+package com.noveogroup.modulotech.ui.common.resources
 
 import android.content.Context
 import androidx.annotation.StringRes

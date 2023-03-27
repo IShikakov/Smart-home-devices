@@ -1,6 +1,6 @@
 package com.noveogroup.modulotech.ui.profile.validation
 
-import com.noveogroup.modulotech.domain.common.DateMaskFormatter
+import com.noveogroup.modulotech.domain.common.formatters.DateMaskFormatter
 import java.text.SimpleDateFormat
 import java.util.*
 

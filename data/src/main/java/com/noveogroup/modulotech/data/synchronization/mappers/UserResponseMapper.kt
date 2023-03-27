@@ -1,4 +1,4 @@
-package com.noveogroup.modulotech.data.synchronization
+package com.noveogroup.modulotech.data.synchronization.mappers
 
 import com.noveogroup.modulotech.data.network.response.user.UserResponse
 import com.noveogroup.modulotech.data.user.entity.AddressEntity

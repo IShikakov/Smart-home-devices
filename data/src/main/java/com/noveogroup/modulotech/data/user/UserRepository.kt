@@ -1,7 +1,8 @@
 package com.noveogroup.modulotech.data.user
 
 import com.noveogroup.modulotech.data.user.dao.UserDao
-import com.noveogroup.modulotech.domain.user.UserRepositoryApi
+import com.noveogroup.modulotech.data.user.mappers.UserEntityMapper
+import com.noveogroup.modulotech.domain.user.api.UserRepositoryApi
 import com.noveogroup.modulotech.domain.user.model.UserProfile
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext

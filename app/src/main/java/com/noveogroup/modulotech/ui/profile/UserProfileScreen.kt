@@ -43,9 +43,9 @@ import androidx.compose.ui.text.input.VisualTransformation
 import androidx.compose.ui.tooling.preview.Devices
 import androidx.compose.ui.tooling.preview.Preview
 import com.noveogroup.modulotech.R
-import com.noveogroup.modulotech.ui.common.DateTransformation
 import com.noveogroup.modulotech.ui.common.DrawableImage
 import com.noveogroup.modulotech.ui.common.Snackbar
+import com.noveogroup.modulotech.ui.common.formatters.DateTransformation
 import com.noveogroup.modulotech.ui.profile.model.UserProfileField
 import com.noveogroup.modulotech.ui.profile.model.UserProfileFields
 import com.noveogroup.modulotech.ui.profile.model.UserProfileScreenState

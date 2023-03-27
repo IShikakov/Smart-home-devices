@@ -5,7 +5,12 @@ import androidx.compose.foundation.focusable
 import androidx.compose.foundation.gestures.DraggableState
 import androidx.compose.foundation.gestures.Orientation
 import androidx.compose.foundation.gestures.draggable
+import androidx.compose.foundation.hoverable
+import androidx.compose.foundation.indication
+import androidx.compose.foundation.interaction.DragInteraction
+import androidx.compose.foundation.interaction.Interaction
 import androidx.compose.foundation.interaction.MutableInteractionSource
+import androidx.compose.foundation.interaction.PressInteraction
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.BoxScope
 import androidx.compose.foundation.layout.BoxWithConstraints
@@ -20,14 +25,17 @@ import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material.SliderColors
 import androidx.compose.material.SliderDefaults
+import androidx.compose.material.ripple.rememberRipple
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateListOf
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.draw.clip
+import androidx.compose.ui.draw.shadow
 import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.tooling.preview.Devices
 import androidx.compose.ui.tooling.preview.Preview
@@ -40,6 +48,10 @@ import kotlin.math.min
 
 private val verticalSliderWidth = 4.dp
 private val thumbSize = 20.dp
+private val ThumbDefaultElevation = 1.dp
+private val ThumbDisabledElevation = 0.dp
+private val ThumbPressedElevation = 6.dp
+private val ThumbRippleRadius = 24.dp
 
 @Composable
 fun VerticalSlider(
@@ -95,28 +107,30 @@ fun VerticalSlider(
             heightDp = (maxHeightPx - minHeightPx).toDp()
         }
         VerticalSliderView(
+            height = heightDp,
             thumbOffset = thumbOffsetDp,
             enabled = enabled,
-            colors = colors,
-            height = heightDp,
             modifier = Modifier
                 .draggable(
                     state = draggableState,
                     orientation = Orientation.Vertical,
                     enabled = enabled,
                     interactionSource = interactionSource,
-                )
+                ),
+            colors = colors,
+            interactionSource = interactionSource,
         )
     }
 }
 
 @Composable
 private fun BoxScope.VerticalSliderView(
+    height: Dp,
     thumbOffset: Dp,
     enabled: Boolean,
-    height: Dp,
-    colors: SliderColors,
     modifier: Modifier,
+    colors: SliderColors,
+    interactionSource: MutableInteractionSource,
 ) {
     val thumbRadius = thumbSize / 2
     Spacer(
@@ -133,15 +147,62 @@ private fun BoxScope.VerticalSliderView(
             .height(thumbOffset - thumbRadius)
             .background(colors.trackColor(enabled = enabled, active = true).value)
     )
-    Box(
-        modifier = Modifier
-            .align(Alignment.TopCenter)
-            .offset(y = height - thumbOffset - thumbRadius)
-            .size(thumbSize)
-            .clip(CircleShape)
-            .background(colors.thumbColor(enabled = enabled).value)
-            .then(modifier)
+    SliderThumb(
+        thumbSize = thumbSize,
+        offset = height - thumbOffset - thumbRadius,
+        enabled = enabled,
+        modifier = modifier,
+        colors = colors,
+        interactionSource = interactionSource,
     )
+}
+
+@Composable
+private fun BoxScope.SliderThumb(
+    thumbSize: Dp,
+    offset: Dp,
+    enabled: Boolean,
+    modifier: Modifier,
+    colors: SliderColors,
+    interactionSource: MutableInteractionSource,
+) {
+    Box(
+        Modifier
+            .offset(y = offset)
+            .align(Alignment.TopCenter)
+            .then(modifier)
+    ) {
+        val interactions = remember { mutableStateListOf<Interaction>() }
+        LaunchedEffect(interactionSource) {
+            interactionSource.interactions.collect { interaction ->
+                when (interaction) {
+                    is PressInteraction.Press -> interactions.add(interaction)
+                    is PressInteraction.Release -> interactions.remove(interaction.press)
+                    is PressInteraction.Cancel -> interactions.remove(interaction.press)
+                    is DragInteraction.Start -> interactions.add(interaction)
+                    is DragInteraction.Stop -> interactions.remove(interaction.start)
+                    is DragInteraction.Cancel -> interactions.remove(interaction.start)
+                }
+            }
+        }
+
+        val elevation = when {
+            !enabled -> ThumbDisabledElevation
+            interactions.isNotEmpty() -> ThumbPressedElevation
+            else -> ThumbDefaultElevation
+        }
+        Spacer(
+            modifier
+                .size(thumbSize)
+                .indication(
+                    interactionSource = interactionSource,
+                    indication = rememberRipple(bounded = false, radius = ThumbRippleRadius)
+                )
+                .hoverable(interactionSource = interactionSource)
+                .shadow(elevation, CircleShape, clip = false)
+                .background(colors.thumbColor(enabled = enabled).value, CircleShape)
+        )
+    }
 }
 
 /**

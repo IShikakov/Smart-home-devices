@@ -1,4 +1,4 @@
-package com.noveogroup.modulotech.domain.user
+package com.noveogroup.modulotech.domain.user.api
 
 import com.noveogroup.modulotech.domain.user.model.UserProfile
 
