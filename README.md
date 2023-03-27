@@ -3,7 +3,7 @@
 A small smart home application that can be used to control devices such as lights,
 roller shutters or heaters.
 
-[<img src="screenshots/app_overview.mp4" width="200" height = "431" />](screenshots/app_overview.mp4)
+<video src="https://user-images.githubusercontent.com/70576602/227895373-90196612-6105-440b-96ef-d07e0618fc92.mp4"/></video>
 
 ## General information
 
@@ -29,3 +29,4 @@ left.
 
 The configuration of each device (current mode, intensity, etc.) is stored locally and survives the
 killing of the application.
+
