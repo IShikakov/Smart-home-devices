@@ -25,4 +25,3 @@ sealed class Device(
         val position: Int,
     ) : Device(id, name, DeviceType.RollerShutter)
 }
-

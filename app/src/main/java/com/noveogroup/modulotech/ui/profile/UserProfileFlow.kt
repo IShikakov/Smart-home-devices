@@ -19,4 +19,3 @@ fun UserProfileFlow(modifier: Modifier = Modifier) {
         }
     }
 }
-
