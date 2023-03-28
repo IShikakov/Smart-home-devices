@@ -16,7 +16,7 @@ fun DevicesFlow(modifier: Modifier = Modifier) {
     val navController = rememberNavController()
     NavHost(
         navController = navController,
-        startDestination = Screen.DevicesListScreen.route
+        startDestination = Screen.DevicesListScreen.route,
     ) {
         composable(Screen.DevicesListScreen.route) {
             DevicesListScreen(modifier) { deviceId ->
@@ -25,7 +25,7 @@ fun DevicesFlow(modifier: Modifier = Modifier) {
         }
         composable(
             route = Screen.DeviceDetailsScreen.route,
-            arguments = listOf(stringNavArg(Screen.DeviceDetailsScreen.DEVICE_ID_KEY))
+            arguments = listOf(stringNavArg(Screen.DeviceDetailsScreen.DEVICE_ID_KEY)),
         ) { backStackEntry ->
             val deviceId = backStackEntry.getStringArg(Screen.DeviceDetailsScreen.DEVICE_ID_KEY)
             DeviceDetailsScreen(deviceId, modifier) {

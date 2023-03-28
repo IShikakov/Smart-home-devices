@@ -23,7 +23,7 @@ class UserProfileValidator(
                     -> listOf(ValidationRule.Mandatory)
                     UserProfileField.Birthdate -> listOf(
                         ValidationRule.Mandatory,
-                        ValidationRule.DateFormat(resourcesManager.resolveString(R.string.Profile_birthdate_format))
+                        ValidationRule.DateFormat(resourcesManager.resolveString(R.string.Profile_birthdate_format)),
                     )
                 }
             }
@@ -51,7 +51,7 @@ class UserProfileValidator(
             ValidationRule.Mandatory -> resourcesManager.resolveString(R.string.Profile_Error_empty_field)
             is ValidationRule.DateFormat -> resourcesManager.resolveString(
                 R.string.Profile_Error_date_format,
-                format
+                format,
             )
         }
 }

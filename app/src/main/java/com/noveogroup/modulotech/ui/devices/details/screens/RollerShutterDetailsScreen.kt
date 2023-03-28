@@ -43,13 +43,13 @@ fun RollerShutterDetailsScreen(
         PortraitDetailsScreen(
             roller = roller,
             rollerDetailsChanged = rollerDetailsChanged,
-            modifier = modifier
+            modifier = modifier,
         )
     } else {
         LandscapeDetailsScreen(
             roller = roller,
             rollerDetailsChanged = rollerDetailsChanged,
-            modifier = modifier
+            modifier = modifier,
         )
     }
 }
@@ -64,7 +64,7 @@ private fun PortraitDetailsScreen(
         modifier = modifier
             .fillMaxSize()
             .padding(regularPadding),
-        horizontalAlignment = Alignment.CenterHorizontally
+        horizontalAlignment = Alignment.CenterHorizontally,
     ) {
         RollerIcon()
         PositionText(value = roller.value.toInt())
@@ -73,7 +73,7 @@ private fun PortraitDetailsScreen(
             value = roller.rawValue,
             range = roller.valueRange,
             changePosition = { rollerDetailsChanged(roller.copy(rawValue = it)) },
-            modifier = Modifier.fillMaxHeight()
+            modifier = Modifier.fillMaxHeight(),
         )
     }
 }
@@ -88,7 +88,7 @@ private fun LandscapeDetailsScreen(
         modifier = modifier
             .fillMaxSize()
             .padding(regularPadding),
-        verticalAlignment = Alignment.CenterVertically
+        verticalAlignment = Alignment.CenterVertically,
     ) {
         RollerIcon()
         Spacer(modifier = Modifier.width(halfPadding))
@@ -96,7 +96,7 @@ private fun LandscapeDetailsScreen(
             value = roller.rawValue,
             range = roller.valueRange,
             changePosition = { rollerDetailsChanged(roller.copy(rawValue = it)) },
-            modifier = modifier.height(deviceIcon)
+            modifier = modifier.height(deviceIcon),
         )
         Spacer(modifier = Modifier.width(halfPadding))
         PositionText(value = roller.value.toInt())
@@ -110,7 +110,7 @@ private fun RollerIcon(
     DrawableIcon(
         image = R.drawable.ic_roller,
         modifier = Modifier.size(deviceIcon),
-        tint = tint
+        tint = tint,
     )
 }
 
@@ -135,7 +135,7 @@ private fun PositionSlider(
         value = value,
         valueRange = range,
         onValueChange = changePosition,
-        modifier = modifier
+        modifier = modifier,
     )
 }
 
@@ -145,7 +145,7 @@ private fun PreviewPortraitRollerDetailsScreen() {
     var detailsPreview by remember { mutableStateOf(detailsPreview) }
     PortraitDetailsScreen(
         roller = detailsPreview,
-        rollerDetailsChanged = { detailsPreview = it }
+        rollerDetailsChanged = { detailsPreview = it },
     )
 }
 
@@ -155,7 +155,7 @@ private fun PreviewLandscapeRollerDetailsScreen() {
     var detailsPreview by remember { mutableStateOf(detailsPreview) }
     LandscapeDetailsScreen(
         roller = detailsPreview,
-        rollerDetailsChanged = { detailsPreview = it }
+        rollerDetailsChanged = { detailsPreview = it },
     )
 }
 
@@ -164,5 +164,5 @@ private val detailsPreview = RollerShutterDetailsPreview(
     name = "Roller Shutter",
     rawValue = 45f,
     valueRange = 0f..100f,
-    valueStep = 1f
+    valueStep = 1f,
 )

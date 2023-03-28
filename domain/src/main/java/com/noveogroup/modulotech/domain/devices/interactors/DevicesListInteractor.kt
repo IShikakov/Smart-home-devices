@@ -20,7 +20,7 @@ class DevicesListInteractor(
 
     fun observeDevices(): Flow<List<Device>> = combine(
         devicesRepository.observeDevices(),
-        selectedFilters
+        selectedFilters,
     ) { devices, selectedFilters ->
         devices.filter { device -> selectedFilters.contains(device.deviceType) }
     }
@@ -33,7 +33,7 @@ class DevicesListInteractor(
         .map { selectedFilters ->
             FiltersState(
                 availableFilters = availableFilters,
-                selectedFilters = selectedFilters
+                selectedFilters = selectedFilters,
             )
         }
 

@@ -27,7 +27,7 @@ import com.noveogroup.modulotech.ui.devices.DevicesFlow
 import com.noveogroup.modulotech.ui.navigation.SmartHomeTab
 import com.noveogroup.modulotech.ui.profile.UserProfileFlow
 import com.noveogroup.modulotech.ui.theme.SmartHomeAppTheme
-import com.noveogroup.modulotech.ui.theme.dark_theme.DarkThemeDelegate
+import com.noveogroup.modulotech.ui.theme.darkTheme.DarkThemeDelegate
 import org.koin.androidx.compose.get
 
 @Composable
@@ -44,11 +44,11 @@ fun SmartHomeApp(
 private fun SmartHomeAppContent() {
     val navController = rememberNavController()
     Scaffold(
-        bottomBar = { SmartHomeBottomBar(navController) }
+        bottomBar = { SmartHomeBottomBar(navController) },
     ) { innerPaddingModifier ->
         TabNavigationHost(
             navController = navController,
-            modifier = Modifier.padding(innerPaddingModifier)
+            modifier = Modifier.padding(innerPaddingModifier),
         )
     }
 }
@@ -61,7 +61,7 @@ private fun SmartHomeBottomBar(
     val navBackStackEntry by navController.currentBackStackEntryAsState()
     val currentRoute = navBackStackEntry?.destination?.route
     BottomNavigation(
-        backgroundColor = MaterialTheme.colors.surface
+        backgroundColor = MaterialTheme.colors.surface,
     ) {
         tabs.forEach { tab ->
             BottomNavigationTab(
@@ -75,7 +75,7 @@ private fun SmartHomeBottomBar(
                         launchSingleTop = true
                         restoreState = true
                     }
-                }
+                },
             )
         }
     }
@@ -89,7 +89,7 @@ private fun TabNavigationHost(
 ) {
     NavHost(
         navController = navController,
-        startDestination = startTab.route
+        startDestination = startTab.route,
     ) {
         composable(SmartHomeTab.Devices.route) { DevicesFlow(modifier) }
         composable(SmartHomeTab.UserProfile.route) { UserProfileFlow(modifier) }
@@ -110,7 +110,7 @@ private fun RowScope.BottomNavigationTab(
         alwaysShowLabel = false,
         selectedContentColor = MaterialTheme.colors.secondary,
         unselectedContentColor = LocalContentColor.current,
-        modifier = Modifier.navigationBarsPadding()
+        modifier = Modifier.navigationBarsPadding(),
     )
 }
 

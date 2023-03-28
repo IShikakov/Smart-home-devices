@@ -12,6 +12,6 @@ fun SmartHomeAppTheme(
     MaterialTheme(
         colors = colorScheme,
         typography = smartHomeTypography,
-        content = content
+        content = content,
     )
 }

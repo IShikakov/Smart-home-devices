@@ -43,20 +43,20 @@ fun DeviceDetailsScreen(
                     is LightDetailsPreview -> LightDetailsScreen(
                         light = details,
                         modifier = modifier.padding(paddingValues),
-                        lightDetailsChanged = viewModel::updateDeviceDetails
+                        lightDetailsChanged = viewModel::updateDeviceDetails,
                     )
                     is HeaterDetailsPreview -> HeaterDetailsScreen(
                         heater = details,
                         modifier = modifier.padding(paddingValues),
-                        heaterDetailsChanged = viewModel::updateDeviceDetails
+                        heaterDetailsChanged = viewModel::updateDeviceDetails,
                     )
                     is RollerShutterDetailsPreview -> RollerShutterDetailsScreen(
                         roller = details,
                         modifier = modifier.padding(paddingValues),
-                        rollerDetailsChanged = viewModel::updateDeviceDetails
+                        rollerDetailsChanged = viewModel::updateDeviceDetails,
                     )
                 }
-            }
+            },
         )
     }
 }
@@ -72,10 +72,10 @@ private fun DeviceDetailsTopAppBar(
             IconButton(onClick = back) {
                 Icon(
                     imageVector = Icons.Default.ArrowBack,
-                    contentDescription = stringResource(R.string.Common_back_icon_description)
+                    contentDescription = stringResource(R.string.Common_back_icon_description),
                 )
             }
-        }
+        },
     )
 }
 
@@ -84,6 +84,6 @@ private fun DeviceDetailsTopAppBar(
 private fun PreviewDeviceDetailsTopAppBar() {
     DeviceDetailsTopAppBar(
         deviceName = "Light",
-        back = {}
+        back = {},
     )
 }

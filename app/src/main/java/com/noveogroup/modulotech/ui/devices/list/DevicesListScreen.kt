@@ -92,10 +92,10 @@ fun DevicesListScreen(
                 deviceClicked = { device -> openDeviceDetails(device.id) },
                 deviceSwiped = viewModel::deleteDevice,
                 filterClicked = viewModel::filterClicked,
-                refresh = viewModel::refresh
+                refresh = viewModel::refresh,
             )
             message?.let { Snackbar(it, scaffoldState.snackbarHostState) }
-        }
+        },
     )
 }
 
@@ -123,7 +123,7 @@ private fun DevicesListScreenContent(
         Column(modifier = modifier) {
             FilterChips(
                 filters = filters,
-                filterClicked = filterClicked
+                filterClicked = filterClicked,
             )
             Spacer(modifier = Modifier.height(halfPadding))
             DevicesList(devices, deviceClicked, deviceSwiped)
@@ -135,12 +135,12 @@ private fun DevicesListScreenContent(
 @Composable
 private fun FilterChips(filters: List<DevicesFilter>, filterClicked: (DevicesFilter) -> Unit) {
     LazyRow(
-        modifier = Modifier.padding(horizontal = halfPadding)
+        modifier = Modifier.padding(horizontal = halfPadding),
     ) {
         items(filters.size) { index ->
             FilterChip(
                 filter = filters[index],
-                filterClicked = filterClicked
+                filterClicked = filterClicked,
             )
         }
     }
@@ -164,7 +164,7 @@ private fun FilterChip(filter: DevicesFilter, filterClicked: (DevicesFilter) -> 
             color = if (filter.isSelected) MaterialTheme.colors.onPrimary else MaterialTheme.colors.onSurface,
             modifier = Modifier
                 .clickable { filterClicked(filter) }
-                .padding(halfPadding)
+                .padding(halfPadding),
         )
     }
 }
@@ -178,10 +178,10 @@ private fun DevicesList(
     LazyColumn(modifier = Modifier.fillMaxSize()) {
         items(
             count = devices.size,
-            key = { index -> devices[index].id }
+            key = { index -> devices[index].id },
         ) { index ->
             DismissedContent(
-                contentDismissed = { deviceSwiped(devices[index]) }
+                contentDismissed = { deviceSwiped(devices[index]) },
             ) {
                 DeviceCard(devices[index], deviceClicked)
             }
@@ -203,7 +203,7 @@ private fun DismissedContent(
             } else {
                 false
             }
-        }
+        },
     )
     SwipeToDismiss(
         state = dismissState,
@@ -215,29 +215,29 @@ private fun DismissedContent(
                 targetValue = when (dismissState.targetValue) {
                     DismissValue.Default -> lightGray
                     else -> darkRed
-                }
+                },
             )
             val scale by animateFloatAsState(
                 targetValue = when (dismissState.targetValue) {
                     DismissValue.Default -> dismissIconStartScale
                     else -> dismissIconEndScale
-                }
+                },
             )
             Box(
                 modifier = Modifier
                     .fillMaxSize()
                     .background(color)
                     .padding(regularPadding),
-                contentAlignment = Alignment.CenterEnd
+                contentAlignment = Alignment.CenterEnd,
             ) {
                 Image(
                     imageVector = Icons.Filled.Delete,
                     contentDescription = stringResource(R.string.Common_delete_icon_description),
-                    modifier = Modifier.scale(scale)
+                    modifier = Modifier.scale(scale),
                 )
             }
         },
-        dismissContent = content
+        dismissContent = content,
     )
 }
 
@@ -257,17 +257,17 @@ private fun DeviceCard(
         DrawableIcon(
             image = device.icon,
             contentDescription = R.string.Common_device_icon_description,
-            modifier = Modifier.size(iconSize)
+            modifier = Modifier.size(iconSize),
         )
         Spacer(modifier = Modifier.width(halfPadding))
         Column {
             Text(
                 text = device.name,
-                style = MaterialTheme.typography.h6
+                style = MaterialTheme.typography.h6,
             )
             Text(
                 text = device.stateDescription,
-                style = MaterialTheme.typography.body2
+                style = MaterialTheme.typography.body2,
             )
         }
     }
@@ -278,7 +278,7 @@ private fun DeviceCard(
     name = "Landscape",
     showBackground = true,
     device = Devices.AUTOMOTIVE_1024p,
-    locale = "en"
+    locale = "en",
 )
 @Composable
 private fun PreviewDevicesListScreenContent() {
@@ -300,7 +300,7 @@ private fun PreviewDevicesListScreenContent() {
                 }
             }
         },
-        refresh = { devices = devicesPreview }
+        refresh = { devices = devicesPreview },
     )
 }
 
@@ -309,19 +309,19 @@ private val devicesPreview = listOf(
         id = "0",
         name = "Light",
         icon = R.drawable.ic_light,
-        stateDescription = "14"
+        stateDescription = "14",
     ),
     DevicePreview(
         id = "1",
         name = "Roller shutter",
         icon = R.drawable.ic_roller,
-        stateDescription = "50"
+        stateDescription = "50",
     ),
     DevicePreview(
         id = "2",
         name = "Heater",
         icon = R.drawable.ic_heater,
-        stateDescription = "23 °C"
+        stateDescription = "23 °C",
     ),
 )
 
@@ -329,16 +329,16 @@ private val filtersPreview = listOf(
     DevicesFilter(
         title = "Light",
         type = DeviceType.Light,
-        isSelected = true
+        isSelected = true,
     ),
     DevicesFilter(
         title = "Heater",
         type = DeviceType.Heater,
-        isSelected = true
+        isSelected = true,
     ),
     DevicesFilter(
         title = "Roller shutter",
         type = DeviceType.RollerShutter,
-        isSelected = true
-    )
+        isSelected = true,
+    ),
 )

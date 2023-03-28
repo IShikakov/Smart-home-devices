@@ -45,7 +45,6 @@ import com.noveogroup.modulotech.ui.theme.regularPadding
 import java.lang.Float.max
 import kotlin.math.min
 
-
 private val verticalSliderWidth = 4.dp
 private val thumbSize = 20.dp
 private val ThumbDefaultElevation = 1.dp
@@ -67,7 +66,7 @@ fun VerticalSlider(
         contentAlignment = Alignment.Center,
         modifier = modifier
             .requiredSizeIn(minWidth = thumbSize, minHeight = thumbSize * 2)
-            .focusable(enabled, interactionSource)
+            .focusable(enabled, interactionSource),
     ) {
         val maxHeightPx: Float = max(constraints.maxHeight.toFloat(), 0f)
         val minHeightPx: Float = min(0f, maxHeightPx)
@@ -77,8 +76,8 @@ fun VerticalSlider(
                 scaleValueToRange(
                     value = value,
                     fromRange = valueRange,
-                    toRange = minHeightPx..maxHeightPx
-                )
+                    toRange = minHeightPx..maxHeightPx,
+                ),
             )
         }
 
@@ -94,8 +93,8 @@ fun VerticalSlider(
                     scaleValueToRange(
                         value = thumbOffset,
                         fromRange = minHeightPx..maxHeightPx,
-                        toRange = valueRange
-                    )
+                        toRange = valueRange,
+                    ),
                 )
             }
         }
@@ -138,14 +137,14 @@ private fun BoxScope.VerticalSliderView(
             .align(Alignment.Center)
             .width(verticalSliderWidth)
             .height(height)
-            .background(colors.trackColor(enabled = enabled, active = false).value)
+            .background(colors.trackColor(enabled = enabled, active = false).value),
     )
     Spacer(
         Modifier
             .align(Alignment.BottomCenter)
             .width(verticalSliderWidth)
             .height(thumbOffset - thumbRadius)
-            .background(colors.trackColor(enabled = enabled, active = true).value)
+            .background(colors.trackColor(enabled = enabled, active = true).value),
     )
     SliderThumb(
         thumbSize = thumbSize,
@@ -170,7 +169,7 @@ private fun BoxScope.SliderThumb(
         Modifier
             .offset(y = offset)
             .align(Alignment.TopCenter)
-            .then(modifier)
+            .then(modifier),
     ) {
         val interactions = remember { mutableStateListOf<Interaction>() }
         LaunchedEffect(interactionSource) {
@@ -196,11 +195,11 @@ private fun BoxScope.SliderThumb(
                 .size(thumbSize)
                 .indication(
                     interactionSource = interactionSource,
-                    indication = rememberRipple(bounded = false, radius = ThumbRippleRadius)
+                    indication = rememberRipple(bounded = false, radius = ThumbRippleRadius),
                 )
                 .hoverable(interactionSource = interactionSource)
                 .shadow(elevation, CircleShape, clip = false)
-                .background(colors.thumbColor(enabled = enabled).value, CircleShape)
+                .background(colors.thumbColor(enabled = enabled).value, CircleShape),
         )
     }
 }
@@ -227,6 +226,6 @@ private fun PreviewVerticalSlider() {
         modifier = Modifier
             .padding(regularPadding)
             .fillMaxWidth()
-            .height(200.dp)
+            .height(200.dp),
     )
 }

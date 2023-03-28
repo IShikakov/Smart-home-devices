@@ -22,7 +22,7 @@ class DevicesListMapper(private val resourcesManager: ResourcesManager) {
                 id = id,
                 name = name,
                 icon = icon,
-                stateDescription = stateDescription
+                stateDescription = stateDescription,
             )
         }
     }
@@ -32,7 +32,7 @@ class DevicesListMapper(private val resourcesManager: ResourcesManager) {
             DevicesFilter(
                 title = resourcesManager.resolveString(type.title),
                 type = type,
-                isSelected = filtersState.selectedFilters.contains(type)
+                isSelected = filtersState.selectedFilters.contains(type),
             )
         }
 
@@ -50,7 +50,7 @@ class DevicesListMapper(private val resourcesManager: ResourcesManager) {
             is Heater -> "${mode.description()}, ${
                 resourcesManager.resolveString(
                     R.string.Common_temperature_format,
-                    temperature
+                    temperature,
                 )
             }"
             is RollerShutter -> "$position"

@@ -43,7 +43,7 @@ object DeviceDetailsMapper {
             rawValue = min(intensity.toFloat(), MAX_INTENSITY),
             valueRange = MIN_INTENSITY..MAX_INTENSITY,
             valueStep = INTENSITY_STEP,
-            mode = mode
+            mode = mode,
         )
 
     private val Heater.preview: HeaterDetailsPreview
@@ -53,7 +53,7 @@ object DeviceDetailsMapper {
             rawValue = min(temperature, MAX_TEMPERATURE),
             valueRange = MIN_TEMPERATURE..MAX_TEMPERATURE,
             valueStep = TEMPERATURE_STEP,
-            mode = mode
+            mode = mode,
         )
 
     private val RollerShutter.preview: RollerShutterDetailsPreview
@@ -70,7 +70,7 @@ object DeviceDetailsMapper {
             id = id,
             name = name,
             intensity = value.toInt(),
-            mode = mode
+            mode = mode,
         )
 
     private val HeaterDetailsPreview.device: Heater
@@ -78,13 +78,13 @@ object DeviceDetailsMapper {
             id = id,
             name = name,
             temperature = value,
-            mode = mode
+            mode = mode,
         )
 
     private val RollerShutterDetailsPreview.device: RollerShutter
         get() = RollerShutter(
             id = id,
             name = name,
-            position = value.toInt()
+            position = value.toInt(),
         )
 }

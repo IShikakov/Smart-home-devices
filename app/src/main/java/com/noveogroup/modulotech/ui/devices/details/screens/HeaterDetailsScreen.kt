@@ -48,13 +48,13 @@ fun HeaterDetailsScreen(
         PortraitDetailsScreen(
             heater = heater,
             heaterDetailsChanged = heaterDetailsChanged,
-            modifier = modifier
+            modifier = modifier,
         )
     } else {
         LandscapeDetailsScreen(
             heater = heater,
             heaterDetailsChanged = heaterDetailsChanged,
-            modifier = modifier
+            modifier = modifier,
         )
     }
 }
@@ -70,12 +70,12 @@ private fun PortraitDetailsScreen(
         modifier = modifier
             .fillMaxSize()
             .padding(regularPadding),
-        horizontalAlignment = Alignment.CenterHorizontally
+        horizontalAlignment = Alignment.CenterHorizontally,
     ) {
         HeaterIcon(color)
         DeviceModeRow(
             mode = heater.mode,
-            toggleMode = { heaterDetailsChanged(heater.copy(mode = heater.mode.opposite())) }
+            toggleMode = { heaterDetailsChanged(heater.copy(mode = heater.mode.opposite())) },
         )
         TemperatureText(heater.value)
         Spacer(modifier = Modifier.height(halfPadding))
@@ -83,7 +83,7 @@ private fun PortraitDetailsScreen(
             value = heater.rawValue,
             range = heater.valueRange,
             changeTemperature = { heaterDetailsChanged(heater.copy(rawValue = it)) },
-            color = color
+            color = color,
         )
     }
 }
@@ -99,21 +99,21 @@ private fun LandscapeDetailsScreen(
         modifier = modifier
             .fillMaxSize()
             .padding(regularPadding),
-        verticalAlignment = Alignment.CenterVertically
+        verticalAlignment = Alignment.CenterVertically,
     ) {
         HeaterIcon(color)
         Spacer(modifier = Modifier.width(halfPadding))
         Column(horizontalAlignment = Alignment.CenterHorizontally) {
             DeviceModeRow(
                 mode = heater.mode,
-                toggleMode = { heaterDetailsChanged(heater.copy(mode = heater.mode.opposite())) }
+                toggleMode = { heaterDetailsChanged(heater.copy(mode = heater.mode.opposite())) },
             )
             TemperatureText(heater.value)
             TemperatureSlider(
                 value = heater.rawValue,
                 range = heater.valueRange,
                 changeTemperature = { heaterDetailsChanged(heater.copy(rawValue = it)) },
-                color = color
+                color = color,
             )
         }
     }
@@ -126,7 +126,7 @@ private fun HeaterIcon(
     DrawableIcon(
         image = R.drawable.ic_heater,
         modifier = Modifier.size(deviceIcon),
-        tint = tint
+        tint = tint,
     )
 }
 
@@ -155,8 +155,8 @@ private fun TemperatureSlider(
         modifier = Modifier.fillMaxWidth(),
         colors = SliderDefaults.colors(
             thumbColor = color,
-            activeTrackColor = color
-        )
+            activeTrackColor = color,
+        ),
     )
 }
 
@@ -167,8 +167,8 @@ private val HeaterDetailsPreview.color: Color
             ColorUtils.blendARGB(
                 Color.Blue.toArgb(),
                 Color.Red.toArgb(),
-                rawValue / valueRange.endInclusive
-            )
+                rawValue / valueRange.endInclusive,
+            ),
         )
     }
 
@@ -198,5 +198,5 @@ private val detailsPreview = HeaterDetailsPreview(
     rawValue = 7.0f,
     valueRange = 7f..28f,
     valueStep = 0.5f,
-    mode = DeviceMode.On
+    mode = DeviceMode.On,
 )

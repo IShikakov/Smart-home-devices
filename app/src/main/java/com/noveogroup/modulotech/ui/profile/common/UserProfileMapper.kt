@@ -23,37 +23,37 @@ class UserProfileMapper(
             userProfileFields = UserProfileFields(
                 firstName = UserProfileFields.Field(
                     field = UserProfileField.FirstName,
-                    value = firstName
+                    value = firstName,
                 ),
                 lastName = UserProfileFields.Field(
                     field = UserProfileField.LastName,
-                    value = lastName
+                    value = lastName,
                 ),
                 birthdate = UserProfileFields.Field(
                     field = UserProfileField.Birthdate,
-                    value = dateMaskFormatter.extractDateDigits(dateFormat.format(birthdate))
+                    value = dateMaskFormatter.extractDateDigits(dateFormat.format(birthdate)),
                 ),
                 city = UserProfileFields.Field(
                     field = UserProfileField.City,
-                    value = address.city
+                    value = address.city,
                 ),
                 postalCode = UserProfileFields.Field(
                     field = UserProfileField.PostalCode,
-                    value = address.postalCode
+                    value = address.postalCode,
                 ),
                 street = UserProfileFields.Field(
                     field = UserProfileField.Street,
-                    value = address.street
+                    value = address.street,
                 ),
                 streetCode = UserProfileFields.Field(
                     field = UserProfileField.StreetCode,
-                    value = address.streetCode
+                    value = address.streetCode,
                 ),
                 country = UserProfileFields.Field(
                     field = UserProfileField.Country,
-                    value = address.country
+                    value = address.country,
                 ),
-            )
+            ),
         )
     }
 
@@ -68,7 +68,7 @@ class UserProfileMapper(
                 street = street.value,
                 streetCode = streetCode.value,
                 country = country.value,
-            )
+            ),
         )
     }
 }

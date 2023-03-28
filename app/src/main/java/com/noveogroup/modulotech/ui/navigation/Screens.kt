@@ -12,13 +12,13 @@ enum class SmartHomeTab(
     Devices(
         R.string.Main_devices_tab,
         R.drawable.ic_devices,
-        "Devices"
+        "Devices",
     ),
     UserProfile(
         R.string.Main_user_profile_tab,
         R.drawable.ic_user_profile,
-        "Profile"
-    )
+        "Profile",
+    ),
 }
 
 sealed interface Screen {

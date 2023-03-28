@@ -48,13 +48,13 @@ fun LightDetailsScreen(
         PortraitDetailsScreen(
             light = light,
             lightDetailsChanged = lightDetailsChanged,
-            modifier = modifier
+            modifier = modifier,
         )
     } else {
         LandscapeDetailsScreen(
             light = light,
             lightDetailsChanged = lightDetailsChanged,
-            modifier = modifier
+            modifier = modifier,
         )
     }
 }
@@ -70,12 +70,12 @@ private fun PortraitDetailsScreen(
         modifier = modifier
             .fillMaxSize()
             .padding(regularPadding),
-        horizontalAlignment = Alignment.CenterHorizontally
+        horizontalAlignment = Alignment.CenterHorizontally,
     ) {
         LightIcon(tint = color)
         DeviceModeRow(
             mode = light.mode,
-            toggleMode = { lightDetailsChanged(light.copy(mode = light.mode.opposite())) }
+            toggleMode = { lightDetailsChanged(light.copy(mode = light.mode.opposite())) },
         )
         IntensityText(value = light.value.toInt())
         Spacer(modifier = Modifier.height(halfPadding))
@@ -83,7 +83,7 @@ private fun PortraitDetailsScreen(
             value = light.rawValue,
             range = light.valueRange,
             color = color,
-            changeIntensity = { lightDetailsChanged(light.copy(rawValue = it)) }
+            changeIntensity = { lightDetailsChanged(light.copy(rawValue = it)) },
         )
     }
 }
@@ -99,29 +99,28 @@ private fun LandscapeDetailsScreen(
         modifier = modifier
             .fillMaxSize()
             .padding(regularPadding),
-        verticalAlignment = Alignment.CenterVertically
+        verticalAlignment = Alignment.CenterVertically,
     ) {
         DrawableIcon(
             image = R.drawable.ic_light,
             modifier = Modifier.size(deviceIcon),
-            tint = color
+            tint = color,
         )
         Spacer(modifier = Modifier.width(halfPadding))
         Column(horizontalAlignment = Alignment.CenterHorizontally) {
             DeviceModeRow(
                 mode = light.mode,
-                toggleMode = { lightDetailsChanged(light.copy(mode = light.mode.opposite())) }
+                toggleMode = { lightDetailsChanged(light.copy(mode = light.mode.opposite())) },
             )
             IntensityText(value = light.value.toInt())
             IntensitySlider(
                 value = light.rawValue,
                 range = light.valueRange,
                 color = color,
-                changeIntensity = { lightDetailsChanged(light.copy(rawValue = it)) }
+                changeIntensity = { lightDetailsChanged(light.copy(rawValue = it)) },
             )
         }
     }
-
 }
 
 @Composable
@@ -131,7 +130,7 @@ private fun LightIcon(
     DrawableIcon(
         image = R.drawable.ic_light,
         modifier = Modifier.size(deviceIcon),
-        tint = tint
+        tint = tint,
     )
 }
 
@@ -160,8 +159,8 @@ private fun IntensitySlider(
         modifier = Modifier.fillMaxWidth(),
         colors = SliderDefaults.colors(
             thumbColor = color,
-            activeTrackColor = color
-        )
+            activeTrackColor = color,
+        ),
     )
 }
 
@@ -172,8 +171,8 @@ private val LightDetailsPreview.color: Color
             ColorUtils.blendARGB(
                 Color.Gray.toArgb(),
                 Color.Yellow.toArgb(),
-                rawValue / valueRange.endInclusive
-            )
+                rawValue / valueRange.endInclusive,
+            ),
         )
     }
 
@@ -197,12 +196,11 @@ private fun PreviewLandscapeLightDetailsScreen() {
     )
 }
 
-
 private val detailsPreview = LightDetailsPreview(
     id = "0",
     name = "Light",
     rawValue = 10f,
     valueRange = 0f..100f,
     valueStep = 1f,
-    mode = DeviceMode.On
+    mode = DeviceMode.On,
 )

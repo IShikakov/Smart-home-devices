@@ -36,19 +36,19 @@ internal object DeviceEntityMapper {
         id = id,
         name = deviceName,
         mode = mode ?: DeviceMode.Off,
-        intensity = intensity ?: 0
+        intensity = intensity ?: 0,
     )
 
     private fun DeviceEntity.toHeater(): Heater = Heater(
         id = id,
         name = deviceName,
         mode = mode ?: DeviceMode.Off,
-        temperature = temperature ?: 0.0f
+        temperature = temperature ?: 0.0f,
     )
 
     private fun DeviceEntity.toRollerShutter(): RollerShutter = RollerShutter(
         id = id,
         name = deviceName,
-        position = position ?: 0
+        position = position ?: 0,
     )
 }

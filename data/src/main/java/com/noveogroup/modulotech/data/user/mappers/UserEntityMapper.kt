@@ -18,9 +18,9 @@ internal object UserEntityMapper {
                     postalCode = postalCode,
                     street = street,
                     streetCode = streetCode,
-                    country = country
+                    country = country,
                 )
-            }
+            },
         )
     }
 
@@ -35,9 +35,9 @@ internal object UserEntityMapper {
                     postalCode = postalCode,
                     street = street,
                     streetCode = streetCode,
-                    country = country
+                    country = country,
                 )
-            }
+            },
         )
     }
 }

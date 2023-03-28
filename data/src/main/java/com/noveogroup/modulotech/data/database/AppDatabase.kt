@@ -16,7 +16,7 @@ import com.noveogroup.modulotech.data.user.entity.UserEntity
     entities = [
         UserEntity::class,
         DeviceEntity::class,
-    ]
+    ],
 )
 @TypeConverters(
     DateConverter::class,

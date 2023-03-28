@@ -9,5 +9,4 @@ enum class UserProfileField {
     FirstName,
     PostalCode,
     StreetCode,
-    ;
 }

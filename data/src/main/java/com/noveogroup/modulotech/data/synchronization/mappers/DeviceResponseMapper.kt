@@ -27,7 +27,7 @@ internal object DeviceResponseMapper {
                 }
             },
             position = position,
-            temperature = temperature
+            temperature = temperature,
         )
     }
 }

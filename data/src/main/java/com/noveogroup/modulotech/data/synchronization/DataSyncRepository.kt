@@ -31,7 +31,7 @@ internal class DataSyncRepository(
                     DeviceResponseMapper.mapToDatabaseEntity(deviceResponse)
                 }
                 devicesDao.refreshDevices(devices)
-            }
+            },
         )
             .joinAll()
     }

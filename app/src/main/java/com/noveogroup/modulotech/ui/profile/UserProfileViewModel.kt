@@ -10,7 +10,7 @@ import com.noveogroup.modulotech.ui.profile.common.UserProfileMapper
 import com.noveogroup.modulotech.ui.profile.model.UserProfileField
 import com.noveogroup.modulotech.ui.profile.model.UserProfileScreenState
 import com.noveogroup.modulotech.ui.profile.validation.UserProfileValidator
-import com.noveogroup.modulotech.ui.theme.dark_theme.DarkThemeDelegate
+import com.noveogroup.modulotech.ui.theme.darkTheme.DarkThemeDelegate
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.update
@@ -47,7 +47,7 @@ class UserProfileViewModel(
             }
             state.copy(
                 userProfileFields = state.userProfileFields
-                    .copyWithNewFieldValue(field, formattedValue)
+                    .copyWithNewFieldValue(field, formattedValue),
             )
         }
     }
@@ -65,7 +65,7 @@ class UserProfileViewModel(
                     _screenState.update { state ->
                         state.copy(
                             userProfileFields = state.userProfileFields
-                                .copyWithErrors(validationsErrors)
+                                .copyWithErrors(validationsErrors),
                         )
                     }
                 }
@@ -83,8 +83,8 @@ class UserProfileViewModel(
         showMessage(
             resourcesManager.resolveString(
                 R.string.Common_error_message,
-                error.javaClass.simpleName
-            )
+                error.javaClass.simpleName,
+            ),
         )
     }
 }

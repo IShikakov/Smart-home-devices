@@ -11,7 +11,6 @@ val databaseModule = module {
     }
     single { get<AppDatabase>().userDao() }
     single { get<AppDatabase>().devicesDao() }
-
 }
 
 private const val DATABASE_NAME = "smart_home.db"

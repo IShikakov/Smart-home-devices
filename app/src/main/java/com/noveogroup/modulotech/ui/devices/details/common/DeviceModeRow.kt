@@ -27,7 +27,7 @@ fun DeviceModeRow(
 ) {
     Row(
         modifier = Modifier.fillMaxWidth(),
-        verticalAlignment = Alignment.CenterVertically
+        verticalAlignment = Alignment.CenterVertically,
     ) {
         Text(
             text = stringResource(R.string.Device_details_mode),
@@ -35,14 +35,14 @@ fun DeviceModeRow(
             modifier = Modifier.weight(1f),
         )
         IconButton(
-            onClick = toggleMode
+            onClick = toggleMode,
         ) {
             DrawableIcon(
                 image = R.drawable.ic_power,
                 tint = when (mode) {
                     DeviceMode.On -> Color.Green
                     DeviceMode.Off -> Color.Red
-                }
+                },
             )
         }
     }
@@ -54,6 +54,6 @@ private fun PreviewModeRow() {
     var mode by remember { mutableStateOf(DeviceMode.Off) }
     DeviceModeRow(
         mode = mode,
-        toggleMode = { mode = mode.opposite() }
+        toggleMode = { mode = mode.opposite() },
     )
 }

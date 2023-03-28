@@ -59,8 +59,8 @@ class KoinModulesTest {
                     devicesModule,
                     devicesListModule,
                     deviceDetailsModule,
-                    userProfileModule
-                )
+                    userProfileModule,
+                ),
             )
         }.checkModules()
     }

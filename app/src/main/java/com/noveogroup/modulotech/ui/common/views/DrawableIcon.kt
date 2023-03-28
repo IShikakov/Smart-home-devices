@@ -27,7 +27,7 @@ fun DrawableIcon(
         painter = painterResource(image),
         contentDescription = contentDescription?.let { stringResource(it) },
         modifier = modifier,
-        tint = tint
+        tint = tint,
     )
 }
 
@@ -37,6 +37,6 @@ private fun PreviewDrawableIcon() {
     DrawableIcon(
         image = R.drawable.ic_moon,
         modifier = Modifier.size(48.dp),
-        tint = Color.Blue
+        tint = Color.Blue,
     )
 }

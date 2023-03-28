@@ -21,7 +21,7 @@ fun Snackbar(
     LaunchedEffect(message, snackbarHostState) {
         snackbarHostState.showSnackbar(
             message = message,
-            duration = duration
+            duration = duration,
         )
     }
 }
@@ -34,7 +34,7 @@ private fun PreviewSnackbar() {
         Box(modifier = Modifier.padding(it)) {
             Snackbar(
                 message = "Hello, I'm a Snackbar!",
-                snackbarHostState = state.snackbarHostState
+                snackbarHostState = state.snackbarHostState,
             )
         }
     }

@@ -12,10 +12,11 @@ fun UserProfileFlow(modifier: Modifier = Modifier) {
     val navController = rememberNavController()
     NavHost(
         navController = navController,
-        startDestination = Screen.UserProfileScreen.route
+        startDestination = Screen.UserProfileScreen.route,
     ) {
         composable(Screen.UserProfileScreen.route) {
             UserProfileScreen(modifier)
         }
     }
 }
+

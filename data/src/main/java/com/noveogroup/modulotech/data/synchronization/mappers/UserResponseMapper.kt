@@ -17,8 +17,8 @@ internal object UserResponseMapper {
                 postalCode = address?.postalCode.orEmpty(),
                 street = address?.street.orEmpty(),
                 streetCode = address?.streetCode.orEmpty(),
-                country = address?.country.orEmpty()
-            )
+                country = address?.country.orEmpty(),
+            ),
         )
     }
 }

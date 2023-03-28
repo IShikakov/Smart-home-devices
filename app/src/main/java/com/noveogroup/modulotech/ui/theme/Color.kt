@@ -26,7 +26,7 @@ val darkColorPalette = darkColors(
     onSecondary = black,
     onBackground = white,
     onSurface = white,
-    onError = black
+    onError = black,
 )
 
 val lightColorPalette = lightColors(
@@ -41,5 +41,5 @@ val lightColorPalette = lightColors(
     onSecondary = black,
     onBackground = black,
     onSurface = black,
-    onError = white
+    onError = white,
 )

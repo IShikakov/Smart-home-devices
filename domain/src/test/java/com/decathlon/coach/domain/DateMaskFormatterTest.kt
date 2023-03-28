@@ -33,17 +33,15 @@ class DateMaskFormatterTest {
         val output = formatter.format("10122020")
 
         Assert.assertEquals("10/12/2020", output)
-
     }
 
     @Test
-    fun `DateMaskFormatter must add a separator based on a pattern, even if a year part is not finished in a date string`() {
+    fun `DateMaskFormatter must add a separator based on a pattern, even if a year part is not finished`() {
         val formatter = DateMaskFormatter("dd/MM/yyyy")
 
         val output = formatter.format("10/12/20")
 
         Assert.assertEquals("10/12/20", output)
-
     }
 
     @Test
@@ -69,7 +67,7 @@ class DateMaskFormatterTest {
     }
 
     @Test
-    fun `DateMaskFormatter must remove extra characters if a date string contains more characters than a pattern has`() {
+    fun `DateMaskFormatter must remove extra characters if a date string contains more characters`() {
         val formatter = DateMaskFormatter("dd/MM/yyyy")
 
         val output1 = formatter.format("10/12/20202")

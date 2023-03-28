@@ -50,7 +50,7 @@ class DevicesListInteractorTest {
             Assert.assertEquals(devicesFilters.size, filtersState.availableFilters.size)
             Assert.assertEquals(
                 devicesFilters.sorted(),
-                filtersState.availableFilters.toList().sorted()
+                filtersState.availableFilters.toList().sorted(),
             )
         }
 
@@ -62,7 +62,7 @@ class DevicesListInteractorTest {
             Assert.assertEquals(devicesFilters.size, filtersState.selectedFilters.size)
             Assert.assertEquals(
                 devicesFilters.sorted(),
-                filtersState.selectedFilters.toList().sorted()
+                filtersState.selectedFilters.toList().sorted(),
             )
         }
 
@@ -120,7 +120,7 @@ class DevicesListInteractorTest {
             Assert.assertEquals(3, filterStates.size)
             Assert.assertEquals(
                 devicesFilters.sorted(),
-                filterStates.last().selectedFilters.toList().sorted()
+                filterStates.last().selectedFilters.toList().sorted(),
             )
         }
 
@@ -148,9 +148,11 @@ class DevicesListInteractorTest {
             Assert.assertEquals(2, devices.size)
             Assert.assertTrue(devices.first().size > devices.last().size)
             Assert.assertTrue(
-                devices.first().any { device -> device.deviceType == DeviceType.Light })
+                devices.first().any { device -> device.deviceType == DeviceType.Light },
+            )
             Assert.assertTrue(
-                devices.last().none { device -> device.deviceType == DeviceType.Light })
+                devices.last().none { device -> device.deviceType == DeviceType.Light },
+            )
         }
 
     @Test
@@ -181,20 +183,20 @@ class DevicesListInteractorTest {
             Light(
                 id = "0",
                 name = "Light",
-                mode = DeviceMode.ON,
-                intensity = 10
+                mode = DeviceMode.On,
+                intensity = 10,
             ),
             Heater(
                 id = "1",
                 name = "Heater",
-                mode = DeviceMode.ON,
-                temperature = 20.0f
+                mode = DeviceMode.On,
+                temperature = 20.0f,
             ),
             RollerShutter(
                 id = "2",
                 name = "Roller Shutter",
-                position = 25
-            )
+                position = 25,
+            ),
         )
     }
 }

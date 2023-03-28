@@ -73,7 +73,7 @@ fun UserProfileScreen(
         topBar = {
             ProfileTopAppBar(
                 darkThemeEnabled = darkModeEnabled,
-                toggleDarkTheme = viewModel::toggleDarkTheme
+                toggleDarkTheme = viewModel::toggleDarkTheme,
             )
         },
         content = { paddingValues ->
@@ -81,10 +81,10 @@ fun UserProfileScreen(
                 modifier = Modifier.padding(paddingValues),
                 screenState = screenState,
                 fieldValueChanged = viewModel::fieldValueChanged,
-                saveButtonClicked = viewModel::saveProfile
+                saveButtonClicked = viewModel::saveProfile,
             )
             message?.let { Snackbar(it, scaffoldState.snackbarHostState) }
-        }
+        },
     )
 }
 
@@ -98,16 +98,16 @@ private fun ProfileTopAppBar(
         actions = {
             val iconRotation: Float by animateFloatAsState(
                 targetValue = if (!darkThemeEnabled) darkThemeIconAnimationStart else darkThemeIconAnimationEnd,
-                animationSpec = tween(durationMillis = darkThemeIconAnimationDuration)
+                animationSpec = tween(durationMillis = darkThemeIconAnimationDuration),
             )
             IconButton(onClick = toggleDarkTheme) {
                 Icon(
                     painter = painterResource(if (darkThemeEnabled) R.drawable.ic_sun else R.drawable.ic_moon),
                     contentDescription = stringResource(R.string.Common_dark_theme_icon_description),
-                    modifier = Modifier.rotate(iconRotation)
+                    modifier = Modifier.rotate(iconRotation),
                 )
             }
-        }
+        },
     )
 }
 
@@ -123,18 +123,18 @@ private fun ProfileScreenContent(
             .fillMaxSize()
             .verticalScroll(rememberScrollState())
             .padding(regularPadding),
-        horizontalAlignment = Alignment.CenterHorizontally
+        horizontalAlignment = Alignment.CenterHorizontally,
     ) {
         UserPhoto(screenState.userPhoto)
         Spacer(modifier = Modifier.height(regularPadding))
         UserInformationSection(
             userSectionFields = screenState.userProfileFields.userSectionFields,
-            fieldValueChanged = fieldValueChanged
+            fieldValueChanged = fieldValueChanged,
         )
         Spacer(modifier = Modifier.height(regularPadding))
         UserAddressSection(
             userAddressSectionFields = screenState.userProfileFields.userAddressSectionFields,
-            fieldValueChanged = fieldValueChanged
+            fieldValueChanged = fieldValueChanged,
         )
         Spacer(modifier = Modifier.height(regularPadding))
         SaveButton(saveButtonClicked = saveButtonClicked)
@@ -150,7 +150,7 @@ private fun UserPhoto(
         contentDescription = stringResource(R.string.Profile_user_photo_description),
         modifier = Modifier
             .size(profilePhotoSize)
-            .clip(CircleShape)
+            .clip(CircleShape),
     )
 }
 
@@ -168,7 +168,7 @@ private fun UserInformationSection(
             onValueChange = fieldValueChanged,
             hint = field.hint(),
             keyboardType = field.keyboardType(),
-            visualTransformation = field.visualTransformation()
+            visualTransformation = field.visualTransformation(),
         )
         if (index != userSectionFields.lastIndex) Spacer(modifier = Modifier.height(halfPadding))
     }
@@ -189,7 +189,7 @@ private fun UserAddressSection(
             hint = field.hint(),
             keyboardType = field.keyboardType(),
             imeAction = if (index == userAddressSectionFields.lastIndex) ImeAction.Done else ImeAction.Next,
-            visualTransformation = field.visualTransformation()
+            visualTransformation = field.visualTransformation(),
         )
         if (index != userAddressSectionFields.lastIndex) {
             Spacer(modifier = Modifier.height(halfPadding))
@@ -217,10 +217,10 @@ private fun UserProfileTextField(
             trailingIcon = fieldState.error?.let { { DrawableIcon(image = R.drawable.ic_error) } },
             keyboardOptions = KeyboardOptions(
                 keyboardType = keyboardType,
-                imeAction = imeAction
+                imeAction = imeAction,
             ),
             onValueChange = { onValueChange(fieldState.field, it) },
-            visualTransformation = visualTransformation
+            visualTransformation = visualTransformation,
         )
         if (fieldState.error != null) {
             Text(
@@ -239,7 +239,7 @@ private fun SaveButton(saveButtonClicked: () -> Unit = {}) {
         shape = CircleShape,
         modifier = Modifier
             .fillMaxWidth()
-            .height(saveProfileButtonHeight)
+            .height(saveProfileButtonHeight),
     ) {
         Text(text = stringResource(R.string.Profile_save_button))
     }
@@ -256,7 +256,7 @@ private fun UserProfileFields.Field.label(): String = stringResource(
         UserProfileField.FirstName -> R.string.Profile_first_name
         UserProfileField.PostalCode -> R.string.Profile_postal_code
         UserProfileField.StreetCode -> R.string.Profile_street_code
-    }
+    },
 )
 
 @Composable
@@ -284,7 +284,7 @@ private fun PreviewProfileTopAppBar() {
     var darkThemeEnabled by remember { mutableStateOf(true) }
     ProfileTopAppBar(
         darkThemeEnabled = darkThemeEnabled,
-        toggleDarkTheme = { darkThemeEnabled = !darkThemeEnabled }
+        toggleDarkTheme = { darkThemeEnabled = !darkThemeEnabled },
     )
 }
 
@@ -293,7 +293,7 @@ private fun PreviewProfileTopAppBar() {
     name = "Landscape",
     showBackground = true,
     device = Devices.AUTOMOTIVE_1024p,
-    locale = "en"
+    locale = "en",
 )
 @Composable
 private fun PreviewProfileScreenContent() {
@@ -307,8 +307,8 @@ private fun PreviewProfileScreenContent() {
                     if (value == "Error") {
                         this.copyWithErrors(
                             mapOf(
-                                field to UserProfileFields.FieldError("Oops, it is an error")
-                            )
+                                field to UserProfileFields.FieldError("Oops, it is an error"),
+                            ),
                         )
                     } else {
                         this
@@ -316,6 +316,6 @@ private fun PreviewProfileScreenContent() {
                 }
             screenState = screenState.copy(userProfileFields = userProfileFields)
         },
-        saveButtonClicked = {}
+        saveButtonClicked = {},
     )
 }
