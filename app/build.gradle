@@ -97,6 +97,7 @@ dependencies {
     implementation libraries.compose.ui
     implementation libraries.compose.toolingPreview
     implementation libraries.compose.activityCompose
+    implementation libraries.compose.systemUiController
     debugImplementation libraries.compose.tooling
 
     implementation libraries.navComponent
