@@ -1,18 +1,17 @@
-package com.noveogroup.modulotech.ui.theme.darkTheme
+package com.noveogroup.modulotech.data.settings.darkTheme
 
 import android.content.Context
 import android.content.res.Configuration
-import com.noveogroup.modulotech.ui.common.extensions.edit
+import com.noveogroup.modulotech.data.common.extensions.edit
+import com.noveogroup.modulotech.domain.darkTheme.api.DarkThemeSaverApi
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 
-class DarkThemePreferences(private val context: Context) {
+class DarkThemePreferences(private val context: Context) : DarkThemeSaverApi {
 
     private val preferences =
         context.getSharedPreferences(DARK_THEME_FILE_NAME, Context.MODE_PRIVATE)
     private val _darkModeFlow: MutableStateFlow<Boolean> = MutableStateFlow(darkThemeEnabled)
-    val darkModeFlow: StateFlow<Boolean> = _darkModeFlow
-
     private var darkThemeEnabled: Boolean
         get() = preferences.getBoolean(DARK_THEME_STATUS_KEY, isSystemInDarkTheme)
         set(value) {
@@ -20,7 +19,9 @@ class DarkThemePreferences(private val context: Context) {
             _darkModeFlow.value = value
         }
 
-    fun toggleDarkTheme() {
+    override fun observeDarkThemeState(): StateFlow<Boolean> = _darkModeFlow
+
+    override fun toggleDarkTheme() {
         darkThemeEnabled = !darkThemeEnabled
     }
 
