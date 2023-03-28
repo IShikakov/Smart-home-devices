@@ -9,5 +9,5 @@ data class Heater(
     val mode: DeviceMode,
     val temperature: Float,
 ) : Device {
-    override val deviceType: DeviceType = DeviceType.HEATER
+    override val deviceType: DeviceType = DeviceType.Heater
 }

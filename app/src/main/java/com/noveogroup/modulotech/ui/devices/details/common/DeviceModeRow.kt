@@ -30,7 +30,7 @@ fun DeviceModeRow(
         verticalAlignment = Alignment.CenterVertically
     ) {
         Text(
-            text = stringResource(R.string.DeviceDetails_mode),
+            text = stringResource(R.string.Device_details_mode),
             style = MaterialTheme.typography.subtitle1,
             modifier = Modifier.weight(1f),
         )
@@ -40,8 +40,8 @@ fun DeviceModeRow(
             DrawableIcon(
                 image = R.drawable.ic_power,
                 tint = when (mode) {
-                    DeviceMode.ON -> Color.Green
-                    DeviceMode.OFF -> Color.Red
+                    DeviceMode.On -> Color.Green
+                    DeviceMode.Off -> Color.Red
                 }
             )
         }
@@ -51,7 +51,7 @@ fun DeviceModeRow(
 @Preview(showBackground = true, device = Devices.PIXEL_2, locale = "en")
 @Composable
 private fun PreviewModeRow() {
-    var mode by remember { mutableStateOf(DeviceMode.OFF) }
+    var mode by remember { mutableStateOf(DeviceMode.Off) }
     DeviceModeRow(
         mode = mode,
         toggleMode = { mode = mode.opposite() }

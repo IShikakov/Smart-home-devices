@@ -85,14 +85,14 @@ private fun SmartHomeBottomBar(
 private fun TabNavigationHost(
     navController: NavHostController,
     modifier: Modifier = Modifier,
-    startTab: SmartHomeTab = SmartHomeTab.DEVICES,
+    startTab: SmartHomeTab = SmartHomeTab.Devices,
 ) {
     NavHost(
         navController = navController,
         startDestination = startTab.route
     ) {
-        composable(SmartHomeTab.DEVICES.route) { DevicesFlow(modifier) }
-        composable(SmartHomeTab.USER_PROFILE.route) { UserProfileFlow(modifier) }
+        composable(SmartHomeTab.Devices.route) { DevicesFlow(modifier) }
+        composable(SmartHomeTab.UserProfile.route) { UserProfileFlow(modifier) }
     }
 }
 

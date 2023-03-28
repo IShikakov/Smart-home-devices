@@ -94,7 +94,7 @@ private fun ProfileTopAppBar(
     toggleDarkTheme: () -> Unit,
 ) {
     TopAppBar(
-        title = { Text(text = stringResource(R.string.profile_screen_title)) },
+        title = { Text(text = stringResource(R.string.Profile_screen_title)) },
         actions = {
             val iconRotation: Float by animateFloatAsState(
                 targetValue = if (!darkThemeEnabled) darkThemeIconAnimationStart else darkThemeIconAnimationEnd,
@@ -103,7 +103,7 @@ private fun ProfileTopAppBar(
             IconButton(onClick = toggleDarkTheme) {
                 Icon(
                     painter = painterResource(if (darkThemeEnabled) R.drawable.ic_sun else R.drawable.ic_moon),
-                    contentDescription = stringResource(R.string.dark_theme_icon_description),
+                    contentDescription = stringResource(R.string.Common_dark_theme_icon_description),
                     modifier = Modifier.rotate(iconRotation)
                 )
             }
@@ -147,7 +147,7 @@ private fun UserPhoto(
 ) {
     Image(
         painter = painterResource(userPhoto),
-        contentDescription = stringResource(R.string.user_profile_photo_description),
+        contentDescription = stringResource(R.string.Profile_user_photo_description),
         modifier = Modifier
             .size(profilePhotoSize)
             .clip(CircleShape)
@@ -248,33 +248,33 @@ private fun SaveButton(saveButtonClicked: () -> Unit = {}) {
 @Composable
 private fun UserProfileFields.Field.label(): String = stringResource(
     when (field) {
-        UserProfileField.CITY -> R.string.Profile_city
-        UserProfileField.STREET -> R.string.Profile_street
-        UserProfileField.COUNTRY -> R.string.Profile_country
-        UserProfileField.LAST_NAME -> R.string.Profile_last_name
-        UserProfileField.BIRTHDATE -> R.string.Profile_birthdate
-        UserProfileField.FIRST_NAME -> R.string.Profile_first_name
-        UserProfileField.POSTAL_CODE -> R.string.Profile_postal_code
-        UserProfileField.STREET_CODE -> R.string.Profile_street_code
+        UserProfileField.City -> R.string.Profile_city
+        UserProfileField.Street -> R.string.Profile_street
+        UserProfileField.Country -> R.string.Profile_country
+        UserProfileField.LastName -> R.string.Profile_last_name
+        UserProfileField.Birthdate -> R.string.Profile_birthdate
+        UserProfileField.FirstName -> R.string.Profile_first_name
+        UserProfileField.PostalCode -> R.string.Profile_postal_code
+        UserProfileField.StreetCode -> R.string.Profile_street_code
     }
 )
 
 @Composable
 private
 fun UserProfileFields.Field.keyboardType(): KeyboardType = when (field) {
-    UserProfileField.BIRTHDATE, UserProfileField.POSTAL_CODE -> KeyboardType.Number
+    UserProfileField.Birthdate, UserProfileField.PostalCode -> KeyboardType.Number
     else -> KeyboardType.Text
 }
 
 @Composable
 private fun UserProfileFields.Field.hint(): String? = when (field) {
-    UserProfileField.BIRTHDATE -> stringResource(R.string.birthdate_format)
+    UserProfileField.Birthdate -> stringResource(R.string.Profile_birthdate_format)
     else -> null
 }
 
 @Composable
 private fun UserProfileFields.Field.visualTransformation(): VisualTransformation = when (field) {
-    UserProfileField.BIRTHDATE -> DateTransformation(stringResource(R.string.birthdate_format))
+    UserProfileField.Birthdate -> DateTransformation(stringResource(R.string.Profile_birthdate_format))
     else -> VisualTransformation.None
 }
 

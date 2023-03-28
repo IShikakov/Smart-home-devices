@@ -15,15 +15,15 @@ internal object DeviceResponseMapper {
             id = id,
             deviceName = deviceName.orEmpty(),
             type = when (productType) {
-                DeviceResponseType.Light -> DeviceType.LIGHT
-                DeviceResponseType.Heater -> DeviceType.HEATER
-                DeviceResponseType.RollerShutter -> DeviceType.ROLLER_SHUTTER
+                DeviceResponseType.Light -> DeviceType.Light
+                DeviceResponseType.Heater -> DeviceType.Heater
+                DeviceResponseType.RollerShutter -> DeviceType.RollerShutter
             },
             intensity = intensity,
             mode = mode?.let {
                 when (mode) {
-                    DeviceResponseMode.ON -> DeviceMode.ON
-                    DeviceResponseMode.OFF -> DeviceMode.OFF
+                    DeviceResponseMode.On -> DeviceMode.On
+                    DeviceResponseMode.Off -> DeviceMode.Off
                 }
             },
             position = position,

@@ -9,13 +9,13 @@ enum class SmartHomeTab(
     @DrawableRes val icon: Int,
     val route: String,
 ) {
-    DEVICES(
-        R.string.devices_tab,
+    Devices(
+        R.string.Main_devices_tab,
         R.drawable.ic_devices,
         "Devices"
     ),
-    USER_PROFILE(
-        R.string.user_profile_tab,
+    UserProfile(
+        R.string.Main_user_profile_tab,
         R.drawable.ic_user_profile,
         "Profile"
     )

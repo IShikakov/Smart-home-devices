@@ -102,7 +102,7 @@ fun DevicesListScreen(
 @Composable
 private fun DevicesListTopAppBar() {
     TopAppBar(
-        title = { Text(text = stringResource(R.string.devices_screen_title)) },
+        title = { Text(text = stringResource(R.string.Devices_screen_title)) },
     )
 }
 
@@ -232,7 +232,7 @@ private fun DismissedContent(
             ) {
                 Image(
                     imageVector = Icons.Filled.Delete,
-                    contentDescription = stringResource(R.string.delete_icon_description),
+                    contentDescription = stringResource(R.string.Common_delete_icon_description),
                     modifier = Modifier.scale(scale)
                 )
             }
@@ -256,7 +256,7 @@ private fun DeviceCard(
     ) {
         DrawableIcon(
             image = device.icon,
-            contentDescription = R.string.device_icon_description,
+            contentDescription = R.string.Common_device_icon_description,
             modifier = Modifier.size(iconSize)
         )
         Spacer(modifier = Modifier.width(halfPadding))
@@ -328,17 +328,17 @@ private val devicesPreview = listOf(
 private val filtersPreview = listOf(
     DevicesFilter(
         title = "Light",
-        type = DeviceType.LIGHT,
+        type = DeviceType.Light,
         isSelected = true
     ),
     DevicesFilter(
         title = "Heater",
-        type = DeviceType.HEATER,
+        type = DeviceType.Heater,
         isSelected = true
     ),
     DevicesFilter(
         title = "Roller shutter",
-        type = DeviceType.ROLLER_SHUTTER,
+        type = DeviceType.RollerShutter,
         isSelected = true
     )
 )

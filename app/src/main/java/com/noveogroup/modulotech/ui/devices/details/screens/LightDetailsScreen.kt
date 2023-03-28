@@ -140,7 +140,7 @@ private fun IntensityText(
     value: Int,
 ) {
     Text(
-        text = stringResource(R.string.DeviceDetails_light_intensity, value),
+        text = stringResource(R.string.Device_details_light_intensity, value),
         style = MaterialTheme.typography.subtitle1,
         modifier = Modifier.fillMaxWidth(),
     )
@@ -167,8 +167,8 @@ private fun IntensitySlider(
 
 private val LightDetailsPreview.color: Color
     get() = when (mode) {
-        DeviceMode.OFF -> Color.Gray
-        DeviceMode.ON -> Color(
+        DeviceMode.Off -> Color.Gray
+        DeviceMode.On -> Color(
             ColorUtils.blendARGB(
                 Color.Gray.toArgb(),
                 Color.Yellow.toArgb(),
@@ -204,5 +204,5 @@ private val detailsPreview = LightDetailsPreview(
     rawValue = 10f,
     valueRange = 0f..100f,
     valueStep = 1f,
-    mode = DeviceMode.ON
+    mode = DeviceMode.On
 )

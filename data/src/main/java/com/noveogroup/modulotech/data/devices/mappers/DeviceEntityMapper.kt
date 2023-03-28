@@ -11,9 +11,9 @@ import com.noveogroup.modulotech.domain.devices.model.device.RollerShutter
 internal object DeviceEntityMapper {
 
     fun mapToDomainModel(device: DeviceEntity): Device = when (device.type) {
-        DeviceType.LIGHT -> device.toLight()
-        DeviceType.HEATER -> device.toHeater()
-        DeviceType.ROLLER_SHUTTER -> device.toRollerShutter()
+        DeviceType.Light -> device.toLight()
+        DeviceType.Heater -> device.toHeater()
+        DeviceType.RollerShutter -> device.toRollerShutter()
     }
 
     fun mapToDatabaseEntity(device: Device): DeviceEntity = with(device) {
@@ -35,14 +35,14 @@ internal object DeviceEntityMapper {
     private fun DeviceEntity.toLight(): Light = Light(
         id = id,
         name = deviceName,
-        mode = mode ?: DeviceMode.OFF,
+        mode = mode ?: DeviceMode.Off,
         intensity = intensity ?: 0
     )
 
     private fun DeviceEntity.toHeater(): Heater = Heater(
         id = id,
         name = deviceName,
-        mode = mode ?: DeviceMode.OFF,
+        mode = mode ?: DeviceMode.Off,
         temperature = temperature ?: 0.0f
     )
 

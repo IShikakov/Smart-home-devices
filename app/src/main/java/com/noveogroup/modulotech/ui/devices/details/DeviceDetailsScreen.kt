@@ -72,7 +72,7 @@ private fun DeviceDetailsTopAppBar(
             IconButton(onClick = back) {
                 Icon(
                     imageVector = Icons.Default.ArrowBack,
-                    contentDescription = stringResource(R.string.back_icon_description)
+                    contentDescription = stringResource(R.string.Common_back_icon_description)
                 )
             }
         }

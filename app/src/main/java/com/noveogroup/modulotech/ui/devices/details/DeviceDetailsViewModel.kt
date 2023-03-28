@@ -56,7 +56,7 @@ class DeviceDetailsViewModel(
     }
 
     private fun showErrorMessage() {
-        showMessage(resourcesManager.resolveString(R.string.error_message))
+        showMessage(resourcesManager.resolveString(R.string.Common_error_message))
     }
 
     companion object {

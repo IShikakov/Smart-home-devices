@@ -13,17 +13,17 @@ class UserProfileValidator(
         UserProfileField.values()
             .associateWith { field ->
                 when (field) {
-                    UserProfileField.CITY,
-                    UserProfileField.STREET,
-                    UserProfileField.COUNTRY,
-                    UserProfileField.LAST_NAME,
-                    UserProfileField.FIRST_NAME,
-                    UserProfileField.POSTAL_CODE,
-                    UserProfileField.STREET_CODE,
+                    UserProfileField.City,
+                    UserProfileField.Street,
+                    UserProfileField.Country,
+                    UserProfileField.LastName,
+                    UserProfileField.FirstName,
+                    UserProfileField.PostalCode,
+                    UserProfileField.StreetCode,
                     -> listOf(ValidationRule.Mandatory)
-                    UserProfileField.BIRTHDATE -> listOf(
+                    UserProfileField.Birthdate -> listOf(
                         ValidationRule.Mandatory,
-                        ValidationRule.DateFormat(resourcesManager.resolveString(R.string.birthdate_format))
+                        ValidationRule.DateFormat(resourcesManager.resolveString(R.string.Profile_birthdate_format))
                     )
                 }
             }
@@ -48,9 +48,9 @@ class UserProfileValidator(
 
     private val ValidationRule.errorMessage
         get() = when (this) {
-            ValidationRule.Mandatory -> resourcesManager.resolveString(R.string.Profile_error_empty_field)
+            ValidationRule.Mandatory -> resourcesManager.resolveString(R.string.Profile_Error_empty_field)
             is ValidationRule.DateFormat -> resourcesManager.resolveString(
-                R.string.Profile_error_date_format,
+                R.string.Profile_Error_date_format,
                 format
             )
         }

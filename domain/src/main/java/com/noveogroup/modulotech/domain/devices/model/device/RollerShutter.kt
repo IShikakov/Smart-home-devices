@@ -7,5 +7,5 @@ data class RollerShutter(
     override val name: String,
     val position: Int,
 ) : Device {
-    override val deviceType: DeviceType = DeviceType.ROLLER_SHUTTER
+    override val deviceType: DeviceType = DeviceType.RollerShutter
 }

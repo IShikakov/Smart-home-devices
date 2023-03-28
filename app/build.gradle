@@ -17,6 +17,15 @@ android {
         testInstrumentationRunner 'androidx.test.runner.AndroidJUnitRunner'
     }
 
+    signingConfigs {
+        release {
+            keyAlias signing.keyAlias
+            keyPassword signing.keyPassword
+            storeFile file(signing.storeFile)
+            storePassword signing.storePassword
+        }
+    }
+
     buildTypes {
         debug {
             applicationIdSuffix = ".debug"
@@ -28,15 +37,7 @@ android {
             minifyEnabled true
             shrinkResources true
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
-        }
-    }
-
-    signingConfigs {
-        release {
-            keyAlias signing.keyAlias
-            keyPassword signing.keyPassword
-            storeFile file(signing.storeFile)
-            storePassword signing.storePassword
+            signingConfig signingConfigs.release
         }
     }
 

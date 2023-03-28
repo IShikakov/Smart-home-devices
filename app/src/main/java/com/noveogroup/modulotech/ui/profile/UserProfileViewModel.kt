@@ -25,7 +25,7 @@ class UserProfileViewModel(
 ) : BaseViewModel() {
 
     private val dateMaskFormatter by lazy {
-        DateMaskFormatter(resourcesManager.resolveString(R.string.birthdate_format))
+        DateMaskFormatter(resourcesManager.resolveString(R.string.Profile_birthdate_format))
     }
 
     private val _screenState = MutableStateFlow(UserProfileScreenState())
@@ -42,7 +42,7 @@ class UserProfileViewModel(
     fun fieldValueChanged(field: UserProfileField, value: String) {
         _screenState.update { state ->
             val formattedValue = when (field) {
-                UserProfileField.BIRTHDATE -> dateMaskFormatter.extractDateDigits(value)
+                UserProfileField.Birthdate -> dateMaskFormatter.extractDateDigits(value)
                 else -> value
             }
             state.copy(
@@ -82,7 +82,7 @@ class UserProfileViewModel(
     private fun handleError(error: Throwable) {
         showMessage(
             resourcesManager.resolveString(
-                R.string.error_message,
+                R.string.Common_error_message,
                 error.javaClass.simpleName
             )
         )

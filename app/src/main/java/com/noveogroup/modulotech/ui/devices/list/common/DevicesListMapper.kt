@@ -49,7 +49,7 @@ class DevicesListMapper(private val resourcesManager: ResourcesManager) {
             is Light -> "${mode.description()}, $intensity"
             is Heater -> "${mode.description()}, ${
                 resourcesManager.resolveString(
-                    R.string.format_heater_temperature,
+                    R.string.Common_temperature_format,
                     temperature
                 )
             }"
@@ -59,13 +59,13 @@ class DevicesListMapper(private val resourcesManager: ResourcesManager) {
     @get:StringRes
     private val DeviceType.title: Int
         get() = when (this) {
-            DeviceType.LIGHT -> R.string.lights_filter
-            DeviceType.HEATER -> R.string.heaters_fiter
-            DeviceType.ROLLER_SHUTTER -> R.string.roller_shutters_filter
+            DeviceType.Light -> R.string.Devices_lights_filter
+            DeviceType.Heater -> R.string.Devices_heaters_filter
+            DeviceType.RollerShutter -> R.string.Devices_roller_shutters_filter
         }
 
     private fun DeviceMode.description(): String = when (this) {
-        DeviceMode.ON -> resourcesManager.resolveString(R.string.device_on)
-        DeviceMode.OFF -> resourcesManager.resolveString(R.string.device_off)
+        DeviceMode.On -> resourcesManager.resolveString(R.string.Devices_device_on)
+        DeviceMode.Off -> resourcesManager.resolveString(R.string.Devices_device_off)
     }
 }

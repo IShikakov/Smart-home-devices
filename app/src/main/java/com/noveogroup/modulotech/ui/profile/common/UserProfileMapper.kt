@@ -14,7 +14,7 @@ import java.util.*
 class UserProfileMapper(
     resourcesManager: ResourcesManager,
 ) {
-    private val birthdateFormat by lazy { resourcesManager.resolveString(R.string.birthdate_format) }
+    private val birthdateFormat by lazy { resourcesManager.resolveString(R.string.Profile_birthdate_format) }
     private val dateFormat by lazy { SimpleDateFormat(birthdateFormat, Locale.ENGLISH) }
     private val dateMaskFormatter by lazy { DateMaskFormatter(birthdateFormat) }
 
@@ -22,35 +22,35 @@ class UserProfileMapper(
         UserProfileScreenState(
             userProfileFields = UserProfileFields(
                 firstName = UserProfileFields.Field(
-                    field = UserProfileField.FIRST_NAME,
+                    field = UserProfileField.FirstName,
                     value = firstName
                 ),
                 lastName = UserProfileFields.Field(
-                    field = UserProfileField.LAST_NAME,
+                    field = UserProfileField.LastName,
                     value = lastName
                 ),
                 birthdate = UserProfileFields.Field(
-                    field = UserProfileField.BIRTHDATE,
+                    field = UserProfileField.Birthdate,
                     value = dateMaskFormatter.extractDateDigits(dateFormat.format(birthdate))
                 ),
                 city = UserProfileFields.Field(
-                    field = UserProfileField.CITY,
+                    field = UserProfileField.City,
                     value = address.city
                 ),
                 postalCode = UserProfileFields.Field(
-                    field = UserProfileField.POSTAL_CODE,
+                    field = UserProfileField.PostalCode,
                     value = address.postalCode
                 ),
                 street = UserProfileFields.Field(
-                    field = UserProfileField.STREET,
+                    field = UserProfileField.Street,
                     value = address.street
                 ),
                 streetCode = UserProfileFields.Field(
-                    field = UserProfileField.STREET_CODE,
+                    field = UserProfileField.StreetCode,
                     value = address.streetCode
                 ),
                 country = UserProfileFields.Field(
-                    field = UserProfileField.COUNTRY,
+                    field = UserProfileField.Country,
                     value = address.country
                 ),
             )

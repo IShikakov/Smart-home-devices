@@ -9,5 +9,5 @@ data class Light(
     val mode: DeviceMode,
     val intensity: Int,
 ) : Device {
-    override val deviceType: DeviceType = DeviceType.LIGHT
+    override val deviceType: DeviceType = DeviceType.Light
 }

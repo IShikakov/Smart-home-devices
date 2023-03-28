@@ -73,10 +73,10 @@ class DevicesListInteractorTest {
             backgroundScope.launch(UnconfinedTestDispatcher(testScheduler)) {
                 interactor.observeFilters().take(2).toList(filterStates)
             }
-            interactor.toggleDevicesFilter(DeviceType.LIGHT)
+            interactor.toggleDevicesFilter(DeviceType.Light)
 
             val expectedSelectedFilters = devicesFilters
-                .minus(DeviceType.LIGHT)
+                .minus(DeviceType.Light)
                 .sorted()
             val actualSelectedFilters = filterStates.last()
                 .selectedFilters
@@ -93,11 +93,11 @@ class DevicesListInteractorTest {
             backgroundScope.launch(UnconfinedTestDispatcher(testScheduler)) {
                 interactor.observeFilters().take(3).toList(filterStates)
             }
-            interactor.toggleDevicesFilter(DeviceType.LIGHT)
-            interactor.toggleDevicesFilter(DeviceType.ROLLER_SHUTTER)
+            interactor.toggleDevicesFilter(DeviceType.Light)
+            interactor.toggleDevicesFilter(DeviceType.RollerShutter)
 
             val expectedSelectedFilters = devicesFilters
-                .minus(listOf(DeviceType.LIGHT, DeviceType.ROLLER_SHUTTER))
+                .minus(listOf(DeviceType.Light, DeviceType.RollerShutter))
                 .sorted()
             val actualSelectedFilters = filterStates.last()
                 .selectedFilters
@@ -114,8 +114,8 @@ class DevicesListInteractorTest {
             backgroundScope.launch {
                 interactor.observeFilters().take(3).toList(filterStates)
             }
-            interactor.toggleDevicesFilter(DeviceType.LIGHT)
-            interactor.toggleDevicesFilter(DeviceType.LIGHT)
+            interactor.toggleDevicesFilter(DeviceType.Light)
+            interactor.toggleDevicesFilter(DeviceType.Light)
 
             Assert.assertEquals(3, filterStates.size)
             Assert.assertEquals(
@@ -143,14 +143,14 @@ class DevicesListInteractorTest {
             backgroundScope.launch {
                 interactor.observeDevices().take(2).toList(devices)
             }
-            interactor.toggleDevicesFilter(DeviceType.LIGHT)
+            interactor.toggleDevicesFilter(DeviceType.Light)
 
             Assert.assertEquals(2, devices.size)
             Assert.assertTrue(devices.first().size > devices.last().size)
             Assert.assertTrue(
-                devices.first().any { device -> device.deviceType == DeviceType.LIGHT })
+                devices.first().any { device -> device.deviceType == DeviceType.Light })
             Assert.assertTrue(
-                devices.last().none { device -> device.deviceType == DeviceType.LIGHT })
+                devices.last().none { device -> device.deviceType == DeviceType.Light })
         }
 
     @Test

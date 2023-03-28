@@ -119,7 +119,7 @@ private fun PositionText(
     value: Int,
 ) {
     Text(
-        text = stringResource(R.string.DeviceDetails_roller_shutter_position, value),
+        text = stringResource(R.string.Device_details_roller_shutter_position, value),
         style = MaterialTheme.typography.subtitle1,
     )
 }

@@ -135,7 +135,7 @@ private fun TemperatureText(
     value: Float,
 ) {
     Text(
-        text = stringResource(R.string.DeviceDetails_heater_temperature, value),
+        text = stringResource(R.string.Device_details_heater_temperature, value),
         style = MaterialTheme.typography.subtitle1,
         modifier = Modifier.fillMaxWidth(),
     )
@@ -162,8 +162,8 @@ private fun TemperatureSlider(
 
 private val HeaterDetailsPreview.color: Color
     get() = when (mode) {
-        DeviceMode.OFF -> Color.Blue
-        DeviceMode.ON -> Color(
+        DeviceMode.Off -> Color.Blue
+        DeviceMode.On -> Color(
             ColorUtils.blendARGB(
                 Color.Blue.toArgb(),
                 Color.Red.toArgb(),
@@ -198,5 +198,5 @@ private val detailsPreview = HeaterDetailsPreview(
     rawValue = 7.0f,
     valueRange = 7f..28f,
     valueStep = 0.5f,
-    mode = DeviceMode.ON
+    mode = DeviceMode.On
 )

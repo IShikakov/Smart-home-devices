@@ -1,14 +1,14 @@
 package com.noveogroup.modulotech.ui.profile.model
 
 data class UserProfileFields(
-    val firstName: Field = Field(UserProfileField.FIRST_NAME),
-    val lastName: Field = Field(UserProfileField.LAST_NAME),
-    val birthdate: Field = Field(UserProfileField.BIRTHDATE),
-    val city: Field = Field(UserProfileField.CITY),
-    val postalCode: Field = Field(UserProfileField.POSTAL_CODE),
-    val street: Field = Field(UserProfileField.STREET),
-    val streetCode: Field = Field(UserProfileField.STREET_CODE),
-    val country: Field = Field(UserProfileField.COUNTRY),
+    val firstName: Field = Field(UserProfileField.FirstName),
+    val lastName: Field = Field(UserProfileField.LastName),
+    val birthdate: Field = Field(UserProfileField.Birthdate),
+    val city: Field = Field(UserProfileField.City),
+    val postalCode: Field = Field(UserProfileField.PostalCode),
+    val street: Field = Field(UserProfileField.Street),
+    val streetCode: Field = Field(UserProfileField.StreetCode),
+    val country: Field = Field(UserProfileField.Country),
 ) {
 
     val userSectionFields = listOf(firstName, lastName, birthdate)
@@ -18,14 +18,14 @@ data class UserProfileFields(
         field: UserProfileField,
         newValue: String,
     ): UserProfileFields = when (field) {
-        UserProfileField.CITY -> copy(city = Field(field = field, value = newValue))
-        UserProfileField.STREET -> copy(street = Field(field = field, value = newValue))
-        UserProfileField.COUNTRY -> copy(country = Field(field = field, value = newValue))
-        UserProfileField.LAST_NAME -> copy(lastName = Field(field = field, value = newValue))
-        UserProfileField.BIRTHDATE -> copy(birthdate = Field(field = field, value = newValue))
-        UserProfileField.FIRST_NAME -> copy(firstName = Field(field = field, value = newValue))
-        UserProfileField.POSTAL_CODE -> copy(postalCode = Field(field = field, value = newValue))
-        UserProfileField.STREET_CODE -> copy(streetCode = Field(field = field, value = newValue))
+        UserProfileField.City -> copy(city = Field(field = field, value = newValue))
+        UserProfileField.Street -> copy(street = Field(field = field, value = newValue))
+        UserProfileField.Country -> copy(country = Field(field = field, value = newValue))
+        UserProfileField.LastName -> copy(lastName = Field(field = field, value = newValue))
+        UserProfileField.Birthdate -> copy(birthdate = Field(field = field, value = newValue))
+        UserProfileField.FirstName -> copy(firstName = Field(field = field, value = newValue))
+        UserProfileField.PostalCode -> copy(postalCode = Field(field = field, value = newValue))
+        UserProfileField.StreetCode -> copy(streetCode = Field(field = field, value = newValue))
     }
 
     fun copyWithErrors(errors: Map<UserProfileField, FieldError>): UserProfileFields =
