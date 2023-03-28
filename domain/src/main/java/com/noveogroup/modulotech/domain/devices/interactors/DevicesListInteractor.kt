@@ -1,9 +1,9 @@
 package com.noveogroup.modulotech.domain.devices.interactors
 
 import com.noveogroup.modulotech.domain.devices.api.DevicesRepositoryApi
-import com.noveogroup.modulotech.domain.devices.model.DeviceType
-import com.noveogroup.modulotech.domain.devices.model.FiltersState
 import com.noveogroup.modulotech.domain.devices.model.device.Device
+import com.noveogroup.modulotech.domain.devices.model.device.DeviceType
+import com.noveogroup.modulotech.domain.devices.model.filter.FiltersState
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.combine

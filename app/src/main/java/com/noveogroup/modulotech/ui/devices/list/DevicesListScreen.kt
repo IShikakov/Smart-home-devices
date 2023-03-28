@@ -51,7 +51,7 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Devices
 import androidx.compose.ui.tooling.preview.Preview
 import com.noveogroup.modulotech.R
-import com.noveogroup.modulotech.domain.devices.model.DeviceType
+import com.noveogroup.modulotech.domain.devices.model.device.DeviceType
 import com.noveogroup.modulotech.ui.common.views.DrawableIcon
 import com.noveogroup.modulotech.ui.common.views.Snackbar
 import com.noveogroup.modulotech.ui.devices.list.model.DevicePreview

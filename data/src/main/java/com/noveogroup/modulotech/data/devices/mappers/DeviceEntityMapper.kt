@@ -1,12 +1,9 @@
 package com.noveogroup.modulotech.data.devices.mappers
 
 import com.noveogroup.modulotech.data.devices.entity.DeviceEntity
-import com.noveogroup.modulotech.domain.devices.model.DeviceMode
-import com.noveogroup.modulotech.domain.devices.model.DeviceType
 import com.noveogroup.modulotech.domain.devices.model.device.Device
-import com.noveogroup.modulotech.domain.devices.model.device.Heater
-import com.noveogroup.modulotech.domain.devices.model.device.Light
-import com.noveogroup.modulotech.domain.devices.model.device.RollerShutter
+import com.noveogroup.modulotech.domain.devices.model.device.DeviceMode
+import com.noveogroup.modulotech.domain.devices.model.device.DeviceType
 
 internal object DeviceEntityMapper {
 
@@ -21,32 +18,32 @@ internal object DeviceEntityMapper {
             id = id,
             type = deviceType,
             deviceName = name,
-            intensity = if (this is Light) this.intensity else null,
+            intensity = if (this is Device.Light) this.intensity else null,
             mode = when (this) {
-                is Light -> this.mode
-                is Heater -> this.mode
+                is Device.Light -> this.mode
+                is Device.Heater -> this.mode
                 else -> null
             },
-            position = if (this is RollerShutter) this.position else null,
-            temperature = if (this is Heater) this.temperature else null,
+            position = if (this is Device.RollerShutter) this.position else null,
+            temperature = if (this is Device.Heater) this.temperature else null,
         )
     }
 
-    private fun DeviceEntity.toLight(): Light = Light(
+    private fun DeviceEntity.toLight(): Device.Light = Device.Light(
         id = id,
         name = deviceName,
         mode = mode ?: DeviceMode.Off,
         intensity = intensity ?: 0,
     )
 
-    private fun DeviceEntity.toHeater(): Heater = Heater(
+    private fun DeviceEntity.toHeater(): Device.Heater = Device.Heater(
         id = id,
         name = deviceName,
         mode = mode ?: DeviceMode.Off,
         temperature = temperature ?: 0.0f,
     )
 
-    private fun DeviceEntity.toRollerShutter(): RollerShutter = RollerShutter(
+    private fun DeviceEntity.toRollerShutter(): Device.RollerShutter = Device.RollerShutter(
         id = id,
         name = deviceName,
         position = position ?: 0,

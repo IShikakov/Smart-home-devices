@@ -27,15 +27,15 @@ import androidx.compose.ui.tooling.preview.Preview
 import com.noveogroup.modulotech.R
 import com.noveogroup.modulotech.ui.common.views.DrawableIcon
 import com.noveogroup.modulotech.ui.common.views.VerticalSlider
-import com.noveogroup.modulotech.ui.devices.details.model.RollerShutterDetailsPreview
+import com.noveogroup.modulotech.ui.devices.details.model.DeviceDetailsPreview
 import com.noveogroup.modulotech.ui.theme.deviceIcon
 import com.noveogroup.modulotech.ui.theme.halfPadding
 import com.noveogroup.modulotech.ui.theme.regularPadding
 
 @Composable
 fun RollerShutterDetailsScreen(
-    roller: RollerShutterDetailsPreview,
-    rollerDetailsChanged: (RollerShutterDetailsPreview) -> Unit,
+    roller: DeviceDetailsPreview.RollerShutter,
+    rollerDetailsChanged: (DeviceDetailsPreview.RollerShutter) -> Unit,
     modifier: Modifier = Modifier,
 ) {
     val orientation = LocalConfiguration.current.orientation
@@ -56,8 +56,8 @@ fun RollerShutterDetailsScreen(
 
 @Composable
 private fun PortraitDetailsScreen(
-    roller: RollerShutterDetailsPreview,
-    rollerDetailsChanged: (RollerShutterDetailsPreview) -> Unit,
+    roller: DeviceDetailsPreview.RollerShutter,
+    rollerDetailsChanged: (DeviceDetailsPreview.RollerShutter) -> Unit,
     modifier: Modifier = Modifier,
 ) {
     Column(
@@ -80,8 +80,8 @@ private fun PortraitDetailsScreen(
 
 @Composable
 private fun LandscapeDetailsScreen(
-    roller: RollerShutterDetailsPreview,
-    rollerDetailsChanged: (RollerShutterDetailsPreview) -> Unit,
+    roller: DeviceDetailsPreview.RollerShutter,
+    rollerDetailsChanged: (DeviceDetailsPreview.RollerShutter) -> Unit,
     modifier: Modifier = Modifier,
 ) {
     Row(
@@ -159,7 +159,7 @@ private fun PreviewLandscapeRollerDetailsScreen() {
     )
 }
 
-private val detailsPreview = RollerShutterDetailsPreview(
+private val detailsPreview = DeviceDetailsPreview.RollerShutter(
     id = "0",
     name = "Roller Shutter",
     rawValue = 45f,

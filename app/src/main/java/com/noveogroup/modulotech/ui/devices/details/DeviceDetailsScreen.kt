@@ -17,9 +17,7 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Devices
 import androidx.compose.ui.tooling.preview.Preview
 import com.noveogroup.modulotech.R
-import com.noveogroup.modulotech.ui.devices.details.model.HeaterDetailsPreview
-import com.noveogroup.modulotech.ui.devices.details.model.LightDetailsPreview
-import com.noveogroup.modulotech.ui.devices.details.model.RollerShutterDetailsPreview
+import com.noveogroup.modulotech.ui.devices.details.model.DeviceDetailsPreview
 import com.noveogroup.modulotech.ui.devices.details.screens.HeaterDetailsScreen
 import com.noveogroup.modulotech.ui.devices.details.screens.LightDetailsScreen
 import com.noveogroup.modulotech.ui.devices.details.screens.RollerShutterDetailsScreen
@@ -40,17 +38,17 @@ fun DeviceDetailsScreen(
             topBar = { DeviceDetailsTopAppBar(details.name, back) },
             content = { paddingValues ->
                 when (details) {
-                    is LightDetailsPreview -> LightDetailsScreen(
+                    is DeviceDetailsPreview.Light -> LightDetailsScreen(
                         light = details,
                         modifier = modifier.padding(paddingValues),
                         lightDetailsChanged = viewModel::updateDeviceDetails,
                     )
-                    is HeaterDetailsPreview -> HeaterDetailsScreen(
+                    is DeviceDetailsPreview.Heater -> HeaterDetailsScreen(
                         heater = details,
                         modifier = modifier.padding(paddingValues),
                         heaterDetailsChanged = viewModel::updateDeviceDetails,
                     )
-                    is RollerShutterDetailsPreview -> RollerShutterDetailsScreen(
+                    is DeviceDetailsPreview.RollerShutter -> RollerShutterDetailsScreen(
                         roller = details,
                         modifier = modifier.padding(paddingValues),
                         rollerDetailsChanged = viewModel::updateDeviceDetails,

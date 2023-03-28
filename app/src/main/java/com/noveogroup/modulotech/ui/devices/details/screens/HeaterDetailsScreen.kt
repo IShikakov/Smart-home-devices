@@ -29,18 +29,18 @@ import androidx.compose.ui.tooling.preview.Devices
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.core.graphics.ColorUtils
 import com.noveogroup.modulotech.R
-import com.noveogroup.modulotech.domain.devices.model.DeviceMode
+import com.noveogroup.modulotech.domain.devices.model.device.DeviceMode
 import com.noveogroup.modulotech.ui.common.views.DrawableIcon
 import com.noveogroup.modulotech.ui.devices.details.common.DeviceModeRow
-import com.noveogroup.modulotech.ui.devices.details.model.HeaterDetailsPreview
+import com.noveogroup.modulotech.ui.devices.details.model.DeviceDetailsPreview
 import com.noveogroup.modulotech.ui.theme.deviceIcon
 import com.noveogroup.modulotech.ui.theme.halfPadding
 import com.noveogroup.modulotech.ui.theme.regularPadding
 
 @Composable
 fun HeaterDetailsScreen(
-    heater: HeaterDetailsPreview,
-    heaterDetailsChanged: (HeaterDetailsPreview) -> Unit,
+    heater: DeviceDetailsPreview.Heater,
+    heaterDetailsChanged: (DeviceDetailsPreview.Heater) -> Unit,
     modifier: Modifier = Modifier,
 ) {
     val orientation = LocalConfiguration.current.orientation
@@ -61,8 +61,8 @@ fun HeaterDetailsScreen(
 
 @Composable
 private fun PortraitDetailsScreen(
-    heater: HeaterDetailsPreview,
-    heaterDetailsChanged: (HeaterDetailsPreview) -> Unit,
+    heater: DeviceDetailsPreview.Heater,
+    heaterDetailsChanged: (DeviceDetailsPreview.Heater) -> Unit,
     modifier: Modifier = Modifier,
 ) {
     val color = heater.color
@@ -90,8 +90,8 @@ private fun PortraitDetailsScreen(
 
 @Composable
 private fun LandscapeDetailsScreen(
-    heater: HeaterDetailsPreview,
-    heaterDetailsChanged: (HeaterDetailsPreview) -> Unit,
+    heater: DeviceDetailsPreview.Heater,
+    heaterDetailsChanged: (DeviceDetailsPreview.Heater) -> Unit,
     modifier: Modifier = Modifier,
 ) {
     val color = heater.color
@@ -160,7 +160,7 @@ private fun TemperatureSlider(
     )
 }
 
-private val HeaterDetailsPreview.color: Color
+private val DeviceDetailsPreview.Heater.color: Color
     get() = when (mode) {
         DeviceMode.Off -> Color.Blue
         DeviceMode.On -> Color(
@@ -192,7 +192,7 @@ private fun PreviewLandscapeHeaterDetailsScreen() {
     )
 }
 
-private val detailsPreview = HeaterDetailsPreview(
+private val detailsPreview = DeviceDetailsPreview.Heater(
     id = "0",
     name = "Heater",
     rawValue = 7.0f,

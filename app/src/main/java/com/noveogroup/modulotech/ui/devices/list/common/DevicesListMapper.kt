@@ -3,13 +3,10 @@ package com.noveogroup.modulotech.ui.devices.list.common
 import androidx.annotation.DrawableRes
 import androidx.annotation.StringRes
 import com.noveogroup.modulotech.R
-import com.noveogroup.modulotech.domain.devices.model.DeviceMode
-import com.noveogroup.modulotech.domain.devices.model.DeviceType
-import com.noveogroup.modulotech.domain.devices.model.FiltersState
 import com.noveogroup.modulotech.domain.devices.model.device.Device
-import com.noveogroup.modulotech.domain.devices.model.device.Heater
-import com.noveogroup.modulotech.domain.devices.model.device.Light
-import com.noveogroup.modulotech.domain.devices.model.device.RollerShutter
+import com.noveogroup.modulotech.domain.devices.model.device.DeviceMode
+import com.noveogroup.modulotech.domain.devices.model.device.DeviceType
+import com.noveogroup.modulotech.domain.devices.model.filter.FiltersState
 import com.noveogroup.modulotech.ui.common.resources.ResourcesManager
 import com.noveogroup.modulotech.ui.devices.list.model.DevicePreview
 import com.noveogroup.modulotech.ui.devices.list.model.DevicesFilter
@@ -39,21 +36,21 @@ class DevicesListMapper(private val resourcesManager: ResourcesManager) {
     @get:DrawableRes
     private val Device.icon: Int
         get() = when (this) {
-            is Light -> R.drawable.ic_light
-            is Heater -> R.drawable.ic_heater
-            is RollerShutter -> R.drawable.ic_roller
+            is Device.Light -> R.drawable.ic_light
+            is Device.Heater -> R.drawable.ic_heater
+            is Device.RollerShutter -> R.drawable.ic_roller
         }
 
     private val Device.stateDescription: String
         get() = when (this) {
-            is Light -> "${mode.description()}, $intensity"
-            is Heater -> "${mode.description()}, ${
+            is Device.Light -> "${mode.description()}, $intensity"
+            is Device.Heater -> "${mode.description()}, ${
                 resourcesManager.resolveString(
                     R.string.Common_temperature_format,
                     temperature,
                 )
             }"
-            is RollerShutter -> "$position"
+            is Device.RollerShutter -> "$position"
         }
 
     @get:StringRes

@@ -4,8 +4,8 @@ import androidx.room.ColumnInfo
 import androidx.room.Entity
 import androidx.room.PrimaryKey
 import com.noveogroup.modulotech.data.devices.entity.DeviceEntity.Companion.TABLE_NAME
-import com.noveogroup.modulotech.domain.devices.model.DeviceMode
-import com.noveogroup.modulotech.domain.devices.model.DeviceType
+import com.noveogroup.modulotech.domain.devices.model.device.DeviceMode
+import com.noveogroup.modulotech.domain.devices.model.device.DeviceType
 
 @Entity(tableName = TABLE_NAME)
 internal data class DeviceEntity(

@@ -4,8 +4,8 @@ import com.noveogroup.modulotech.data.devices.entity.DeviceEntity
 import com.noveogroup.modulotech.data.network.response.device.DeviceResponse
 import com.noveogroup.modulotech.data.network.response.device.DeviceResponseMode
 import com.noveogroup.modulotech.data.network.response.device.DeviceResponseType
-import com.noveogroup.modulotech.domain.devices.model.DeviceMode
-import com.noveogroup.modulotech.domain.devices.model.DeviceType
+import com.noveogroup.modulotech.domain.devices.model.device.DeviceMode
+import com.noveogroup.modulotech.domain.devices.model.device.DeviceType
 
 internal object DeviceResponseMapper {
 

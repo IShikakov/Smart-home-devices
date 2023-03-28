@@ -17,7 +17,7 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Devices
 import androidx.compose.ui.tooling.preview.Preview
 import com.noveogroup.modulotech.R
-import com.noveogroup.modulotech.domain.devices.model.DeviceMode
+import com.noveogroup.modulotech.domain.devices.model.device.DeviceMode
 import com.noveogroup.modulotech.ui.common.views.DrawableIcon
 
 @Composable

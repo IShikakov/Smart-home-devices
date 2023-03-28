@@ -2,13 +2,10 @@ package com.decathlon.coach.domain
 
 import com.noveogroup.modulotech.domain.devices.api.DevicesRepositoryApi
 import com.noveogroup.modulotech.domain.devices.interactors.DevicesListInteractor
-import com.noveogroup.modulotech.domain.devices.model.DeviceMode
-import com.noveogroup.modulotech.domain.devices.model.DeviceType
-import com.noveogroup.modulotech.domain.devices.model.FiltersState
 import com.noveogroup.modulotech.domain.devices.model.device.Device
-import com.noveogroup.modulotech.domain.devices.model.device.Heater
-import com.noveogroup.modulotech.domain.devices.model.device.Light
-import com.noveogroup.modulotech.domain.devices.model.device.RollerShutter
+import com.noveogroup.modulotech.domain.devices.model.device.DeviceMode
+import com.noveogroup.modulotech.domain.devices.model.device.DeviceType
+import com.noveogroup.modulotech.domain.devices.model.filter.FiltersState
 import io.mockk.MockKAnnotations
 import io.mockk.coEvery
 import io.mockk.coVerify
@@ -180,19 +177,19 @@ class DevicesListInteractorTest {
     companion object {
         private val devicesFilters = DeviceType.values().toList()
         private val testDevicesList = listOf(
-            Light(
+            Device.Light(
                 id = "0",
                 name = "Light",
                 mode = DeviceMode.On,
                 intensity = 10,
             ),
-            Heater(
+            Device.Heater(
                 id = "1",
                 name = "Heater",
                 mode = DeviceMode.On,
                 temperature = 20.0f,
             ),
-            RollerShutter(
+            Device.RollerShutter(
                 id = "2",
                 name = "Roller Shutter",
                 position = 25,

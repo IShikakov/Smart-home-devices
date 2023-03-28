@@ -1,13 +1,7 @@
 package com.noveogroup.modulotech.ui.devices.details.common
 
 import com.noveogroup.modulotech.domain.devices.model.device.Device
-import com.noveogroup.modulotech.domain.devices.model.device.Heater
-import com.noveogroup.modulotech.domain.devices.model.device.Light
-import com.noveogroup.modulotech.domain.devices.model.device.RollerShutter
 import com.noveogroup.modulotech.ui.devices.details.model.DeviceDetailsPreview
-import com.noveogroup.modulotech.ui.devices.details.model.HeaterDetailsPreview
-import com.noveogroup.modulotech.ui.devices.details.model.LightDetailsPreview
-import com.noveogroup.modulotech.ui.devices.details.model.RollerShutterDetailsPreview
 import kotlin.math.min
 
 object DeviceDetailsMapper {
@@ -25,19 +19,19 @@ object DeviceDetailsMapper {
     private const val ROLLER_POSITION_STEP = 1f
 
     fun mapToPreview(device: Device): DeviceDetailsPreview = when (device) {
-        is Light -> device.preview
-        is Heater -> device.preview
-        is RollerShutter -> device.preview
+        is Device.Light -> device.preview
+        is Device.Heater -> device.preview
+        is Device.RollerShutter -> device.preview
     }
 
     fun mapToDevice(preview: DeviceDetailsPreview): Device = when (preview) {
-        is LightDetailsPreview -> preview.device
-        is HeaterDetailsPreview -> preview.device
-        is RollerShutterDetailsPreview -> preview.device
+        is DeviceDetailsPreview.Light -> preview.device
+        is DeviceDetailsPreview.Heater -> preview.device
+        is DeviceDetailsPreview.RollerShutter -> preview.device
     }
 
-    private val Light.preview: LightDetailsPreview
-        get() = LightDetailsPreview(
+    private val Device.Light.preview: DeviceDetailsPreview.Light
+        get() = DeviceDetailsPreview.Light(
             id = id,
             name = name,
             rawValue = min(intensity.toFloat(), MAX_INTENSITY),
@@ -46,8 +40,8 @@ object DeviceDetailsMapper {
             mode = mode,
         )
 
-    private val Heater.preview: HeaterDetailsPreview
-        get() = HeaterDetailsPreview(
+    private val Device.Heater.preview: DeviceDetailsPreview.Heater
+        get() = DeviceDetailsPreview.Heater(
             id = id,
             name = name,
             rawValue = min(temperature, MAX_TEMPERATURE),
@@ -56,8 +50,8 @@ object DeviceDetailsMapper {
             mode = mode,
         )
 
-    private val RollerShutter.preview: RollerShutterDetailsPreview
-        get() = RollerShutterDetailsPreview(
+    private val Device.RollerShutter.preview: DeviceDetailsPreview.RollerShutter
+        get() = DeviceDetailsPreview.RollerShutter(
             id = id,
             name = name,
             rawValue = min(position.toFloat(), MAX_ROLLER_POSITION),
@@ -65,24 +59,24 @@ object DeviceDetailsMapper {
             valueStep = ROLLER_POSITION_STEP,
         )
 
-    private val LightDetailsPreview.device: Light
-        get() = Light(
+    private val DeviceDetailsPreview.Light.device: Device.Light
+        get() = Device.Light(
             id = id,
             name = name,
             intensity = value.toInt(),
             mode = mode,
         )
 
-    private val HeaterDetailsPreview.device: Heater
-        get() = Heater(
+    private val DeviceDetailsPreview.Heater.device: Device.Heater
+        get() = Device.Heater(
             id = id,
             name = name,
             temperature = value,
             mode = mode,
         )
 
-    private val RollerShutterDetailsPreview.device: RollerShutter
-        get() = RollerShutter(
+    private val DeviceDetailsPreview.RollerShutter.device: Device.RollerShutter
+        get() = Device.RollerShutter(
             id = id,
             name = name,
             position = value.toInt(),

@@ -1,9 +1,28 @@
 package com.noveogroup.modulotech.domain.devices.model.device
 
-import com.noveogroup.modulotech.domain.devices.model.DeviceType
+sealed class Device(
+    val id: String,
+    val name: String,
+    val deviceType: DeviceType,
+) {
+    class Light(
+        id: String,
+        name: String,
+        val mode: DeviceMode,
+        val intensity: Int,
+    ) : Device(id, name, DeviceType.Light)
 
-sealed interface Device {
-    val id: String
-    val name: String
-    val deviceType: DeviceType
+    class Heater(
+        id: String,
+        name: String,
+        val mode: DeviceMode,
+        val temperature: Float,
+    ) : Device(id, name, DeviceType.Heater)
+
+    class RollerShutter(
+        id: String,
+        name: String,
+        val position: Int,
+    ) : Device(id, name, DeviceType.RollerShutter)
 }
+

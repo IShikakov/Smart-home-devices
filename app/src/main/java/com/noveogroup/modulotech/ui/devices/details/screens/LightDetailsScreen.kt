@@ -29,18 +29,18 @@ import androidx.compose.ui.tooling.preview.Devices
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.core.graphics.ColorUtils
 import com.noveogroup.modulotech.R
-import com.noveogroup.modulotech.domain.devices.model.DeviceMode
+import com.noveogroup.modulotech.domain.devices.model.device.DeviceMode
 import com.noveogroup.modulotech.ui.common.views.DrawableIcon
 import com.noveogroup.modulotech.ui.devices.details.common.DeviceModeRow
-import com.noveogroup.modulotech.ui.devices.details.model.LightDetailsPreview
+import com.noveogroup.modulotech.ui.devices.details.model.DeviceDetailsPreview
 import com.noveogroup.modulotech.ui.theme.deviceIcon
 import com.noveogroup.modulotech.ui.theme.halfPadding
 import com.noveogroup.modulotech.ui.theme.regularPadding
 
 @Composable
 fun LightDetailsScreen(
-    light: LightDetailsPreview,
-    lightDetailsChanged: (LightDetailsPreview) -> Unit,
+    light: DeviceDetailsPreview.Light,
+    lightDetailsChanged: (DeviceDetailsPreview.Light) -> Unit,
     modifier: Modifier = Modifier,
 ) {
     val orientation = LocalConfiguration.current.orientation
@@ -61,8 +61,8 @@ fun LightDetailsScreen(
 
 @Composable
 private fun PortraitDetailsScreen(
-    light: LightDetailsPreview,
-    lightDetailsChanged: (LightDetailsPreview) -> Unit,
+    light: DeviceDetailsPreview.Light,
+    lightDetailsChanged: (DeviceDetailsPreview.Light) -> Unit,
     modifier: Modifier = Modifier,
 ) {
     val color = light.color
@@ -90,8 +90,8 @@ private fun PortraitDetailsScreen(
 
 @Composable
 private fun LandscapeDetailsScreen(
-    light: LightDetailsPreview,
-    lightDetailsChanged: (LightDetailsPreview) -> Unit,
+    light: DeviceDetailsPreview.Light,
+    lightDetailsChanged: (DeviceDetailsPreview.Light) -> Unit,
     modifier: Modifier = Modifier,
 ) {
     val color = light.color
@@ -164,7 +164,7 @@ private fun IntensitySlider(
     )
 }
 
-private val LightDetailsPreview.color: Color
+private val DeviceDetailsPreview.Light.color: Color
     get() = when (mode) {
         DeviceMode.Off -> Color.Gray
         DeviceMode.On -> Color(
@@ -196,7 +196,7 @@ private fun PreviewLandscapeLightDetailsScreen() {
     )
 }
 
-private val detailsPreview = LightDetailsPreview(
+private val detailsPreview = DeviceDetailsPreview.Light(
     id = "0",
     name = "Light",
     rawValue = 10f,

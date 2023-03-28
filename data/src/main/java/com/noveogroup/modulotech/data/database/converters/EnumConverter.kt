@@ -1,8 +1,8 @@
 package com.noveogroup.modulotech.data.database.converters
 
 import androidx.room.TypeConverter
-import com.noveogroup.modulotech.domain.devices.model.DeviceMode
-import com.noveogroup.modulotech.domain.devices.model.DeviceType
+import com.noveogroup.modulotech.domain.devices.model.device.DeviceMode
+import com.noveogroup.modulotech.domain.devices.model.device.DeviceType
 
 internal object EnumConverter {
 
