@@ -11,8 +11,8 @@ internal class UserRepository(
     private val userDao: UserDao,
 ) : UserRepositoryApi {
 
-    override suspend fun fetchUserProfile(): UserProfile = withContext(Dispatchers.IO) {
-        UserEntityMapper.mapToUserProfile(userDao.selectUser())
+    override suspend fun fetchUserProfile(): UserProfile? = withContext(Dispatchers.IO) {
+        userDao.selectUser()?.let { UserEntityMapper.mapToUserProfile(it) }
     }
 
     override suspend fun saveUserProfile(userProfile: UserProfile) = withContext(Dispatchers.IO) {

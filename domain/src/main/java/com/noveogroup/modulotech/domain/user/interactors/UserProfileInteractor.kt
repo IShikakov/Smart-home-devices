@@ -7,7 +7,7 @@ class UserProfileInteractor(
     private val userRepository: UserRepositoryApi,
 ) {
 
-    suspend fun fetchUserProfile(): UserProfile = userRepository.fetchUserProfile()
+    suspend fun fetchUserProfile(): UserProfile? = userRepository.fetchUserProfile()
 
     suspend fun saveUserProfile(userProfile: UserProfile): Unit =
         userRepository.saveUserProfile(userProfile)

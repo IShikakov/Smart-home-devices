@@ -10,7 +10,7 @@ import com.noveogroup.modulotech.data.user.entity.UserEntity
 internal abstract class UserDao : BaseDao<UserEntity> {
 
     @Query("SELECT * FROM ${UserEntity.TABLE_NAME} LIMIT 1")
-    abstract suspend fun selectUser(): UserEntity
+    abstract suspend fun selectUser(): UserEntity?
 
     @Query("SELECT EXISTS (SELECT 1 FROM ${UserEntity.TABLE_NAME} LIMIT 1)")
     abstract suspend fun isUserCreated(): Boolean

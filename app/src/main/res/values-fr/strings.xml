@@ -27,6 +27,7 @@
     <string name="Profile.street_code">Code de la rue</string>
     <string name="Profile.country">Pays</string>
     <string name="Profile.save_button">Sauver</string>
+    <string name="Profile.Error.profile_not_found">Aucun profil d\'utilisateur n\'a été trouvé. Télécharger ou créer un profil</string>
     <string name="Profile.Error.empty_field">Le champ ne doit pas être vide</string>
     <string name="Profile.Error.date_format">La date doit être au format %1$s</string>
     <string name="Profile.saved_message">Le profil a été sauvegardé</string>

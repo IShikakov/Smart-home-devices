@@ -35,7 +35,11 @@ class UserProfileViewModel(
     init {
         viewModelScope.launch {
             val userProfile = userProfileInteractor.fetchUserProfile()
-            _screenState.value = mapper.mapToScreenState(userProfile)
+            if (userProfile != null) {
+                _screenState.value = mapper.mapToScreenState(userProfile)
+            } else {
+                showMessage(resourcesManager.resolveString(R.string.Profile_Error_profile_not_found))
+            }
         }
     }
 

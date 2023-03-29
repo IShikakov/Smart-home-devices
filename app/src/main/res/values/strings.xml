@@ -27,6 +27,7 @@
     <string name="Profile.street_code">Street code</string>
     <string name="Profile.country">Country</string>
     <string name="Profile.save_button">Save</string>
+    <string name="Profile.Error.profile_not_found">No user profile was found. Download or create one</string>
     <string name="Profile.Error.empty_field">Field must not be empty</string>
     <string name="Profile.Error.date_format">Date must be in format %1$s</string>
     <string name="Profile.saved_message">The profile has been saved</string>
