@@ -16,12 +16,9 @@ internal object DateConverter {
 
     @TypeConverter
     @JvmStatic
-    fun dateToLong(date: Date?): String? = date?.let {
-        println("dateToLong $date")
-        dateFormat.format(it)
-    }
+    fun dateToString(date: Date?): String? = date?.let { dateFormat.format(it) }
 
     @TypeConverter
     @JvmStatic
-    fun longToDate(string: String?): Date? = string?.let { dateFormat.parse(it) }
+    fun stringToDate(string: String?): Date? = string?.let { dateFormat.parse(it) }
 }
